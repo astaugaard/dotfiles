@@ -1,0 +1,8 @@
+* {{
+    accent: {color1};
+
+    background: {background}77;
+    background2: {background};
+    foreground: {foreground};
+    spacing: 2;
+}}

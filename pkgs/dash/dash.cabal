@@ -1,0 +1,49 @@
+
+cabal-version: 1.12
+
+name:           DynamicDashboard
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/astaugaard/DynamicDashboard#readme>
+homepage:       https://github.com/astaugaard/DynamicDashboard#readme
+bug-reports:    https://github.com/astaugaard/DynamicDashboard/issues
+author:         Aaron Staugaard
+maintainer:     astaugaard@icloud.com
+copyright:      2022 Aaron Staugaard
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    CHANGELOG.md
+
+source-repository head
+  type: git
+  location: https://github.com/astaugaard/DynamicDashboard
+
+library
+  exposed-modules:
+      XMonad.Layout.DynamicDashboard XMonad.Layout.SelectiveLayout XMonad.Layout.FixedBsp
+  -- other-modules:
+  --     Paths_gtkCalculator
+  hs-source-dirs:
+      .
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base >=4.7 && <5,
+      xmonad,
+      xmonad-contrib
+  default-language: Haskell2010
+
+test-suite DynamicDashboard-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  -- other-modules:
+  --     Paths_gtkCalculator
+  hs-source-dirs:
+      test
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+
+
+nix: True
