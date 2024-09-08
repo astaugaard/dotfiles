@@ -8,7 +8,7 @@ let
 in
 {
   imports = [
-  	./xmonad/xmonad.nix
+  	./modules
   ];
 
   nixpkgs.overlays = [
@@ -18,6 +18,10 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
+  myhome.xmonad.enable = true;
+  myhome.toys.enable = true;
+  myhome.devtools.enable = true;
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
@@ -25,105 +29,27 @@ in
       homeDirectory = "/home/a";
 
       packages = with pkgs; [
-        dmenu
-        # firefox
-        pywal
-        pkg-config
-        rofi
+        # always
         kak-lsp
         alsa-utils
-        picom
-        neofetch
-        fish
-        wmctrl
-        eww
-        nitrogen
-        lxappearance
-        sassc
-        glib
-        xdotool
-        neofetch
-        libnotify
-        beauty-line-icon-theme
-        dunst
-        librsvg
-        # gimp
-        # grapejuice
-        pass
-        stack
-        # discord
-        # spotify
-        xclip
-        gnupg
-        gcc
-        pinentry-gtk2
-        unzip
-        ghc
-        haskell-language-server
-        nautilus
         bc
-        tcpdump
-        greatVibes
-        # qbittorrent
-        # wireshark
-        # mySlock
-        # dolphin-emu
-        # shutter
-        qemu
-        # inkscape
-        i3lock
-        cabal-install
-        galculator
-        xorg.xclock
-        # tex
-        # anki
-        # gdlauncher
+        unzip
         git
-        valgrind
-        scrot
-        catsay
-        fortune
-        qmk
-        # musescore
-        pkgs-unstable.cargo
-        pkgs-unstable.rust-analyzer
-        libglvnd
         maestral
-        maestral-gui
         nix-index
-        # thunderbird
-        ventoy
-        hyfetch
-        nodePackages.node2nix
-        # tor-browser
-        # prismlauncher
-        gnome-software
-        librewolf
-        flatpak
+
+        qemu
       ];
   };
 
   programs.password-store.enable = true;
-  # services.gpg-agent = {
-    #  enable = true;
-    #  pinentryFlavor = "curses";
-    #  pinentryPackage = pkgs.pinentry-curses;
-#  };
 
   xdg.enable = true;
-  # xdg.configHome = "~/.config";
 
   xdg.mimeApps.defaultApplications = {
     "x-scheme-handler/http" = ["librewolf.desktop"];
     "x-scheme-handler/https" = ["librewolf.desktop"];
   };
-
-  # xdg.configFile."eww".source = ./eww;
-  xdg.configFile."rofi".source = ./rofi;
-  xdg.configFile."wal".source = ./wal;
-  xdg.configFile."kitty".source = ./kitty;
-  xdg.configFile."picom".source = ./picom;
-  xdg.configFile."neofetch".source = ./neofetch;
 
   xdg.systemDirs.data = ["/usr/share" "/var/lib/flatpak/exports/share" "~/.local/share/flatpak/exports/share"];
 
@@ -139,7 +65,4 @@ in
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-
-  #systemctl --user import-environment PATH
-  # systemctl --user restart xdg-desktop-portal.service
 }
