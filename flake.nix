@@ -29,9 +29,6 @@
         extraSpecialArgs = {
             inherit pkgs-unstable;
         };
-
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
       };
     };
 }

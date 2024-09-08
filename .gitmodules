@@ -1,0 +1,3 @@
+[submodule "modules/kak"]
+	path = modules/kak
+	url = git@github.com:astaugaard/kakrc.git

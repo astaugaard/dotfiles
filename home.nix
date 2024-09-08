@@ -21,6 +21,7 @@ in
   myhome.xmonad.enable = true;
   myhome.toys.enable = true;
   myhome.devtools.enable = true;
+  myhome.kak.enable = true;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -30,7 +31,6 @@ in
 
       packages = with pkgs; [
         # always
-        kak-lsp
         alsa-utils
         bc
         unzip

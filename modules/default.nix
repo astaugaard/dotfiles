@@ -1,13 +1,15 @@
-{pkgs, config, lib, ...}: {
+{pkgs, config, lib, ...}:
+{
     imports = [
-        ./neofetch
-        ./picom
+        ./decommon.nix
         ./devtools.nix
+        ./dex11.nix
+        ./kitty
+        ./picom
+        ./neofetch
         ./toys.nix
         ./rofi
-        ./kitty
-        ./decommon.nix
-        ./dex11.nix
+        ./kak.nix
         ./xmonad
     ];
 }
