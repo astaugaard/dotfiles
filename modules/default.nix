@@ -11,5 +11,6 @@
         ./rofi
         ./kak.nix
         ./xmonad
+        ./fish
     ];
 }
