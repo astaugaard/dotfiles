@@ -36,23 +36,6 @@ import Data.Monoid
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
-
---colors
-bluePurple =  "#cba6f7"
-deepPurple = "#b4befe"
-cyan = "#94e2d5"
-
-green = "#a6e3a1"
-yellow = "#f9e2af"
-
-background = "#1e1e2e"
-white = "#cdd6f4"
-orange = "#fab387"
-pink = "#f5c2e7"
-purple = "#cba6f7"
-red = "#f38ba8"
-
-
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 
@@ -90,8 +73,8 @@ myWorkspaces    = ["1 ","2 ","3 ","4 ","5 ","6 ","7 ","8 ","9 "]
 
 -- Border colors for unfocused and focused windows, respectively.
 
-myNormalBorderColor  = background
-myFocusedBorderColor = pink
+myNormalBorderColor  = "@normalBorderColor@"
+myFocusedBorderColor = "@activeBorderColor@"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -330,7 +313,6 @@ myLogHook = return ()
 myStartupHook = do
     spawnOnce "nitrogen --restore&"
     spawnOnce "~/.local/bin/bar-exe"
-    spawnOnce "dunst&"
     spawnOnce "picom&"
     spawnOnce "maestral start"
     spawnOnce "systemctl --user import-environment PATH; systemctl --user restart xdg-desktop-portal.service"

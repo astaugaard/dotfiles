@@ -17,7 +17,11 @@ with lib;
     		extraPackages = haskellPackages: [
                 haskellPackages.dynamicDashboard
     		];
-    		config = ./config.hs;
+    		config = pkgs.substituteAll
+    		  { src = ./config.hs;
+        		normalBorderColor = "#${config.colorScheme.palette.base01}";
+        		activeBorderColor = "#${config.colorScheme.palette.base07}";
+    		  };
     	};
     	myhome.decommon.enable = true;
     	myhome.dex11.enable = true;

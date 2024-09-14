@@ -26,6 +26,7 @@ abbr -a se stack run
 # fish_add_path ~/.cabal/bin/
 fish_add_path ~/.bin/
 fish_add_path ~/.local/bin/
+fish_add_path ~/.pack/bin/
 set EDITOR kak
 
 set LS_COLORS "di=36;40:ln=0"

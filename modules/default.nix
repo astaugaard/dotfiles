@@ -12,5 +12,6 @@
         ./kak.nix
         ./xmonad
         ./fish
+        ./dunst.nix
     ];
 }

@@ -15,7 +15,6 @@ with lib;
         eww
         lxappearance
         libnotify
-        dunst
         nautilus
         galculator
         xorg.xclock
@@ -27,7 +26,10 @@ with lib;
         sassc
         beauty-line-icon-theme
         greatVibes
+        pywal
       ];
+
+      myhome.dunst.enable = true;
       myhome.kitty.enable = true;
       myhome.rofi.enable = true;
     };

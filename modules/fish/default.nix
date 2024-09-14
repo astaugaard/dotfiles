@@ -11,9 +11,7 @@ with lib;
     };
 
     config = mkIf config.myhome.fish.enable {
-      home.packages = with pkgs; [
-          fish
-      ];
-      xdg.configFile."fish".source = ./. ;
+#        programs.fish.enable = true;
+#        programs.fish.shellInit = builtins.readFile(./config.fish);
     };
 }

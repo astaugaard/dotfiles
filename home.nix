@@ -1,20 +1,22 @@
-{ config, pkgs, lib, pkgs-unstable,... }:
+{ config, pkgs, lib, pkgs-unstable, nix-colors, catppuccin,... }:
 let
     tex =
         pkgs.texlive.combine {
             inherit (pkgs.texlive) scheme-tetex standalone preview;
         };
-    # unstable = import <nixos-unstable> {config = {allowUnfree = true; }; };
 in
 {
   imports = [
   	./modules
+  	nix-colors.homeManagerModules.default
   ];
+
+  colorScheme = nix-colors.colorSchemes.catppuccin-macchiato;
 
   nixpkgs.overlays = [
       (import ./pkgs)
-  ];
 
+  ];
 
   nixpkgs.config.allowUnfree = true;
 
@@ -22,6 +24,7 @@ in
   myhome.toys.enable = true;
   myhome.devtools.enable = true;
   myhome.kak.enable = true;
+
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -40,7 +43,40 @@ in
 
         qemu
       ];
+
+      sessionVariables = {
+          GTK_THEME = "catppuccin";
+      };
   };
+
+  gtk.enable = true;
+
+  gtk.catppuccin = {
+      enable = true;
+      flavor = "macchiato";
+      accent = "mauve";
+      size = "standard";
+      tweaks = ["normal"];
+  };
+
+  gtk.iconTheme = {
+      name = "BeautyLine";
+      package = pkgs.beauty-line-icon-theme;
+  };
+
+  gtk.gtk3.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
+  };
+
+  gtk.gtk4.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
+  };
+
+  qt.style.package = pkgs.catppuccin-qt5ct;
 
   programs.password-store.enable = true;
 

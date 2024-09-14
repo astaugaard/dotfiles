@@ -26,6 +26,9 @@ with lib;
         qmk
         libglvnd
         nodePackages.node2nix
+        chez
+        gmp.dev
+        gnumake
       ];
     };
 }
