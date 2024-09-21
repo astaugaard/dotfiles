@@ -5,7 +5,7 @@
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "nixpkgs";
 
-    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    # unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     catppuccin.url = "github:catppuccin/nix";
 
@@ -17,11 +17,11 @@
     };
   };
 
-  outputs = { nixpkgs, home-manager, unstable, nix-colors, catppuccin, ... }:
+  outputs = { nixpkgs, home-manager, nix-colors, catppuccin, ... }:
     let
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
-      pkgs-unstable = unstable.legacyPackages.${system};
+      # pkgs-unstable = unstable.legacyPackages.${system};
     in {
       homeConfigurations."a" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
@@ -32,7 +32,7 @@
 
 
         extraSpecialArgs = {
-            inherit pkgs-unstable;
+            # inherit pkgs-unstable;
             inherit nix-colors;
         };
       };

@@ -1,4 +1,4 @@
-{pkgs, pkgs-unstable, config, lib, ...}:
+{pkgs, config, lib, ...}:
 with builtins;
 with lib;
 {
@@ -21,14 +21,15 @@ with lib;
         haskell-language-server
         cabal-install
         valgrind
-        pkgs-unstable.cargo
-        pkgs-unstable.rust-analyzer
+        cargo
+        rust-analyzer
         qmk
         libglvnd
         nodePackages.node2nix
         chez
         gmp.dev
         gnumake
+        rustfmt
       ];
     };
 }

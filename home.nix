@@ -1,4 +1,4 @@
-{ config, pkgs, lib, pkgs-unstable, nix-colors, catppuccin,... }:
+{ config, pkgs, lib, nix-colors, catppuccin,... }:
 let
     tex =
         pkgs.texlive.combine {
@@ -15,12 +15,12 @@ in
 
   nixpkgs.overlays = [
       (import ./pkgs)
-
   ];
 
   nixpkgs.config.allowUnfree = true;
 
   myhome.xmonad.enable = true;
+  myhome.sway.enable = true;
   myhome.toys.enable = true;
   myhome.devtools.enable = true;
   myhome.kak.enable = true;

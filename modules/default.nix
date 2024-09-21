@@ -13,5 +13,7 @@
         ./xmonad
         ./fish
         ./dunst.nix
+        ./sway
+        ./deway.nix
     ];
 }

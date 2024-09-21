@@ -25,7 +25,6 @@ with lib;
         flatpak
         sassc
         beauty-line-icon-theme
-        greatVibes
         pywal
       ];
 

@@ -1,6 +1,6 @@
 self: super: {
     catsay = self.callPackage ./catsay.nix {};
-    greatVibes = self.callPackage ./googleFonts.nix {};
+    # greatVibes = self.callPackage ./googleFonts.nix {};
     reasymotion = self.callPackage ./reasymotion.nix {};
 
     haskellPackages = super.haskellPackages.override {

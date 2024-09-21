@@ -11,6 +11,8 @@ with lib;
     };
 
     config = mkIf config.myhome.fish.enable {
+        home.packages = [ pkgs.fish ];
+
 #        programs.fish.enable = true;
 #        programs.fish.shellInit = builtins.readFile(./config.fish);
     };
