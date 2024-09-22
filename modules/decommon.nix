@@ -21,6 +21,7 @@ with lib;
         scrot
         maestral-gui
         gnome-software
+        kdePackages.discover
         librewolf
         flatpak
         sassc

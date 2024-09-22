@@ -46,6 +46,7 @@ in
 
       sessionVariables = {
           GTK_THEME = "catppuccin";
+          WLR_RENDERER = "vulkan";
       };
   };
 

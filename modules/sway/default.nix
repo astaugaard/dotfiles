@@ -12,9 +12,31 @@ with lib;
 
     config = mkIf config.myhome.sway.enable {
         wayland.windowManager.sway.enable = true;
-        wayland.windowManager.sway.package = pkgs.swayfx;
+        wayland.windowManager.sway.package = pkgs.sway;
         wayland.windowManager.sway.checkConfig = false;
+        wayland.windowManager.sway.xwayland = true;
         wayland.windowManager.sway.swaynag.enable = true;
+
+        wayland.windowManager.sway.extraConfig = "
+            output * bg ~/backgrounds/butterfly.png fill
+            xwayland enable
+        ";
+
+        # add extra session commands
+
+        wayland.windowManager.sway.extraSessionCommands = 
+            ''
+            export SDL_VIDEODRIVER=wayland
+            # needs qt5.qtwayland in systemPackages
+            export QT_QPA_PLATFORM=wayland
+            export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
+            # Fix for some Java AWT applications (e.g. Android Studio),
+            # use this if they aren't displayed properly:
+            export _JAVA_AWT_WM_NONREPARENTING=1
+
+            export WLR_RENDERER = "vulkan"
+            export GTK_USE_PORTAL = "0"
+            '';
 
         wayland.windowManager.sway.config = {
             down = "t";
@@ -23,10 +45,13 @@ with lib;
             right = "s";
             focus.mouseWarping = true;
             gaps = {
-                horizontal = 10;
-                vertical = 10;
+                horizontal = 0;
+                vertical = 0;
+                inner = 10;
                 smartGaps = true;
             };
+
+            bars = [];
 
             modifier = "Mod4";
 
@@ -38,7 +63,7 @@ with lib;
                   right = config.wayland.windowManager.sway.config.right;
               in {
                 "${modifier}+p" = "exec rofi -theme launcher -modi drun -show drun -show-icons";
-                "${modifier}+Shift+Return" = "kitty";
+                "${modifier}+Shift+Return" = "exec kitty";
                 "${modifier}+Shift+w" = "kill";
                 "${modifier}+Shift+q" = "exec exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
                 "${modifier}+Shift+l" = "exec swaylock --image ~/Dropbox/lock.png";
@@ -90,8 +115,11 @@ with lib;
 
             startup = [
                 { command = "maestral start"; }
-                { command = "systemctl --user import-environment PATH; systemctl --user restart xdg-desktop-portal.service"; }
+                { command = "systemctl --user import-environment"; }
+                # { command = "dbus-update-activation-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME"; }
             ];
+
+            
 
             terminal = "kitty";
 
@@ -100,10 +128,10 @@ with lib;
             colors = {
                 focused = {
                     border = "#${config.colorScheme.palette.base07}";
-                    background = "#${config.colorScheme.palette.base01}";
-                    childBorder = "#${config.colorScheme.palette.base01}";
-                    indicator = "#000000";
-                    text = "#000000";
+                    background = "#${config.colorScheme.palette.base07}";
+                    childBorder = "#${config.colorScheme.palette.base07}";
+                    indicator = "#${config.colorScheme.palette.base07}";
+                    text = "#${config.colorScheme.palette.base07}";
                 };
 
                 unfocused = {
