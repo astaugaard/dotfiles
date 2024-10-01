@@ -15,13 +15,12 @@ with lib;
         eww
         lxappearance
         libnotify
-        nautilus
+        gnome.nautilus
         galculator
         xorg.xclock
         scrot
         maestral-gui
-        gnome-software
-        kdePackages.discover
+        gnome.gnome-software
         librewolf
         flatpak
         sassc
@@ -29,8 +28,8 @@ with lib;
         pywal
       ];
 
-      myhome.dunst.enable = true;
       myhome.kitty.enable = true;
       myhome.rofi.enable = true;
+      myhome.swaync.enable = true;
     };
 }

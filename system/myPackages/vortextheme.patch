@@ -1,0 +1,26 @@
+diff --git a/vortex-ubuntu/vortex-ubuntu.plymouth b/vortex-ubuntu/vortex-ubuntu.plymouth
+index a8c78fa..f1c258d 100644
+--- a/vortex-ubuntu/vortex-ubuntu.plymouth
++++ b/vortex-ubuntu/vortex-ubuntu.plymouth
+@@ -4,6 +4,6 @@ Description=Ubuntu logo with spinning colored stripes
+ ModuleName=script
+ 
+ [script]
+-ImageDir=/usr/share/plymouth/themes/vortex-ubuntu
+-ScriptFile=/usr/share/plymouth/themes/vortex-ubuntu/vortex-ubuntu.script
++ImageDir=@themeDir@
++ScriptFile=@themeDir@/vortex-ubuntu.script
+ UseFirmwareBackground=false
+diff --git a/vortex-ubuntu/vortex-ubuntu.script b/vortex-ubuntu/vortex-ubuntu.script
+index 749aac7..49915cb 100644
+--- a/vortex-ubuntu/vortex-ubuntu.script
++++ b/vortex-ubuntu/vortex-ubuntu.script
+@@ -17,7 +17,7 @@ if (Plymouth.GetMode () == "shutdown")
+ s = 0.75;
+ 
+ logo_image = Image ("logo.png");
+-logo_image = logo_image.Scale (120 * s , 120 * s);
++logo_image = logo_image.Scale (120 * s , 104 * s);
+ logo = Sprite (logo_image);
+ logo.SetX (Window.GetWidth ()  / 2 - logo_image.GetWidth()  / 2);
+ logo.SetY ((Window.GetHeight() * yPos) - logo_image.GetHeight() / 2);

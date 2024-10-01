@@ -12,19 +12,17 @@ with lib;
 
     config = mkIf config.myhome.sway.enable {
         wayland.windowManager.sway.enable = true;
-        wayland.windowManager.sway.package = pkgs.sway;
         wayland.windowManager.sway.checkConfig = false;
         wayland.windowManager.sway.xwayland = true;
         wayland.windowManager.sway.swaynag.enable = true;
 
         wayland.windowManager.sway.extraConfig = "
-            output * bg ~/backgrounds/butterfly.png fill
-            xwayland enable
+        output * bg ~/backgrounds/butterfly.png fill
+        xwayland enable
         ";
 
-        # add extra session commands
 
-        wayland.windowManager.sway.extraSessionCommands = 
+        wayland.windowManager.sway.extraSessionCommands =
             ''
             export SDL_VIDEODRIVER=wayland
             # needs qt5.qtwayland in systemPackages
@@ -34,9 +32,24 @@ with lib;
             # use this if they aren't displayed properly:
             export _JAVA_AWT_WM_NONREPARENTING=1
 
-            export WLR_RENDERER = "vulkan"
-            export GTK_USE_PORTAL = "0"
+            export GTK_USE_PORTAL="0"
+            export WLR_RENDERER="vulkan"
             '';
+
+        services.swayidle = {
+            enable = true;
+            events = [
+                { event = "before-sleep"; command = "${pkgs.swaylock}/bin/swaylock -fF --image ~/Dropbox/lock.png"; }
+            ];
+            # timeouts = [
+            #     { timeout = 300; command = "${pkgs.swaylock}/bin/swaylock -fF --image ~/Dropbox/lock.png"; }
+            #     { timeout = 600;
+            #       command = "${pkgs.sway}/bin/swaymsg \"output * power off\"";
+            #       resumeCommand = "${pkgs.sway}/bin/swaymsg \"output * power on\"";
+            #     }
+            #     { timeout = 900; command = "${pkgs.systemd}/bin/systemctl hybrid-sleep"; }
+            # ];
+        };
 
         wayland.windowManager.sway.config = {
             down = "t";
@@ -49,6 +62,7 @@ with lib;
                 vertical = 0;
                 inner = 10;
                 smartGaps = true;
+                smartBorders = "on";
             };
 
             bars = [];
@@ -64,6 +78,9 @@ with lib;
               in {
                 "${modifier}+p" = "exec rofi -theme launcher -modi drun -show drun -show-icons";
                 "${modifier}+Shift+Return" = "exec kitty";
+                "${modifier}+Shift+c" = "exec flatpak run org.flameshot.Flameshot gui";
+                "${modifier}+Shift+o" = "exec swaync-client -t -sw";
+
                 "${modifier}+Shift+w" = "kill";
                 "${modifier}+Shift+q" = "exec exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'";
                 "${modifier}+Shift+l" = "exec swaylock --image ~/Dropbox/lock.png";
@@ -116,6 +133,7 @@ with lib;
             startup = [
                 { command = "maestral start"; }
                 { command = "systemctl --user import-environment"; }
+                # { command = "swaync"; }
                 # { command = "dbus-update-activation-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME"; }
             ];
 

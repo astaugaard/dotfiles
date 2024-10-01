@@ -15,5 +15,6 @@
         ./dunst.nix
         ./sway
         ./deway.nix
+        ./swaync.nix
     ];
 }
