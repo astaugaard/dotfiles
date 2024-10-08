@@ -16,6 +16,10 @@ with lib;
         wayland.windowManager.sway.xwayland = true;
         wayland.windowManager.sway.swaynag.enable = true;
 
+        home.packages = [
+            pkgs.pulseaudio
+        ];
+
         wayland.windowManager.sway.extraConfig = "
         output * bg ~/backgrounds/butterfly.png fill
         xwayland enable
