@@ -19,6 +19,7 @@ with lib;
         cbonsai
         cmatrix
         lolcat
+        prideful
       ];
       myhome.neofetch.enable = true;
     };
