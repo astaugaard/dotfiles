@@ -20,6 +20,7 @@ with lib;
         cmatrix
         lolcat
         prideful
+        sl
       ];
       myhome.neofetch.enable = true;
     };
