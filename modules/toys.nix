@@ -16,6 +16,9 @@ with lib;
         hyfetch
         catsay
         fortune
+        cbonsai
+        cmatrix
+        lolcat
       ];
       myhome.neofetch.enable = true;
     };
