@@ -10,7 +10,7 @@ with lib;
         };
     };
 
-    config = mkIf config.myhome.kitty.enable {
+    config = mkIf config.myhome.picom.enable {
       home.packages = with pkgs; [
         picom
       ];

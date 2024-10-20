@@ -20,5 +20,12 @@ with lib;
           image = "${lib.fileset.toSource { root = ./.; fileset = ./lock.png; }}/lock.png";
       };
       myhome.swaync.enable = true;
+
+      services.swayidle = {
+        enable = true;
+        events = [
+            { event = "before-sleep"; command = "${pkgs.swaylock}/bin/swaylock -fF --image ~/Dropbox/lock.png"; }
+        ];
+      };
     };
 }

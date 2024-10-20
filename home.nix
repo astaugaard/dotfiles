@@ -19,8 +19,9 @@ in
 
   nixpkgs.config.allowUnfree = true;
 
-  myhome.xmonad.enable = true;
+  myhome.xmonad.enable = false;
   myhome.sway.enable = true;
+  myhome.niri.enable = true;
   myhome.toys.enable = true;
   myhome.devtools.enable = true;
   myhome.kak.enable = true;

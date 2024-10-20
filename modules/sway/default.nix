@@ -40,21 +40,6 @@ with lib;
             export WLR_RENDERER="vulkan"
             '';
 
-        services.swayidle = {
-            enable = true;
-            events = [
-                { event = "before-sleep"; command = "${pkgs.swaylock}/bin/swaylock -fF --image ~/Dropbox/lock.png"; }
-            ];
-            # timeouts = [
-            #     { timeout = 300; command = "${pkgs.swaylock}/bin/swaylock -fF --image ~/Dropbox/lock.png"; }
-            #     { timeout = 600;
-            #       command = "${pkgs.sway}/bin/swaymsg \"output * power off\"";
-            #       resumeCommand = "${pkgs.sway}/bin/swaymsg \"output * power on\"";
-            #     }
-            #     { timeout = 900; command = "${pkgs.systemd}/bin/systemctl hybrid-sleep"; }
-            # ];
-        };
-
         wayland.windowManager.sway.config = {
             down = "t";
             up = "n";

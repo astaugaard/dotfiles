@@ -33,9 +33,11 @@ in
 
   boot.plymouth = {
 	enable = false;
-	themePackages = [mypkgs.plymouth-vortex];
-	theme = "vortex";
+	themePackages = [pkgs.adi1090x-plymouth-themes];
+	theme = "hexagon_alt";
   };
+
+  security.rtkit.enable = true;
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -57,6 +59,8 @@ in
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.utf8";
 
+  # sound.enable = true;
+
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -71,10 +75,10 @@ in
   services.xserver = {
     xkb.layout = "us";
     # xkb.variant= "dvorak";
-    enable = true;
+    enable = false;
     windowManager = {
 	xmonad = {
-		enable = true;
+		enable = false;
 	};
     };
 
@@ -113,7 +117,12 @@ in
 
   programs.sway.enable = true;
   programs.sway.package = pkgs.sway;
+
   programs.xwayland.enable = true;
+
+  programs.niri.enable = true;
+  # programs.niri.package = pkgs.niri-stable;
+  niri-flake.cache.enable = false;
 
   security.polkit.enable = true;
 
@@ -141,8 +150,8 @@ in
     libxkbcommon
   ];
 
-  hardware.pulseaudio.enable = false;
-  hardware.pulseaudio.support32Bit = true;
+  # hardware.pulseaudio.enable = true;
+  # hardware.pulseaudio.support32Bit = true;
 
   users.defaultUserShell = pkgs.fish;
   programs.fish.enable = true;
@@ -163,6 +172,13 @@ in
       };
       sway = {
           default = [
+              "gtk"
+              "wlr"
+          ];
+      };
+      niri = {
+          default = [
+              "gnome"
               "gtk"
               "wlr"
           ];
@@ -207,7 +223,6 @@ in
         libsecret
         catppuccin-gtk
         beauty-line-icon-theme
-
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
   ];

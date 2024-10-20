@@ -14,6 +14,7 @@
         ./fish
         ./dunst.nix
         ./sway
+        ./niri
         ./deway.nix
         ./swaync.nix
     ];
