@@ -40,14 +40,19 @@ in
   security.rtkit.enable = true;
 
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.wireless = {
+      environmentFile = "./wifi-password";
+      enable = true;
+      networks."Whitemarsh".psk = "@WIFIPASS@";
+      extraConfig = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=wheel";
+  };  # Enables wireless support via wpa_supplicant.;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  networking.networkmanager.enable = true;
+  # networking.networkmanager.enable = true;
   # networking.wireless.iwd.enable = true;
   # networking.networkmanager.wifi.backend = "iwd";
 
@@ -66,6 +71,7 @@ in
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
   };

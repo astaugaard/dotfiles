@@ -1,4 +1,4 @@
-{pkgs, config, lib, ...}:
+{pkgs, config, lib, pkgs-unstable, ...}:
 with builtins;
 with lib;
 {
