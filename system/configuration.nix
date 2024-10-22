@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, pkgs-unstable, ... }:
 
 let mypkgs = import ./myPackages pkgs;
 in
@@ -41,7 +41,7 @@ in
 
   networking.hostName = "nixos"; # Define your hostname.
   networking.wireless = {
-      environmentFile = "./wifi-password";
+      environmentFile = /home/a/dotfiles/system/wifi-password;
       enable = true;
       networks."Whitemarsh".psk = "@WIFIPASS@";
       extraConfig = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=wheel";
@@ -68,12 +68,15 @@ in
 
   services.pipewire = {
     enable = true;
+    audio.enable = true;
+    package = pkgs-unstable.pipewire;
+    systemWide = true;
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    wireplumber.enable = true;
+    # wireplumber.enable = true;
+    # wireplumber.package = pkgs-unstable.wireplumber;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
   };
 
 
@@ -113,13 +116,23 @@ in
       enable = true;
       settings = {
           default_session = {
-              command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+              # command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+              command = "${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.regreet}/bin/regreet";
               user = "greeter";
           };
       };
   };
 
-  programs.regreet.enable = false;
+  programs.regreet.enable = true;
+  programs.regreet.settings = {
+      background.fit = "Fill";
+      background.path = ./wallhaven-6dq1w6.jpg;
+      GTK.application_prefer_dark_theme = true;
+      commands = {
+          reboot = ["systemctl" "reboot"];
+          poweroff = ["systemctl" "poweroff"];
+      };
+  };
 
   programs.sway.enable = true;
   programs.sway.package = pkgs.sway;
@@ -196,7 +209,7 @@ in
   users.users.a = {
     isNormalUser = true;
     description = "astaugaard";
-    extraGroups = [ "networkmanager" "wheel" "audio" "wireshark"];
+    extraGroups = [ "networkmanager" "wheel" "audio" "wireshark" "pipewire"];
     packages = with pkgs; [libglvnd];
     initialPassword = "a";
   };

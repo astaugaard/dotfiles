@@ -67,6 +67,10 @@
         nixos = lib.nixosSystem {
             inherit system;
 
+            specialArgs = {
+                inherit pkgs-unstable;
+            };
+
             modules = [
                 ./system/configuration.nix
                 niri.outputs.nixosModules.niri
