@@ -24,7 +24,7 @@ with lib;
             
                 "Mod+Shift+Return".action = spawn "kitty";
                 "Mod+P".action = spawn "rofi" "-theme" "launcher" "-modi" "drun" "-show" "drun" "-show-icons";
-                "Super+Shift+C".action = spawn "flatpak" "run" "org.flameshot.Flameshot" "gui";
+                "Super+Shift+C".action = screenshot;
                 "Super+Shift+O".action = spawn "swaync-client" "-t" "-sw";
                 "Super+Shift+L".action = spawn "swaylock" "--image" "~/Dropbox/lock.png";
             
@@ -138,9 +138,11 @@ with lib;
             prefer-no-csd = true;
             spawn-at-startup = [
                 { command = ["maestral" "start"]; }
-                { command = ["swaybg" "-i" "~/backgrounds/butterfly.png" "-m" "fill"]; }
+                { command = ["${pkgs.fish}/bin/fish" "${./set_bg.fish}"]; }
                 { command = ["swaync"]; }
                 { command = ["${pkgs.xwayland-satellite-unstable}/bin/xwayland-satellite"]; }
+                { command = ["dbus-update-activation-environment" "DISPLAY"]; }
+
             ];
 
             input.focus-follows-mouse.enable = true;

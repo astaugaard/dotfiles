@@ -23,6 +23,7 @@ with lib;
         valgrind
         pkgs-unstable.cargo
         pkgs-unstable.rust-analyzer
+        cargo-disasm
         qmk
         libglvnd
         nodePackages.node2nix

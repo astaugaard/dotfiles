@@ -5,6 +5,8 @@ self: super: {
 
     prideful = self.callPackage ./prideful.nix {};
 
+    cargo-disasm = self.callPackage ./cargo-disasm.nix {};
+
     haskellPackages = super.haskellPackages.override {
         overrides = self: super: {
             dynamicDashboard = self.callPackage ./dash {};

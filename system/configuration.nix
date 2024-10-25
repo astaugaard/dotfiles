@@ -209,7 +209,7 @@ in
   users.users.a = {
     isNormalUser = true;
     description = "astaugaard";
-    extraGroups = [ "networkmanager" "wheel" "audio" "wireshark" "pipewire"];
+    extraGroups = [ "networkmanager" "wheel" "audio" "wireshark" "pipewire" "video"];
     packages = with pkgs; [libglvnd];
     initialPassword = "a";
   };
