@@ -214,37 +214,6 @@ with lib;
       };
     };
 
-    # homeModules.niri
-    # programs.
-
-    #   home.packages = [
-    #       # pkgs.pulseaudio
-    #       pkgs-unstable.niri
-    #   ];
-
-    #   # wayland.windowManager.sway.extraSessionCommands =
-    #   #     ''
-    #   #     export SDL_VIDEODRIVER=wayland
-    #   #     # needs qt5.qtwayland in systemPackages
-    #   #     export QT_QPA_PLATFORM=wayland
-    #   #     export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
-    #   #     # Fix for some Java AWT applications (e.g. Android Studio),
-    #   #     # use this if they aren't displayed properly:
-    #   #     export _JAVA_AWT_WM_NONREPARENTING=1
-
-    #   #     export GTK_USE_PORTAL="0"
-    #   #     export WLR_RENDERER="vulkan"
-    #   #     '';
-
-    #   xdg.configFile."niri/config.kdl" = {
-    #       # source = "config.kdl";
-    # source = pkgs.substituteAll
-    #   { src = ./config.kdl;
-    #   		normalBorderColor = "#${config.colorScheme.palette.base01}";
-    #   		activeBorderColor = "#${config.colorScheme.palette.base07}";
-    #   };
-    #   };
-
     myhome.decommon.enable = true;
     myhome.deway.enable = true;
   };
