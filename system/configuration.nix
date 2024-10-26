@@ -4,8 +4,8 @@
 
 { config, pkgs, pkgs-unstable, ... }:
 
-let mypkgs = import ./myPackages pkgs;
-in
+# let mypkgs = import ./myPackages pkgs;
+# in
 {
   imports =
     [ # Include the results of the hardware scan.
@@ -21,7 +21,7 @@ in
 	device = "nodev";
 	useOSProber = true;
 	efiSupport = true;
-	theme = "${mypkgs.grub-pets-min-theme}/grub/theme";
+	theme = "${pkgs.grub-pets-min-theme}/grub/theme";
   };
   boot.initrd.kernelModules = [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu" ];

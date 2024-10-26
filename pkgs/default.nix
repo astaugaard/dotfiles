@@ -7,6 +7,10 @@ self: super: {
 
     cargo-disasm = self.callPackage ./cargo-disasm.nix {};
 
+    grub-pets-min-theme = self.callPackage ./pets-min-theme.nix {};
+
+    nixos-plymouth-vortex= self.callPackage ./plymouth-vortex.nix.nix {};
+
     haskellPackages = super.haskellPackages.override {
         overrides = self: super: {
             dynamicDashboard = self.callPackage ./dash {};

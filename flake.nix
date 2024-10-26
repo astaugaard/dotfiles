@@ -28,18 +28,23 @@
     let
       system = "x86_64-linux";
       # pkgs = nixpkgs.legacyPackages.${system};
+      myOverlays = [
+              niri.overlays.niri
+              (final: super: {
+                rofi-wayland-unwrapped = super.rofi-wayland-unwrapped.overrideAttrs({ patches ? [], ... }: {
+                patches = patches ++ [
+                    (final.fetchpatch {
+                        url = "https://github.com/samueldr/rofi/commit/55425f72ff913eb72f5ba5f5d422b905d87577d0.patch";
+                        hash = "sha256-vTUxtJs4SuyPk0PgnGlDIe/GVm/w1qZirEhKdBp4bHI=";
+                    })
+                ];
+                });
+              })
+              (import ./pkgs)];
       pkgs = import nixpkgs {
           inherit system;
           config = { allowUnfree = true; };
-          overlays = [niri.overlays.niri (final: super: {
-            rofi-wayland-unwrapped = super.rofi-wayland-unwrapped.overrideAttrs({ patches ? [], ... }: {
-              patches = patches ++ [
-                (final.fetchpatch {
-                  url = "https://github.com/samueldr/rofi/commit/55425f72ff913eb72f5ba5f5d422b905d87577d0.patch";
-                  hash = "sha256-vTUxtJs4SuyPk0PgnGlDIe/GVm/w1qZirEhKdBp4bHI=";
-                })
-              ];
-            }); })];
+          overlays = myOverlays;
       };
 
       pkgs-unstable = import nixpkgs-unstable {
@@ -72,6 +77,7 @@
             };
 
             modules = [
+                ({config, pkgs, ...}: { nixpkgs.overlays = myOverlays; }) # name a more hack way of doing this
                 ./system/configuration.nix
                 niri.outputs.nixosModules.niri
             ];

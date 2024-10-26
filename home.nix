@@ -13,10 +13,6 @@ in
 
   colorScheme = nix-colors.colorSchemes.catppuccin-macchiato;
 
-  nixpkgs.overlays = [
-      (import ./pkgs)
-  ];
-
   nixpkgs.config.allowUnfree = true;
 
   myhome.xmonad.enable = false;
