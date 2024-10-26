@@ -45,7 +45,8 @@ function fish_title
      prompt_pwd
      date "+  Time: %H:%M:%S"
 end
-   
+
+zoxide init fish | source
 
 function fish_user_key_bindings
     # Execute this once per mode that emacs bindings should be used in
