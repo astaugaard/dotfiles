@@ -41,6 +41,7 @@ in
         git
         maestral
         nix-index
+        zoxide
 
         qemu
       ];
