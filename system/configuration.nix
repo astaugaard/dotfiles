@@ -2,26 +2,31 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, pkgs-unstable, ... }:
+{
+  config,
+  pkgs,
+  pkgs-unstable,
+  ...
+}:
 
 # let mypkgs = import ./myPackages pkgs;
 # in
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader.efi.canTouchEfiVariables = true;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.grub = {
-	enable = true;
-# 	version = 2;
-	device = "nodev";
-	useOSProber = true;
-	efiSupport = true;
-	theme = "${pkgs.grub-pets-min-theme}/grub/theme";
+    enable = true;
+    # 	version = 2;
+    device = "nodev";
+    useOSProber = true;
+    efiSupport = true;
+    theme = "${pkgs.grub-pets-min-theme}/grub/theme";
   };
   boot.initrd.kernelModules = [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
@@ -32,20 +37,20 @@
   hardware.opengl.package = pkgs.mesa.drivers;
 
   boot.plymouth = {
-	enable = false;
-	themePackages = [pkgs.adi1090x-plymouth-themes];
-	theme = "hexagon_alt";
+    enable = false;
+    themePackages = [ pkgs.adi1090x-plymouth-themes ];
+    theme = "hexagon_alt";
   };
 
   security.rtkit.enable = true;
 
   networking.hostName = "nixos"; # Define your hostname.
   networking.wireless = {
-      environmentFile = /home/a/dotfiles/system/wifi-password;
-      enable = true;
-      networks."Whitemarsh".psk = "@WIFIPASS@";
-      extraConfig = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=wheel";
-  };  # Enables wireless support via wpa_supplicant.;
+    environmentFile = /home/a/dotfiles/system/wifi-password;
+    enable = true;
+    networks."Whitemarsh".psk = "@WIFIPASS@";
+    extraConfig = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=wheel";
+  }; # Enables wireless support via wpa_supplicant.;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -56,7 +61,7 @@
   # networking.wireless.iwd.enable = true;
   # networking.networkmanager.wifi.backend = "iwd";
 
-#  networking.wireless.enable = false
+  #  networking.wireless.enable = false
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -79,31 +84,30 @@
     # If you want to use JACK applications, uncomment this
   };
 
-
   # Configure keymap in X11
   services.xserver = {
     xkb.layout = "us";
     # xkb.variant= "dvorak";
     enable = false;
     windowManager = {
-	xmonad = {
-		enable = false;
-	};
+      xmonad = {
+        enable = false;
+      };
     };
 
     displayManager.lightdm = {
-	enable = false;
-	greeters.mini = {
-    		enable = true;
-    		user = "a";
-    		extraConfig = ''
-    			[greeter]
-        		show-password-label = false
-        		[greeter-theme]
-            		background-image = ""
-            	'';
-		};
-        };
+      enable = false;
+      greeters.mini = {
+        enable = true;
+        user = "a";
+        extraConfig = ''
+          			[greeter]
+              		show-password-label = false
+              		[greeter-theme]
+                  		background-image = ""
+                  	'';
+      };
+    };
   };
 
   services.seatd.enable = true;
@@ -113,25 +117,31 @@
   services.displayManager.sddm.wayland.enable = true;
 
   services.greetd = {
-      enable = true;
-      settings = {
-          default_session = {
-              # command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
-              command = "${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.regreet}/bin/regreet";
-              user = "greeter";
-          };
+    enable = true;
+    settings = {
+      default_session = {
+        # command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
+        command = "${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.regreet}/bin/regreet";
+        user = "greeter";
       };
+    };
   };
 
   programs.regreet.enable = true;
   programs.regreet.settings = {
-      background.fit = "Fill";
-      background.path = ./wallhaven-6dq1w6.jpg;
-      GTK.application_prefer_dark_theme = true;
-      commands = {
-          reboot = ["systemctl" "reboot"];
-          poweroff = ["systemctl" "poweroff"];
-      };
+    background.fit = "Fill";
+    background.path = ./wallhaven-6dq1w6.jpg;
+    GTK.application_prefer_dark_theme = true;
+    commands = {
+      reboot = [
+        "systemctl"
+        "reboot"
+      ];
+      poweroff = [
+        "systemctl"
+        "poweroff"
+      ];
+    };
   };
 
   programs.sway.enable = true;
@@ -152,9 +162,9 @@
   services.ntp.enable = true;
 
   programs.gnupg.agent = {
-      enable = true;
-    
-      pinentryPackage = pkgs.pinentry-curses;
+    enable = true;
+
+    pinentryPackage = pkgs.pinentry-curses;
   };
 
   programs.dconf.enable = true;
@@ -178,82 +188,85 @@
   xdg.portal.enable = true;
 
   xdg.portal.wlr = {
-      enable = true;
+    enable = true;
   };
 
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk pkgs.xdg-desktop-portal-wlr];
+  xdg.portal.extraPortals = [
+    pkgs.xdg-desktop-portal-gtk
+    pkgs.xdg-desktop-portal-wlr
+  ];
 
   xdg.portal.config = {
-      common = {
-          default = [
-              "gtk"
-          ];
-      };
-      sway = {
-          default = [
-              "gtk"
-              "wlr"
-          ];
-      };
-      niri = {
-          default = [
-              "gnome"
-              "gtk"
-              "wlr"
-          ];
-      };
+    common = {
+      default = [ "gtk" ];
+    };
+    sway = {
+      default = [
+        "gtk"
+        "wlr"
+      ];
+    };
+    niri = {
+      default = [
+        "gnome"
+        "gtk"
+        "wlr"
+      ];
+    };
   };
-
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.a = {
     isNormalUser = true;
     description = "astaugaard";
-    extraGroups = [ "networkmanager" "wheel" "audio" "wireshark" "pipewire" "video"];
-    packages = with pkgs; [libglvnd];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "audio"
+      "wireshark"
+      "pipewire"
+      "video"
+    ];
+    packages = with pkgs; [ libglvnd ];
     initialPassword = "a";
   };
-
 
   # Allow unfree packages
 
   nixpkgs.config.allowUnfree = true;
 
   fonts = {
-      packages = with pkgs; [
-	(nerdfonts.override {fonts = ["FiraCode"]; })];
-      fontconfig = {
-	defaultFonts = {
-		monospace = [ "FiraCode" ];
-	};
+    packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
+    fontconfig = {
+      defaultFonts = {
+        monospace = [ "FiraCode" ];
       };
+    };
   };
-
-
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-	kakoune
-        wget
-        xterm
-        fish
-        postgresql
-        libsecret
-        catppuccin-gtk
-        beauty-line-icon-theme
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    kakoune
+    wget
+    xterm
+    fish
+    postgresql
+    libsecret
+    catppuccin-gtk
+    beauty-line-icon-theme
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
   ];
 
-#  environment.variables = {
-#      WLR_RENDERER = "vulkan";
-#      GTK_USE_PORTAL = "0";
-#  };
+  #  environment.variables = {
+  #      WLR_RENDERER = "vulkan";
+  #      GTK_USE_PORTAL = "0";
+  #  };
 
   networking.firewall = {
-	allowedTCPPorts = [ 17500 ];
-	allowedUDPPorts = [ 17500 ];
+    allowedTCPPorts = [ 17500 ];
+    allowedUDPPorts = [ 17500 ];
   };
 
   systemd.services.flatpak-repo = {
@@ -265,35 +278,35 @@
   };
 
   nix = {
-      package = pkgs.lix;
-      extraOptions = ''
-      	experimental-features = nix-command flakes
-      '';
-      gc = {
-          automatic = true;
-          dates = "weekly";
-          options = "--delete-older-than 5d";
-      };
+    package = pkgs.lix;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 5d";
+    };
   };
 
-#  systemd.user.services.dropbox = {
-#	description = "Dropbox";
-#	after = [ "xembedsniproxy.service" ];
-#	wants = [ "xembedsniproxy.service" ];
-#	wantedBy = [ "graphical-session.target" ];
-##	enviroment = {
-##		QT_PLUGIN_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtPluginPrefix;
-##	        QML2_IMPORT_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtQmlPrefix;
-##	};
-#	serviceConfig = {
-#		ExecStart = "${pkgs.maestral.out}/bin/maestral start";
-#		ExecReload = "${pkgs.coreutils.out}/bin/kill -HUP $MAINPID";
-#		KillMode = "control-group";
-#		PrivateTmp = true;
-#		ProtectSystem = "full";
-#		Nice = 10;
-#	};
-#  };
+  #  systemd.user.services.dropbox = {
+  #	description = "Dropbox";
+  #	after = [ "xembedsniproxy.service" ];
+  #	wants = [ "xembedsniproxy.service" ];
+  #	wantedBy = [ "graphical-session.target" ];
+  ##	enviroment = {
+  ##		QT_PLUGIN_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtPluginPrefix;
+  ##	        QML2_IMPORT_PATH = "/run/current-system/sw/" + pkgs.qt5.qtbase.qtQmlPrefix;
+  ##	};
+  #	serviceConfig = {
+  #		ExecStart = "${pkgs.maestral.out}/bin/maestral start";
+  #		ExecReload = "${pkgs.coreutils.out}/bin/kill -HUP $MAINPID";
+  #		KillMode = "control-group";
+  #		PrivateTmp = true;
+  #		ProtectSystem = "full";
+  #		Nice = 10;
+  #	};
+  #  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

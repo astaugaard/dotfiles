@@ -1,14 +1,18 @@
-{ config, pkgs, lib, nix-colors, catppuccin,... }:
+{
+  config,
+  pkgs,
+  lib,
+  nix-colors,
+  catppuccin,
+  ...
+}:
 let
-    tex =
-        pkgs.texlive.combine {
-            inherit (pkgs.texlive) scheme-tetex standalone preview;
-        };
+  tex = pkgs.texlive.combine { inherit (pkgs.texlive) scheme-tetex standalone preview; };
 in
 {
   imports = [
-  	./modules
-  	nix-colors.homeManagerModules.default
+    ./modules
+    nix-colors.homeManagerModules.default
   ];
 
   colorScheme = nix-colors.colorSchemes.catppuccin-macchiato;
@@ -22,57 +26,57 @@ in
   myhome.devtools.enable = true;
   myhome.kak.enable = true;
 
-
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home = {
-      username = "a";
-      homeDirectory = "/home/a";
+    username = "a";
+    homeDirectory = "/home/a";
 
-      packages = with pkgs; [
-        # always
-        alsa-utils
-        bc
-        unzip
-        git
-        maestral
-        nix-index
-        zoxide
+    packages = with pkgs; [
+      # always
+      alsa-utils
+      bc
+      unzip
+      git
+      maestral
+      nix-index
+      zoxide
+      nixfmt-rfc-style
 
-        qemu
-      ];
+      qemu
+    ];
 
-      sessionVariables = {
-          GTK_THEME = "catppuccin";
-          WLR_RENDERER = "vulkan";
-      };
+    sessionVariables = {
+      GTK_THEME = "catppuccin";
+      WLR_RENDERER = "vulkan";
+    };
   };
 
   gtk.enable = true;
 
   gtk.catppuccin = {
-      enable = true;
-      flavor = "macchiato";
-      accent = "mauve";
-      size = "standard";
-      tweaks = ["normal"];
+    enable = true;
+    flavor = "macchiato";
+    accent = "mauve";
+    size = "standard";
+    tweaks = [ "normal" ];
   };
 
   gtk.iconTheme = {
-      name = "BeautyLine";
-      package = pkgs.beauty-line-icon-theme;
+    name = "BeautyLine";
+    package = pkgs.beauty-line-icon-theme;
   };
 
   gtk.gtk3.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
+    Settings = ''
+      gtk-application-prefer-dark-theme=1
+    '';
   };
 
   gtk.gtk4.extraConfig = {
-      Settings = ''
-        gtk-application-prefer-dark-theme=1
-      '';
+    Settings = ''
+      gtk-application-prefer-dark-theme=1
+    '';
   };
 
   qt.style.package = pkgs.catppuccin-qt5ct;
@@ -82,11 +86,15 @@ in
   xdg.enable = true;
 
   xdg.mimeApps.defaultApplications = {
-    "x-scheme-handler/http" = ["librewolf.desktop"];
-    "x-scheme-handler/https" = ["librewolf.desktop"];
+    "x-scheme-handler/http" = [ "librewolf.desktop" ];
+    "x-scheme-handler/https" = [ "librewolf.desktop" ];
   };
 
-  xdg.systemDirs.data = ["/usr/share" "/var/lib/flatpak/exports/share" "~/.local/share/flatpak/exports/share"];
+  xdg.systemDirs.data = [
+    "/usr/share"
+    "/var/lib/flatpak/exports/share"
+    "~/.local/share/flatpak/exports/share"
+  ];
 
   # This value determines the Home Manager release that you
   # configuration is compatible with. This helps avoid breakage

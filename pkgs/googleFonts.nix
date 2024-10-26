@@ -5,14 +5,15 @@ pkgs.stdenv.mkDerivation rec {
 
   buildInputs = [ pkgs.unzip ];
 
-  src = (pkgs.fetchgit {
+  src = (
+    pkgs.fetchgit {
       url = "https://github.com/google/fonts.git";
-      sparseCheckout = ["ofl/greatvibes"];
+      sparseCheckout = [ "ofl/greatvibes" ];
       sha256 = "sha256-oBwcKXaI0Y/0mSrv3n8KJ17BkR0oyTMP1cpes5OYEK8=";
-  });
+    }
+  );
 
-  buildPhase = ''
-  '';
+  buildPhase = '''';
   installPhase = ''
     mkdir -p $out/share/fonts/truetype/Great\ Vibes/
     mv ofl/greatvibes/GreatVibes-Regular.ttf $out/share/fonts/truetype/Great\ Vibes/GreatVibes-Regular.ttf
