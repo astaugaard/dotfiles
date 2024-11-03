@@ -10,7 +10,9 @@
 
     catppuccin.url = "github:catppuccin/nix";
 
-    nix-colors.url = "github:misterio77/nix-colors";
+    # nix-colors.url = "github:misterio77/nix-colors";
+
+    stylix.url = "github:danth/stylix";
 
     niri = {
       url = "github:sodiboo/niri-flake";
@@ -28,8 +30,7 @@
     {
       nixpkgs,
       home-manager,
-      nix-colors,
-      catppuccin,
+      stylix,
       nixpkgs-unstable,
       niri,
       ...
@@ -82,13 +83,14 @@
         # the path to your home.nix.
         modules = [
           ./home.nix
-          catppuccin.homeManagerModules.catppuccin
+          # catppuccin.homeManagerModules.catppuccin
           niri.homeModules.niri
+          stylix.homeManagerModules.stylix
         ];
 
         extraSpecialArgs = {
           inherit pkgs-unstable;
-          inherit nix-colors;
+          # inherit nix-colors;
         };
       };
 

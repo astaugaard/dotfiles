@@ -2,8 +2,6 @@
   config,
   pkgs,
   lib,
-  nix-colors,
-  catppuccin,
   pkgs-unstable,
   ...
 }:
@@ -13,12 +11,16 @@ in
 {
   imports = [
     ./modules
-    nix-colors.homeManagerModules.default
+    # nix-colors.homeManagerModules.default
   ];
 
-  colorScheme = nix-colors.colorSchemes.catppuccin-macchiato;
+  # colorScheme = nix-colors.colorSchemes.catppuccin-macchiato;
 
   nixpkgs.config.allowUnfree = true;
+
+  stylix.enable = true;
+  stylix.image = ./butterfly.png;
+  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-macchiato.yaml";
 
   myhome.xmonad.enable = false;
   myhome.sway.enable = true;
@@ -73,13 +75,13 @@ in
 
   gtk.enable = true;
 
-  gtk.catppuccin = {
-    enable = true;
-    flavor = "macchiato";
-    accent = "mauve";
-    size = "standard";
-    tweaks = [ "normal" ];
-  };
+  # gtk.catppuccin = {
+  #   enable = true;
+  #   flavor = "macchiato";
+  #   accent = "mauve";
+  #   size = "standard";
+  #   tweaks = [ "normal" ];
+  # };
 
   gtk.iconTheme = {
     name = "BeautyLine";

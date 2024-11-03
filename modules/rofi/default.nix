@@ -18,6 +18,9 @@ with lib;
 
   config = mkIf config.myhome.rofi.enable {
     home.packages = with pkgs; [ rofi-wayland ];
+
+    stylix.targets.rofi.enable = false;
+
     xdg.configFile."rofi".source = pkgs.substituteAllFiles {
       src = ./.;
       files = [
@@ -25,10 +28,10 @@ with lib;
         "themes/launcher.rasi"
         "themes/rounded-common.rasi"
       ];
-      background = "#${config.colorScheme.palette.base01}50";
-      background2 = "#${config.colorScheme.palette.base00}";
-      foreground = "#${config.colorScheme.palette.base05}";
-      accent = "#${config.colorScheme.palette.base0E}";
+      background = "#${config.lib.stylix.colors.base01}50";
+      background2 = "#${config.lib.stylix.colors.base00}";
+      foreground = "#${config.lib.stylix.colors.base05}";
+      accent = "#${config.lib.stylix.colors.base0E}";
     };
   };
 }

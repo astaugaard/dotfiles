@@ -21,6 +21,9 @@ with lib;
       wl-clipboard
     ];
     programs.swaylock.enable = true;
+
+    stylix.targets.swaylock.useImage = false;
+
     programs.swaylock.settings = {
       image = "${
         lib.fileset.toSource {

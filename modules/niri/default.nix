@@ -150,7 +150,7 @@ with lib;
           let
             background_file = pkgs.substituteAll {
               src = ./set_bg.fish;
-              background_image = ./butterfly.png;
+              background_image = config.stylix.image;
             };
           in
           {
@@ -190,8 +190,8 @@ with lib;
         focus-ring = {
           enable = true;
           width = 2;
-          active.color = "#${config.colorScheme.palette.base07}";
-          inactive.color = "#${config.colorScheme.palette.base01}";
+          active.color = "#${config.lib.stylix.colors.base07}";
+          inactive.color = "#${config.lib.stylix.colors.base01}";
         };
 
         always-center-single-column = true;

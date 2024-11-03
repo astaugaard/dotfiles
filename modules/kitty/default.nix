@@ -16,7 +16,9 @@ with lib;
   };
 
   config = mkIf config.myhome.kitty.enable {
-    home.packages = with pkgs; [ kitty ];
-    xdg.configFile."kitty".source = ./.;
+    # home.packages = with pkgs; [ kitty ];
+    # xdg.configFile."kitty".source = ./.;
+    programs.kitty.enable = true;
+    stylix.targets.kitty.enable = true;
   };
 }
