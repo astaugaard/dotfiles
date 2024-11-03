@@ -18,6 +18,7 @@
     ./fish.nix
     ./dunst.nix
     ./sway
+    ./kitty.nix
     ./niri
     ./deway.nix
     ./swaync.nix

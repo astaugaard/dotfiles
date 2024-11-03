@@ -18,7 +18,6 @@ with lib;
 
   config = mkIf config.myhome.toys.enable {
     home.packages = with pkgs; [
-      # neofetch
       hyfetch
       catsay
       fortune
