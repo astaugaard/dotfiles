@@ -140,18 +140,26 @@ with lib;
       screenshot-path = "~/Dropbox/Screenshots/Screenshot %Y-%m-%d at %H:%M:%S.png";
       prefer-no-csd = true;
       spawn-at-startup = [
-        {
-          command = [
-            "maestral"
-            "start"
-          ];
-        }
-        {
-          command = [
-            "${pkgs.fish}/bin/fish"
-            "${./set_bg.fish}"
-          ];
-        }
+        # {
+        #   command = [
+        #     "maestral"
+        #     "start"
+        #   ];
+        # }
+        (
+          let
+            background_file = pkgs.substituteAll {
+              src = ./set_bg.fish;
+              background_image = ./butterfly.png;
+            };
+          in
+          {
+            command = [
+              "${pkgs.fish}/bin/fish"
+              "${background_file}"
+            ];
+          }
+        )
         { command = [ "swaync" ]; }
         { command = [ "${pkgs.xwayland-satellite-unstable}/bin/xwayland-satellite" ]; }
         {

@@ -19,15 +19,16 @@
 
   # Bootloader.
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";
+  # boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.grub = {
-    enable = true;
+    enable = false;
     # 	version = 2;
     device = "nodev";
     useOSProber = true;
     efiSupport = true;
     theme = "${pkgs.grub-pets-min-theme}/grub/theme";
   };
+  boot.loader.systemd-boot.enable = true;
   boot.initrd.kernelModules = [ "amdgpu" ];
   services.xserver.videoDrivers = [ "amdgpu" ];
 
@@ -200,12 +201,12 @@
     common = {
       default = [ "gtk" ];
     };
-    sway = {
-      default = [
-        "gtk"
-        "wlr"
-      ];
-    };
+    # sway = {
+    #   default = [
+    #     "gtk"
+    #     "wlr"
+    #   ];
+    # };
     niri = {
       default = [
         "gnome"
@@ -265,7 +266,20 @@
   #  };
 
   networking.firewall = {
-    allowedTCPPorts = [ 17500 ];
+    allowedTCPPorts = [
+      17500
+      17599
+      17600
+      17601
+      17602
+      17603
+      17604
+      17605
+      17606
+      17607
+      17608
+      17609
+    ];
     allowedUDPPorts = [ 17500 ];
   };
 
@@ -278,7 +292,7 @@
   };
 
   nix = {
-    package = pkgs.lix;
+    # package = pkgs.lix;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';

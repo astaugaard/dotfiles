@@ -3,12 +3,11 @@
  * User                 : LR-Tech               
  * Theme Repo           : https://github.com/lr-tech/rofi-themes-collection
  *******************************************************************************/
-@import "~/.cache/wal/colors.rasi"
 * {
     font:   "Roboto 12";
 
-    background-color:   @background2;
-    text-color:         @foreground;
+    background-color:   @background2@;
+    text-color:         @foreground@;
 
     margin:     0px;
     padding:    0px;
@@ -21,7 +20,7 @@ window {
     y-offset:       -200;
     border-radius:  24px;
     
-    background-color:   @background2;
+    background-color:   @background2@;
 }
 
 mainbox {
@@ -29,8 +28,8 @@ mainbox {
 }
 
 inputbar {
-    background-color:   @background;
-    border-color:       @accent;
+    background-color:   @background@;
+    border-color:       @accent@;
 
     border:         2px;
     border-radius:  16px;
@@ -41,19 +40,19 @@ inputbar {
 }
 
 prompt {
-    text-color: @accent;
+    text-color: @accent@;
 }
 
 entry {
     placeholder:        "Search";
-    placeholder-color:  @accent;
+    placeholder-color:  @accent@;
 }
 
 message {
     margin:             12px 0 0;
     border-radius:      16px;
-    border-color:       @foreground;
-    background-color:   @accent;
+    border-color:       @foreground@;
+    background-color:   @accent@;
 }
 
 textbox {
@@ -77,11 +76,11 @@ element {
 }
 
 element selected {
-    text-color: @foreground;
+    text-color: @foreground@;
 }
 
 element selected normal, element selected active {
-    background-color: @accent;
+    background-color: @accent@;
 }
 
 element-icon {

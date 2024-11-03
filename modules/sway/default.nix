@@ -123,7 +123,7 @@ with lib;
         };
 
       startup = [
-        { command = "maestral start"; }
+        # { command = "maestral start"; }
         { command = "systemctl --user import-environment"; }
         # { command = "swaync"; }
         # { command = "dbus-update-activation-environment WAYLAND_DISPLAY DISPLAY XDG_CURRENT_DESKTOP SWAYSOCK I3SOCK XCURSOR_SIZE XCURSOR_THEME"; }

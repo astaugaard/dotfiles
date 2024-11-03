@@ -4,6 +4,7 @@
   lib,
   nix-colors,
   catppuccin,
+  pkgs-unstable,
   ...
 }:
 let
@@ -38,10 +39,13 @@ in
       bc
       unzip
       git
-      maestral
+      # maestral
       nix-index
+      pkgs-unstable.dropbox-cli
       zoxide
       nixfmt-rfc-style
+
+      bitwarden-desktop
 
       qemu
     ];
@@ -51,6 +55,21 @@ in
       WLR_RENDERER = "vulkan";
     };
   };
+
+  systemd.user.services.dropbox = {
+    Unit = {
+      Description = "Dropbox service";
+    };
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+    Service = {
+      ExecStart = "${pkgs-unstable.dropbox}/bin/dropbox";
+      Restart = "on-failure";
+    };
+  };
+
+  # services.dropbox.enable = true;
 
   gtk.enable = true;
 

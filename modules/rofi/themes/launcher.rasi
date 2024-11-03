@@ -1,9 +1,7 @@
-@import "~/.cache/wal/colors.rasi"
-
 * {
-    background-color:      @background;
-    text-color:            @foreground;
-    border-color:          @foreground;
+    background-color:      @background@;
+    text-color:            @foreground@;
+    border-color:          @foreground@;
     font:            "Fira Code NF 10";
 }
 
@@ -75,6 +73,6 @@ element-text {
     width: 24;
 }
 element selected {
-    background-color: @accent;
+    background-color: @accent@;
     border-radius: 100%;
 }

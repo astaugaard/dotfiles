@@ -1,4 +1,1 @@
-//@theme "/home/astaugaard/.config/rofi/themes/rounded-dracula-dark.rasi"
-//@theme "/home/astaugaard/.config/rofi/themes/rounded-common.rasi"
-//@theme "/home/astaugaard/.config/rofi/themes/launcher.rasi"
 @theme "~/.config/rofi/themes/rounded-common.rasi"
