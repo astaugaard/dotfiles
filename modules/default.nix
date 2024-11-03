@@ -9,7 +9,6 @@
     ./decommon.nix
     ./devtools.nix
     ./dex11.nix
-    ./kitty
     ./picom
     ./toys.nix
     ./rofi.nix
