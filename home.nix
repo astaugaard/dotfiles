@@ -49,12 +49,37 @@ in
 
       bitwarden-desktop
 
+      (pkgs.writeShellScriptBin "system" ''
+
+        case $1 in
+          "home") 
+            pushd ~/dotfiles
+            home-manager switch --flake ".?submodules=1"
+            popd ;;
+          "system")
+            pushd ~/dotfiles
+            sudo nixos-rebuild switch --flake ".?submodules=1"
+            popd ;;
+          "update")
+            pushd ~/dotfiles
+            nix flake update
+            home-manager switch --flake ".?submodules=1"
+            sudo nixos-rebuild switch --flake ".?submodules=1"
+            flatpak update -y
+            popd ;;
+          *) echo "unknown command: $1" ;;
+        esac
+
+      '')
+
       qemu
     ];
 
     sessionVariables = {
       GTK_THEME = "catppuccin";
       WLR_RENDERER = "vulkan";
+      EDITOR = "kak";
+      LS_COLORS = "di=36;40:ln=0";
     };
   };
 

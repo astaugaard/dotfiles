@@ -11,12 +11,11 @@
     ./dex11.nix
     ./kitty
     ./picom
-    ./neofetch
     ./toys.nix
     ./rofi.nix
     ./kak.nix
     ./xmonad
-    ./fish
+    ./fish.nix
     ./dunst.nix
     ./sway
     ./niri

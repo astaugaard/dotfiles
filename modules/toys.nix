@@ -18,7 +18,7 @@ with lib;
 
   config = mkIf config.myhome.toys.enable {
     home.packages = with pkgs; [
-      neofetch
+      # neofetch
       hyfetch
       catsay
       fortune
@@ -28,6 +28,7 @@ with lib;
       prideful
       sl
     ];
-    myhome.neofetch.enable = true;
+
+    programs.fastfetch.enable = true;
   };
 }
