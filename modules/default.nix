@@ -13,7 +13,7 @@
     ./picom
     ./neofetch
     ./toys.nix
-    ./rofi
+    ./rofi.nix
     ./kak.nix
     ./xmonad
     ./fish

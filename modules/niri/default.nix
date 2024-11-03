@@ -29,7 +29,7 @@ with lib;
         "Mod+Shift+Slash".action = show-hotkey-overlay;
 
         "Mod+Shift+Return".action = spawn "kitty";
-        "Mod+P".action = spawn "rofi" "-theme" "launcher" "-modi" "drun" "-show" "drun" "-show-icons";
+        "Mod+P".action = spawn "rofi" "-modi" "drun" "-show" "drun" "-show-icons";
         "Super+Shift+C".action = screenshot;
         "Super+Shift+O".action = spawn "swaync-client" "-t" "-sw";
         "Super+Shift+L".action = spawn "swaylock" "--image" "~/Dropbox/lock.png";
