@@ -7,6 +7,22 @@
 }:
 let
   tex = pkgs.texlive.combine { inherit (pkgs.texlive) scheme-tetex standalone preview; };
+  mybackground = pkgs.stdenv.mkDerivation rec {
+    name = "mybackground";
+    src = ./.;
+    background = "#${config.lib.stylix.colors.base01}";
+    foreground = "#${config.lib.stylix.colors.base0E}";
+
+    dontUnpack = true;
+
+    buildPhase = ''
+      substituteAllInPlace butterfly.svg
+    '';
+
+    installPhase = ''
+      ${pkgs.inkscape} --export-type "png" --export-filename "$out/butterfly.png" butterfly.svg
+    '';
+  };
 in
 {
   imports = [
@@ -19,13 +35,13 @@ in
   nixpkgs.config.allowUnfree = true;
 
   stylix.enable = true;
-  stylix.image = ./butterfly.png;
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-macchiato.yaml";
+  stylix.image = "${mybackground}/butterfly.png";
 
   myhome.xmonad.enable = false;
   myhome.sway.enable = true;
-  myhome.niri.enable = true;
-  myhome.toys.enable = true;
+  myhome.niri.enable = true; # baes01
+  myhome.toys.enable = true; # base0E
   myhome.devtools.enable = true;
   myhome.kak.enable = true;
 
