@@ -37,6 +37,9 @@ with lib;
       gmp.dev
       gnumake
       pkgs-unstable.rustfmt
+      lld
+      nixfmt-rfc-style
+      trunk
     ];
   };
 }

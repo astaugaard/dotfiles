@@ -20,7 +20,9 @@ with lib;
       swaybg
       wl-clipboard
     ];
+    myhome.desktop.enable = true;
     programs.swaylock.enable = true;
+    home.sessionVariables.WLR_RENDERER = "vulkan";
 
     stylix.targets.swaylock.useImage = false;
 

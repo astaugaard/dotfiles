@@ -5,45 +5,18 @@
   pkgs-unstable,
   ...
 }:
-let
-  tex = pkgs.texlive.combine { inherit (pkgs.texlive) scheme-tetex standalone preview; };
-  mybackground = pkgs.stdenv.mkDerivation rec {
-    name = "mybackground";
-    src = ./.;
-    background = "#${config.lib.stylix.colors.base01}";
-    foreground = "#${config.lib.stylix.colors.base0E}";
-
-    dontUnpack = true;
-
-    buildPhase = ''
-      substituteAllInPlace butterfly.svg
-    '';
-
-    installPhase = ''
-      ${pkgs.inkscape} --export-type "png" --export-filename "$out/butterfly.png" butterfly.svg
-    '';
-  };
-in
 {
-  imports = [
-    ./modules
-    # nix-colors.homeManagerModules.default
-  ];
-
-  # colorScheme = nix-colors.colorSchemes.catppuccin-macchiato;
+  imports = [ ./modules ];
 
   nixpkgs.config.allowUnfree = true;
 
-  stylix.enable = true;
-  stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-macchiato.yaml";
-  stylix.image = "${mybackground}/butterfly.png";
-
   myhome.xmonad.enable = false;
   myhome.sway.enable = true;
-  myhome.niri.enable = true; # baes01
-  myhome.toys.enable = true; # base0E
+  myhome.niri.enable = true;
+  myhome.toys.enable = true;
   myhome.devtools.enable = true;
   myhome.kak.enable = true;
+  myhome.flatpak.enable = true;
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -53,20 +26,12 @@ in
 
     packages = with pkgs; [
       # always
-      alsa-utils
       bc
       unzip
       git
-      # maestral
-      nix-index
-      pkgs-unstable.dropbox-cli
       zoxide
-      nixfmt-rfc-style
-
-      bitwarden-desktop
 
       (pkgs.writeShellScriptBin "system" ''
-
         case $1 in
           "home") 
             pushd ~/dotfiles
@@ -81,82 +46,34 @@ in
             nix flake update
             home-manager switch --flake ".?submodules=1"
             sudo nixos-rebuild switch --flake ".?submodules=1"
-            flatpak update -y
+            ${if config.myhome.flatpak.enable then "flatpak update -y" else ""}
             popd ;;
-          *) echo "unknown command: $1" ;;
-        esac
+          "collect-garbage")
+            nix-collect-garbage --delete-older-than 5d
+            sudo nix-collect-garbage --delete-older-than 5d
+            ${if config.myhome.flatpak.enable then "flatpak uninstall - -unused " else ""};;
+          "collect-garbage-all")
+            nix-collect-garbage -d
+            sudo nix-collect-garbage -d 
+            ${if config.myhome.flatpak.enable then "flatpak uninstall - -unused " else ""};;
+          *)
+            echo "unknown command: $1"
+            echo "valid commands: "
+            echo "  home"
+            echo "  system"
+            echo "  update"
+            echo "  collect-garbage"
+            echo "  collect-garbage-all" ;;
 
+        esac
       '')
 
-      qemu
     ];
 
-    sessionVariables = {
-      GTK_THEME = "catppuccin";
-      WLR_RENDERER = "vulkan";
-      EDITOR = "kak";
-      LS_COLORS = "di=36;40:ln=0";
-    };
+    sessionVariables.LS_COLORS = "di=36;40:ln=0";
   };
-
-  systemd.user.services.dropbox = {
-    Unit = {
-      Description = "Dropbox service";
-    };
-    Install = {
-      WantedBy = [ "default.target" ];
-    };
-    Service = {
-      ExecStart = "${pkgs-unstable.dropbox}/bin/dropbox";
-      Restart = "on-failure";
-    };
-  };
-
-  # services.dropbox.enable = true;
-
-  gtk.enable = true;
-
-  # gtk.catppuccin = {
-  #   enable = true;
-  #   flavor = "macchiato";
-  #   accent = "mauve";
-  #   size = "standard";
-  #   tweaks = [ "normal" ];
-  # };
-
-  gtk.iconTheme = {
-    name = "BeautyLine";
-    package = pkgs.beauty-line-icon-theme;
-  };
-
-  gtk.gtk3.extraConfig = {
-    Settings = ''
-      gtk-application-prefer-dark-theme=1
-    '';
-  };
-
-  gtk.gtk4.extraConfig = {
-    Settings = ''
-      gtk-application-prefer-dark-theme=1
-    '';
-  };
-
-  qt.style.package = pkgs.catppuccin-qt5ct;
-
-  programs.password-store.enable = true;
 
   xdg.enable = true;
-
-  xdg.mimeApps.defaultApplications = {
-    "x-scheme-handler/http" = [ "librewolf.desktop" ];
-    "x-scheme-handler/https" = [ "librewolf.desktop" ];
-  };
-
-  xdg.systemDirs.data = [
-    "/usr/share"
-    "/var/lib/flatpak/exports/share"
-    "~/.local/share/flatpak/exports/share"
-  ];
 
   # This value determines the Home Manager release that you
   # configuration is compatible with. This helps avoid breakage

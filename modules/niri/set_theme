@@ -1,0 +1,8 @@
+#!/usr/bin/env fish
+
+set generation (home-manager generations | head -1 | awk '{print $7}')
+
+echo $generation
+echo $argv[1]
+
+$generation/specialisation/$argv[1]/activate hello

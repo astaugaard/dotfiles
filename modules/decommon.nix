@@ -17,24 +17,22 @@ with lib;
 
   config = mkIf config.myhome.decommon.enable {
     home.packages = with pkgs; [
-      eww
-      lxappearance
       libnotify
       gnome.nautilus
-      galculator
-      xorg.xclock
       scrot
-      maestral-gui
-      gnome.gnome-software
-      librewolf
-      flatpak
-      sassc
       beauty-line-icon-theme
-      pywal
+      librewolf
     ];
 
     myhome.kitty.enable = true;
     myhome.rofi.enable = true;
     myhome.swaync.enable = true;
+
+    gtk.enable = true;
+    gtk.iconTheme = {
+      name = "BeautyLine";
+      package = pkgs.beauty-line-icon-theme;
+    };
+
   };
 }

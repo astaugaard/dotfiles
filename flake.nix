@@ -6,11 +6,7 @@
     nixpkgs.url = "nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
-    # unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-
     catppuccin.url = "github:catppuccin/nix";
-
-    # nix-colors.url = "github:misterio77/nix-colors";
 
     stylix.url = "github:danth/stylix";
 

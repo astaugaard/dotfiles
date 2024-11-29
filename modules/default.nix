@@ -21,5 +21,9 @@
     ./niri
     ./deway.nix
     ./swaync.nix
+    ./desktop.nix
+    ./flatpak.nix
+    ./colors.nix
+    # ./oomox-gtk-theme.nix
   ];
 }

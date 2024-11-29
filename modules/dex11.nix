@@ -24,6 +24,7 @@ with lib;
       xclip
       i3lock
     ];
+    myhome.desktop.enable = true;
 
     myhome.dunst.enable = false;
     myhome.picom.enable = true;

@@ -24,5 +24,6 @@ with lib;
       fd
     ];
     xdg.configFile."kak".source = ./kak;
+    home.sessionVariables.EDITOR = "kak";
   };
 }
