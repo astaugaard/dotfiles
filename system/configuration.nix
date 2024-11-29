@@ -28,20 +28,21 @@
     efiSupport = true;
     theme = "${pkgs.grub-pets-min-theme}/grub/theme";
   };
-  boot.loader.systemd-boot.enable = true;
-  boot.initrd.kernelModules = [ "amdgpu" ];
-  services.xserver.videoDrivers = [ "amdgpu" ];
-
-  hardware.opengl.driSupport = true;
-  hardware.opengl.driSupport32Bit = true;
-  hardware.opengl.enable = true;
-  hardware.opengl.package = pkgs.mesa.drivers;
 
   boot.plymouth = {
     enable = false;
     themePackages = [ pkgs.adi1090x-plymouth-themes ];
     theme = "hexagon_alt";
   };
+
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  services.xserver.videoDrivers = [ "amdgpu" ];
+
+  boot.loader.systemd-boot.enable = true;
+  hardware.opengl.driSupport = true;
+  hardware.opengl.driSupport32Bit = true;
+  hardware.opengl.enable = true;
+  hardware.opengl.package = pkgs.mesa.drivers;
 
   security.rtkit.enable = true;
 
@@ -112,7 +113,7 @@
   };
 
   services.seatd.enable = true;
-  services.seatd.user = "a";
+  # services.seatd.user = "a"; check this
 
   services.displayManager.sddm.enable = false;
   services.displayManager.sddm.wayland.enable = true;
