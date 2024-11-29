@@ -79,7 +79,6 @@
         # the path to your home.nix.
         modules = [
           ./home.nix
-          # catppuccin.homeManagerModules.catppuccin
           niri.homeModules.niri
           stylix.homeManagerModules.stylix
         ];

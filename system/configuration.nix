@@ -170,7 +170,7 @@
 
   programs.dconf.enable = true;
 
-  programs.nix-ld.enable = true;
+  programs.nix-ld.enable = false;
 
   programs.nix-ld.libraries = with pkgs; [
     xorg.libX11
