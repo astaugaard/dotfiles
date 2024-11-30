@@ -105,7 +105,7 @@
                 nixpkgs.overlays = myOverlays;
               }
             ) # name a more hack way of doing this
-            ./system/configuration.nix
+            ./configuration.nix
             niri.outputs.nixosModules.niri
           ];
         };
