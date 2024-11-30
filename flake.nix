@@ -90,6 +90,29 @@
         };
       };
 
+      homeModules.myhome =
+        { config }:
+        {
+          imports = [
+            ./modules
+            niri.homeModules.niri
+            stylix.homeManagerModules.stylix
+          ];
+          options = { };
+          config = { };
+        };
+
+      nixosModules.mysystem =
+        { config }:
+        {
+          imports = [
+            ./systemModules
+            niri.outputs.nixosModules.niri
+          ];
+          options = { };
+          config = { };
+        };
+
       nixosConfigurations = {
         nixos = lib.nixosSystem {
           inherit system;
@@ -106,7 +129,7 @@
               }
             ) # name a more hack way of doing this
             ./configuration.nix
-            ./systemModules/default.nix
+            ./systemModules
             niri.outputs.nixosModules.niri
           ];
         };
