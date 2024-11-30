@@ -159,8 +159,6 @@
 
   services.displayManager.defaultSession = "none+xmonad";
 
-  services.flatpak.enable = true;
-
   services.ntp.enable = true;
 
   programs.gnupg.agent = {
@@ -241,57 +239,20 @@
   environment.systemPackages = with pkgs; [
     kakoune
     wget
-    xterm
     fish
-    postgresql
+    # postgresql
     libsecret
+
+    # gui
     catppuccin-gtk
     beauty-line-icon-theme
+    xterm
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
   ];
 
-  networking.firewall = {
-    allowedTCPPorts = [
-      17500
-      17599
-      17600
-      17601
-      17602
-      17603
-      17604
-      17605
-      17606
-      17607
-      17608
-      17609
-      53317 # for localsend
-    ];
-    allowedUDPPorts = [
-      17500
-      53317
-    ];
-  };
-
-  systemd.services.flatpak-repo = {
-    wantedBy = [ "multi-user.target" ];
-    path = [ pkgs.flatpak ];
-    script = ''
-      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    '';
-  };
-
-  nix = {
-    # package = pkgs.lix;
-    extraOptions = ''
-      experimental-features = nix-command flakes
-    '';
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 5d";
-    };
-  };
+  mysystem.enablegc = true;
+  mysystem.flatpak = true;
 
   #  systemd.user.services.dropbox = {
   #	description = "Dropbox";
@@ -329,7 +290,6 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

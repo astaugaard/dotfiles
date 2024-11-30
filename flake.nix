@@ -106,6 +106,7 @@
               }
             ) # name a more hack way of doing this
             ./configuration.nix
+            ./systemModules/default.nix
             niri.outputs.nixosModules.niri
           ];
         };
