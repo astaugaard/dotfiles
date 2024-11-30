@@ -1,3 +1,0 @@
-for i in (kak -l) 
-    echo "colorscheme catppuccin_mocha" | kak -p $i
-end
