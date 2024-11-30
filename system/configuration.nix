@@ -171,16 +171,6 @@
 
   programs.dconf.enable = true;
 
-  programs.nix-ld.enable = false;
-
-  programs.nix-ld.libraries = with pkgs; [
-    xorg.libX11
-    xorg.libXcursor
-    xorg.libxcb
-    xorg.libXi
-    libxkbcommon
-  ];
-
   # hardware.pulseaudio.enable = true;
   # hardware.pulseaudio.support32Bit = true;
 
@@ -260,11 +250,6 @@
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
   ];
-
-  #  environment.variables = {
-  #      WLR_RENDERER = "vulkan";
-  #      GTK_USE_PORTAL = "0";
-  #  };
 
   networking.firewall = {
     allowedTCPPorts = [

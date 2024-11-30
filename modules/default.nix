@@ -24,6 +24,7 @@
     ./desktop.nix
     ./flatpak.nix
     ./colors.nix
+    ./dropbox.nix
     # ./oomox-gtk-theme.nix
   ];
 
