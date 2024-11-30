@@ -26,5 +26,36 @@ with lib;
     };
 
     services.flatpak.enable = true;
+
+    # needed for flatpaks to work
+    xdg.portal.enable = true;
+
+    xdg.portal.wlr = {
+      enable = true;
+    };
+
+    xdg.portal.extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-wlr
+    ];
+
+    xdg.portal.config = {
+      common = {
+        default = [ "gtk" ];
+      };
+      # sway = {
+      #   default = [
+      #     "gtk"
+      #     "wlr"
+      #   ];
+      # };
+      niri = {
+        default = [
+          "gnome"
+          "gtk"
+          "wlr"
+        ];
+      };
+    };
   };
 }

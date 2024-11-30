@@ -6,7 +6,11 @@
 }:
 with lib;
 {
-  imports = [ ./flatpak.nix ];
+  imports = [
+    ./flatpak.nix
+    ./gui.nix
+    ./amd.nix
+  ];
 
   options.mysystem = {
     enablegc = mkOption {
@@ -19,9 +23,70 @@ with lib;
       type = lib.types.bool;
       default = false;
     };
+    user = mkOption {
+      description = "main user for the system";
+      type = lib.types.str;
+    };
+    userdescription = mkOption {
+      description = "full name of the user";
+      type = lib.types.str;
+    };
+    wpasupplicant = {
+      enable = mkOption {
+        description = "enable wpa_supplicant";
+        type = lib.types.bool;
+        default = false;
+      };
+      envfile = mkOption {
+        description = "filepath to wifi password env file";
+        type = lib.types.path;
+        default = "/home/${config.mysystem.user}/dotfiles/wifi-password";
+      };
+    };
+
   };
 
   config = {
+    boot.loader.efi.canTouchEfiVariables = true;
+    boot.loader.grub = {
+      enable = false;
+      # 	version = 2;
+      device = "nodev";
+      useOSProber = true;
+      efiSupport = true;
+      theme = "${pkgs.grub-pets-min-theme}/grub/theme";
+    };
+    boot.loader.systemd-boot.enable = true;
+
+    security.rtkit.enable = true;
+
+    environment.systemPackages = with pkgs; [
+      kakoune
+      wget
+      fish
+      libsecret
+    ];
+
+    users.users."${(config.mysystem.user)}" = {
+      isNormalUser = true;
+      description = config.mysystem.userdescription;
+      extraGroups = [
+        # just set by default bc I don't care
+        "networkmanager"
+        "wheel"
+        "audio"
+        "wireshark"
+        "pipewire"
+        "video"
+      ];
+      packages = with pkgs; [ libglvnd ];
+      initialPassword = (config.mysystem.user);
+    };
+
+    users.defaultUserShell = pkgs.fish;
+    programs.fish.enable = true;
+
+    nixpkgs.config.allowUnfree = true;
     nix = {
       # package = pkgs.lix;
       extraOptions = ''
@@ -57,5 +122,18 @@ with lib;
         53317
       ];
     };
+
+    security.polkit.enable = true;
+    services.ntp.enable = true;
+    programs.dconf.enable = true;
+
+    networking.wireless = {
+      environmentFile = config.mysystem.wpasupplicant.envfile;
+      enable = config.mysystem.wpasupplicant.enable;
+      networks."Whitemarsh".psk = "@WIFIPASS@";
+      extraConfig = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=wheel";
+    };
+
+    system.stateVersion = "22.05"; # Did you read the comment?
   };
 }
