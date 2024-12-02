@@ -18,7 +18,7 @@ with lib;
 
   config = mkIf config.myhome.flatpak.enable {
     home.packages = with pkgs; [
-      gnome.gnome-software
+      gnome-software
       flatpak
     ];
 

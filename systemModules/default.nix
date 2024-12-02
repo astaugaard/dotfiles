@@ -128,9 +128,9 @@ with lib;
     programs.dconf.enable = true;
 
     networking.wireless = {
-      environmentFile = config.mysystem.wpasupplicant.envfile;
+      secretsFile = config.mysystem.wpasupplicant.envfile;
       enable = config.mysystem.wpasupplicant.enable;
-      networks."Whitemarsh".psk = "@WIFIPASS@";
+      networks."Whitemarsh".pskRaw = "ext:psk_home";
       extraConfig = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=wheel";
     };
 

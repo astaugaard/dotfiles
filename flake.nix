@@ -3,7 +3,7 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
-    nixpkgs.url = "nixpkgs/nixos-24.05";
+    nixpkgs.url = "nixpkgs/nixos-24.11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     stylix = {
@@ -18,7 +18,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -37,22 +37,6 @@
       # pkgs = nixpkgs.legacyPackages.${system};
       myOverlays = [
         niri.overlays.niri
-        (final: super: {
-          rofi-wayland-unwrapped = super.rofi-wayland-unwrapped.overrideAttrs (
-            {
-              patches ? [ ],
-              ...
-            }:
-            {
-              patches = patches ++ [
-                (final.fetchpatch {
-                  url = "https://github.com/samueldr/rofi/commit/55425f72ff913eb72f5ba5f5d422b905d87577d0.patch";
-                  hash = "sha256-vTUxtJs4SuyPk0PgnGlDIe/GVm/w1qZirEhKdBp4bHI=";
-                })
-              ];
-            }
-          );
-        })
         (import ./pkgs)
       ];
       pkgs = import nixpkgs {
@@ -90,29 +74,6 @@
         };
       };
 
-      homeModules.myhome =
-        { config }:
-        {
-          imports = [
-            ./modules
-            niri.homeModules.niri
-            stylix.homeManagerModules.stylix
-          ];
-          options = { };
-          config = { };
-        };
-
-      nixosModules.mysystem =
-        { config }:
-        {
-          imports = [
-            ./systemModules
-            niri.outputs.nixosModules.niri
-          ];
-          options = { };
-          config = { };
-        };
-
       nixosConfigurations = {
         nixos = lib.nixosSystem {
           inherit system;
@@ -133,6 +94,128 @@
             niri.outputs.nixosModules.niri
           ];
         };
+
+        iso = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit pkgs-unstable;
+          };
+          modules = [
+            (
+              {
+                config,
+                pkgs,
+                modulesPath,
+                ...
+              }:
+              {
+                imports = [ (modulesPath + "/installer/cd-dvd/installation-cd-base.nix") ];
+                nixpkgs.overlays = myOverlays;
+                security.polkit.extraConfig = ''
+                  polkit.addRule(function(action, subject) {
+                    if (subject.isInGroup("wheel")) {
+                      return polkit.Result.YES;
+                    }
+                  });
+                '';
+
+                networking.networkmanager.enable = true;
+                networking.wireless.enable = lib.mkImageMediaOverride false;
+                services.spice-vdagentd.enable = true;
+                services.qemuGuest.enable = true;
+                virtualisation.vmware.guest.enable = pkgs.stdenv.hostPlatform.isx86;
+                virtualisation.hypervGuest.enable = true;
+                services.xe-guest-utilities.enable = pkgs.stdenv.hostPlatform.isx86;
+                # The VirtualBox guest additions rely on an out-of-tree kernel module
+                # which lags behind kernel releases, potentially causing broken builds.
+                virtualisation.virtualbox.guest.enable = false;
+                boot.plymouth.enable = true;
+
+                environment.defaultPackages = with pkgs; [
+                  # Include gparted for partitioning disks.
+                  gparted
+
+                  # Include some editors.
+                  vim
+                  nano
+
+                  # Include some version control tools.
+                  git
+                  rsync
+
+                  # Firefox for reading the manual.
+                  firefox
+
+                  mesa-demos
+                ];
+
+                services.displayManager = {
+                  sddm.enable = true;
+                  autoLogin = {
+                    enable = true;
+                    user = "nixos";
+                  };
+                };
+
+                mysystem.niri = true;
+
+                programs.niri.settings = {
+
+                };
+
+                mysystem.user = "nixos";
+                mysystem.userdescription = "nixos";
+
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users."nixos" = {
+                  imports = [
+                    # niri.homeModules.niri
+                    stylix.homeManagerModules.stylix
+                    (import ./modules { standalone = false; })
+                  ];
+
+                  myhome.xmonad.enable = false;
+                  myhome.sway.enable = false;
+                  # myhome.niri.enable = false;
+                  # myhome.niri.overloadNiriPackage = false;
+                  myhome.toys.enable = false;
+                  myhome.devtools.enable = false;
+                  myhome.kak.enable = true;
+                  myhome.flatpak.enable = false;
+                  myhome.dropbox.enable = false;
+                  myhome.username = "nixos";
+                };
+              }
+            ) # name a more hack way of doing this
+            ./systemModules
+            home-manager.nixosModules.home-manager
+            niri.outputs.nixosModules.niri
+          ];
+        };
       };
+
+      homeModules.myhome =
+        { config }:
+        {
+          imports = [
+            (import ./modules { standalone = true; })
+            niri.homeModules.niri
+            stylix.homeManagerModules.stylix
+          ];
+          options = { };
+          config = { };
+        };
+
+      nixosModules.mysystem =
+        { config }:
+        {
+          imports = [
+            ./systemModules
+            niri.outputs.nixosModules.niri
+          ];
+          options = { };
+          config = { };
+        };
     };
 }

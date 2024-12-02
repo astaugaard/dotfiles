@@ -6,7 +6,8 @@
   ...
 }:
 {
-  imports = [ ./modules ];
+  imports = [ (import ./modules { standalone = true; }) ];
+  # imports = [ ./modules ];
 
   myhome.xmonad.enable = false;
   myhome.sway.enable = true;

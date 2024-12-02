@@ -48,10 +48,10 @@ with lib;
       xterm
     ];
 
-    programs.sway.enable = true;
+    programs.sway.enable = config.mysystem.sway;
     programs.sway.package = pkgs.sway;
 
-    programs.niri.enable = true;
+    programs.niri.enable = config.mysystem.niri;
     niri-flake.cache.enable = false;
 
     programs.xwayland.enable = true;

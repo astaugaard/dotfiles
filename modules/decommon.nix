@@ -18,7 +18,7 @@ with lib;
   config = mkIf config.myhome.decommon.enable {
     home.packages = with pkgs; [
       libnotify
-      gnome.nautilus
+      nautilus
       scrot
       beauty-line-icon-theme
       librewolf

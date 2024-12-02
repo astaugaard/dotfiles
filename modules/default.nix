@@ -1,3 +1,4 @@
+{ standalone }:
 {
   pkgs,
   config,
@@ -18,7 +19,8 @@
     ./dunst.nix
     ./sway
     ./kitty.nix
-    ./niri
+    (import ./niri { inherit standalone; })
+    # ./niri
     ./deway.nix
     ./swaync.nix
     ./desktop.nix
