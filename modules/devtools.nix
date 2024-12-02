@@ -29,7 +29,7 @@ with lib;
       valgrind
       pkgs-unstable.cargo
       pkgs-unstable.rust-analyzer
-      cargo-disasm
+      # cargo-disasm # removed for now bc test not passing
       qmk
       libglvnd
       nodePackages.node2nix

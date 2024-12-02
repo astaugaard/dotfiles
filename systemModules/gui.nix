@@ -116,9 +116,8 @@ with lib;
       pulse.enable = true;
     };
 
-    hardware.opengl.driSupport = true;
-    hardware.opengl.driSupport32Bit = true;
-    hardware.opengl.enable = true;
-    hardware.opengl.package = pkgs.mesa.drivers;
+    hardware.graphics.enable32Bit = true;
+    hardware.graphics.enable = true;
+    hardware.graphics.package = pkgs.mesa.drivers;
   };
 }
