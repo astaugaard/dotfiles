@@ -21,28 +21,16 @@ with lib;
       galculator
       xorg.xclock
       bitwarden-desktop
-      pkgs-unstable.dropbox-cli
-      qemu
       nix-index
       alsa-utils
+      # virt-manager
+      # qemu
+      # libvirt
     ];
 
     xdg.mimeApps.defaultApplications = {
       "x-scheme-handler/http" = [ "librewolf.desktop" ];
       "x-scheme-handler/https" = [ "librewolf.desktop" ];
-    };
-
-    systemd.user.services.dropbox = {
-      Unit = {
-        Description = "Dropbox service";
-      };
-      Install = {
-        WantedBy = [ "default.target" ];
-      };
-      Service = {
-        ExecStart = "${pkgs-unstable.dropbox}/bin/dropbox";
-        Restart = "on-failure";
-      };
     };
   };
 }

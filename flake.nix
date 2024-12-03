@@ -21,6 +21,10 @@
       url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -30,6 +34,7 @@
       stylix,
       nixpkgs-unstable,
       niri,
+      nixos-generators,
       ...
     }:
     let
@@ -95,104 +100,6 @@
           ];
         };
 
-        iso = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit pkgs-unstable;
-          };
-          modules = [
-            (
-              {
-                config,
-                pkgs,
-                modulesPath,
-                ...
-              }:
-              {
-                imports = [ (modulesPath + "/installer/cd-dvd/installation-cd-base.nix") ];
-                nixpkgs.overlays = myOverlays;
-                security.polkit.extraConfig = ''
-                  polkit.addRule(function(action, subject) {
-                    if (subject.isInGroup("wheel")) {
-                      return polkit.Result.YES;
-                    }
-                  });
-                '';
-
-                networking.networkmanager.enable = true;
-                networking.wireless.enable = lib.mkImageMediaOverride false;
-                services.spice-vdagentd.enable = true;
-                services.qemuGuest.enable = true;
-                virtualisation.vmware.guest.enable = pkgs.stdenv.hostPlatform.isx86;
-                virtualisation.hypervGuest.enable = true;
-                services.xe-guest-utilities.enable = pkgs.stdenv.hostPlatform.isx86;
-                # The VirtualBox guest additions rely on an out-of-tree kernel module
-                # which lags behind kernel releases, potentially causing broken builds.
-                virtualisation.virtualbox.guest.enable = false;
-                boot.plymouth.enable = true;
-
-                environment.defaultPackages = with pkgs; [
-                  # Include gparted for partitioning disks.
-                  gparted
-
-                  # Include some editors.
-                  vim
-                  nano
-
-                  # Include some version control tools.
-                  git
-                  rsync
-
-                  # Firefox for reading the manual.
-                  firefox
-
-                  mesa-demos
-                ];
-
-                services.displayManager = {
-                  sddm.enable = true;
-                  autoLogin = {
-                    enable = true;
-                    user = "nixos";
-                  };
-                };
-
-                mysystem.niri = true;
-
-                programs.niri.settings = {
-
-                };
-
-                mysystem.user = "nixos";
-                mysystem.userdescription = "nixos";
-
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.users."nixos" = {
-                  imports = [
-                    # niri.homeModules.niri
-                    stylix.homeManagerModules.stylix
-                    (import ./modules { standalone = false; })
-                  ];
-
-                  myhome.xmonad.enable = false;
-                  myhome.sway.enable = false;
-                  # myhome.niri.enable = false;
-                  # myhome.niri.overloadNiriPackage = false;
-                  myhome.toys.enable = false;
-                  myhome.devtools.enable = false;
-                  myhome.kak.enable = true;
-                  myhome.flatpak.enable = false;
-                  myhome.dropbox.enable = false;
-                  myhome.username = "nixos";
-                };
-              }
-            ) # name a more hack way of doing this
-            ./systemModules
-            home-manager.nixosModules.home-manager
-            niri.outputs.nixosModules.niri
-          ];
-        };
       };
 
       homeModules.myhome =
@@ -217,5 +124,122 @@
           options = { };
           config = { };
         };
+
+      packages.x86_64-linux.iso = nixos-generators.nixosGenerate {
+        system = "x86_64-linux";
+        format = "install-iso";
+        specialArgs = {
+          inherit pkgs-unstable;
+        };
+        modules = [
+          (
+            {
+              config,
+              pkgs,
+              modulesPath,
+              ...
+            }:
+            {
+              imports = [ (modulesPath + "/installer/cd-dvd/installation-cd-base.nix") ];
+              nixpkgs.overlays = myOverlays;
+              security.polkit.extraConfig = ''
+                polkit.addRule(function(action, subject) {
+                  if (subject.isInGroup("wheel")) {
+                    return polkit.Result.YES;
+                  }
+                });
+              '';
+
+              networking.networkmanager.enable = true;
+              networking.wireless.enable = lib.mkImageMediaOverride false;
+              services.spice-vdagentd.enable = true;
+              services.qemuGuest.enable = true;
+              virtualisation.vmware.guest.enable = pkgs.stdenv.hostPlatform.isx86;
+              virtualisation.hypervGuest.enable = true;
+              services.xe-guest-utilities.enable = pkgs.stdenv.hostPlatform.isx86;
+              # The VirtualBox guest additions rely on an out-of-tree kernel module
+              # which lags behind kernel releases, potentially causing broken builds.
+              virtualisation.virtualbox.guest.enable = false;
+              boot.plymouth.enable = true;
+
+              environment.defaultPackages = with pkgs; [
+                # Include gparted for partitioning disks.
+                gparted
+
+                # Include some editors.
+                vim
+                nano
+
+                # Include some version control tools.
+                git
+                rsync
+
+                # Firefox for reading the manual.
+                firefox
+
+                mesa-demos
+              ];
+
+              services.displayManager = {
+                sddm.enable = true;
+                sddm.wayland.enable = true;
+                autoLogin = {
+                  enable = true;
+                  user = "nixos";
+                };
+              };
+
+              mysystem.niri = true;
+
+              mysystem.user = "nixos";
+              mysystem.userdescription = "nixos";
+              mysystem.initialPassword = null;
+              mysystem.loginManager = false;
+
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users."nixos" =
+                {
+                  config,
+                  pkgs,
+                  lib,
+                  ...
+                }:
+                {
+                  imports = [
+                    # niri.homeModules.niri
+                    stylix.homeManagerModules.stylix
+                    (import ./modules { standalone = false; })
+                  ];
+
+                  programs.niri.settings = (
+                    import ./modules/niri/settings.nix {
+                      inherit lib;
+                      inherit pkgs;
+                      inherit config;
+                    }
+                  );
+
+                  myhome.xmonad.enable = false;
+                  myhome.sway.enable = false;
+                  myhome.deway.enable = true;
+                  myhome.decommon.enable = true;
+                  # myhome.niri.enable = false;
+                  # myhome.niri.overloadNiriPackage = false;
+                  myhome.toys.enable = false;
+                  myhome.devtools.enable = false;
+                  myhome.kak.enable = true;
+                  myhome.flatpak.enable = false;
+                  myhome.dropbox.enable = false;
+                  myhome.desktop.enable = false;
+                  myhome.username = "nixos";
+                };
+            }
+          ) # name a more hack way of doing this
+          ./systemModules
+          home-manager.nixosModules.home-manager
+          niri.outputs.nixosModules.niri
+        ];
+      };
     };
 }

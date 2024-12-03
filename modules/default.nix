@@ -78,7 +78,13 @@
               nix-collect-garbage -d
               sudo nix-collect-garbage -d 
               ${if config.myhome.flatpak.enable then "flatpak uninstall - -unused " else ""};;
+            "build-iso")
+              pushd ~/dotfiles
+              nix build .?submodules=1#nixosConfigurations.iso.config.system.build.isoImage
+              popd
+              ;;
             *)
+
               echo "unknown command: $1"
               echo "valid commands: "
               echo "  home"

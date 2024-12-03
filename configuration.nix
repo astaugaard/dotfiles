@@ -52,4 +52,5 @@
   mysystem.user = "a";
   mysystem.userdescription = "astaugaard";
   mysystem.wpasupplicant.enable = true;
+  mysystem.virt = true;
 }

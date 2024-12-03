@@ -20,7 +20,7 @@ with lib;
       swaybg
       wl-clipboard
     ];
-    myhome.desktop.enable = true;
+    # myhome.desktop.enable = true;
     programs.swaylock.enable = true;
     home.sessionVariables.WLR_RENDERER = "vulkan";
 

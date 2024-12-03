@@ -28,6 +28,7 @@ with lib;
       pkgs-unstable.cabal-install
       valgrind
       pkgs-unstable.cargo
+      pkgs-unstable.cargo-tarpaulin
       pkgs-unstable.rust-analyzer
       # cargo-disasm # removed for now bc test not passing
       qmk

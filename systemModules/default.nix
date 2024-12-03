@@ -44,9 +44,22 @@ with lib;
       };
     };
 
+    initialPassword = mkOption {
+      description = "initial password for the user";
+      type = lib.types.nullOr lib.types.str;
+      default = "a";
+    };
+
+    virt = mkOption {
+      description = "virtualization support";
+      type = lib.types.bool;
+      default = false;
+    };
   };
 
   config = {
+    virtualisation.libvirtd.enable = config.mysystem.virt;
+
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.grub = {
       enable = false;
@@ -78,9 +91,10 @@ with lib;
         "wireshark"
         "pipewire"
         "video"
+        "libvirtd"
       ];
       packages = with pkgs; [ libglvnd ];
-      initialPassword = (config.mysystem.user);
+      initialPassword = config.mysystem.initialPassword;
     };
 
     users.defaultUserShell = pkgs.fish;
