@@ -58,6 +58,7 @@ with lib;
             "privacy"
             "idle_inhibitor"
             "pulseaudio"
+            "custom/update"
           ];
         };
 
@@ -68,6 +69,12 @@ with lib;
             "tray"
             "group/power"
           ];
+        };
+
+        "custom/update" = {
+          format = "󰚰";
+          tooltip = false;
+          on-click = "system update-button";
         };
 
         "custom/power" = {

@@ -70,7 +70,10 @@
         modules = [
           ./home.nix
           niri.homeModules.niri
-          stylix.homeManagerModules.stylix
+          {
+            imports = [ stylix.homeManagerModules.stylix ];
+            disabledModules = [ "${stylix}/modules/kubecolor/hm.nix" ];
+          }
         ];
 
         extraSpecialArgs = {

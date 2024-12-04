@@ -79,6 +79,8 @@
               nix-collect-garbage -d
               sudo nix-collect-garbage -d 
               ${if config.myhome.flatpak.enable then "flatpak uninstall - -unused " else ""};;
+            "update-button")
+              kitty bash -c 'system update; fish' ;;
             "build-iso")
               pushd ~/dotfiles
               nix build .?submodules=1#nixosConfigurations.iso.config.system.build.isoImage
@@ -92,7 +94,8 @@
               echo "  system"
               echo "  update"
               echo "  collect-garbage"
-              echo "  collect-garbage-all" ;;
+              echo "  collect-garbage-all"
+              echo "  build-iso";;
           esac
         '')
 
