@@ -6,6 +6,26 @@
 }:
 with builtins;
 with lib;
+let
+  lockscreen = pkgs.stdenv.mkDerivation rec {
+    name = "lockscreen";
+    src = lib.fileset.toSource {
+      root = ./.;
+      fileset = ./lock.svg;
+    };
+    foreground = "#${config.lib.stylix.colors.base09}";
+
+    buildPhase = ''
+      substituteAllInPlace lock.svg
+    '';
+
+    installPhase = ''
+      mkdir $out
+
+      ${pkgs.inkscape}/bin/inkscape --export-type "png" --export-filename "$out/lock.png" lock.svg
+    '';
+  };
+in
 {
   options.myhome.deway = {
     enable = mkOption {
@@ -24,15 +44,12 @@ with lib;
     programs.swaylock.enable = true;
     home.sessionVariables.WLR_RENDERER = "vulkan";
 
+    myhome.waybar.enable = true;
+
     stylix.targets.swaylock.useImage = false;
 
     programs.swaylock.settings = {
-      image = "${
-        lib.fileset.toSource {
-          root = ./.;
-          fileset = ./lock.png;
-        }
-      }/lock.png";
+      image = "${lockscreen}/lock.png";
     };
     myhome.swaync.enable = true;
 

@@ -16,7 +16,7 @@
     "Mod+P".action = spawn "rofi" "-modi" "drun" "-show" "drun" "-show-icons";
     "Super+Shift+C".action = screenshot;
     "Super+Shift+O".action = spawn "swaync-client" "-t" "-sw";
-    "Super+Shift+L".action = spawn "swaylock" "--image" "~/Dropbox/lock.png";
+    "Super+Shift+L".action = spawn "swaylock" "--image" "${config.programs.swaylock.settings.image}";
 
     "Mod+R".action = switch-preset-column-width;
     "Mod+Shift+R".action = switch-preset-window-height;

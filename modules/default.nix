@@ -27,6 +27,7 @@
     ./flatpak.nix
     ./colors.nix
     ./dropbox.nix
+    ./waybar.nix
     # ./oomox-gtk-theme.nix
   ];
 
