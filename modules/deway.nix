@@ -53,14 +53,5 @@ in
     };
     myhome.swaync.enable = true;
 
-    services.swayidle = {
-      enable = true;
-      events = [
-        {
-          event = "before-sleep";
-          command = "${pkgs.swaylock}/bin/swaylock -fF --image ~/Dropbox/lock.png";
-        }
-      ];
-    };
   };
 }

@@ -18,7 +18,6 @@ with lib;
   config = mkIf config.myhome.waybar.enable {
     programs.waybar = {
       settings.mainbar = {
-        # layer = "top";
         position = "top";
         margin-left = 5;
         margin-right = 5;
@@ -48,6 +47,7 @@ with lib;
             "custom/power"
             "custom/quit"
             "custom/lock"
+            "custom/sleep"
             "custom/reboot"
           ];
         };
@@ -81,6 +81,12 @@ with lib;
           format = "⏻";
           tooltip = false;
           on-click = "shutdown now";
+        };
+
+        "custom/sleep" = {
+          format = "󰤄";
+          tooltip = false;
+          on-click = "systemctl hybrid-sleep";
         };
 
         "custom/quit" = {
@@ -157,8 +163,8 @@ with lib;
         .module {
           padding-left: 10px;
           padding-right: 10px;
-          font-size: 20px;
-          color: #${config.lib.stylix.colors.base01}
+          font-size: 25px;
+          color: #${config.lib.stylix.colors.base01};
         }
 
         .modules-left {
@@ -174,6 +180,14 @@ with lib;
           background-color: blue;
           border-radius: 25px;
           background-image: linear-gradient(0deg, #${config.lib.stylix.colors.base0A}, #${config.lib.stylix.colors.base0B} );
+        }
+
+        #privacy-item {
+            color: #${config.lib.stylix.colors.base01};
+        }
+
+        .popup {
+            font-size: 20px;
         }
 
         #bottom2 {

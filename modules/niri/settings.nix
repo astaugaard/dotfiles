@@ -157,6 +157,7 @@
 
   input.focus-follows-mouse.enable = true;
   input.focus-follows-mouse.max-scroll-amount = "25%";
+  input.warp-mouse-to-focus = true;
 
   window-rules = [
     {
