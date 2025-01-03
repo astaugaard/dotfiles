@@ -10,6 +10,8 @@ with lib;
     ./flatpak.nix
     ./gui.nix
     ./amd.nix
+    ./tailscale.nix
+    ./ssh.nix
   ];
 
   options.mysystem = {
