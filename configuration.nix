@@ -46,13 +46,13 @@
 
   mysystem.enablegc = true;
   mysystem.flatpak.enable = true;
-  mysystem.tailscale.enable = true;
+  # mysystem.tailscale.enable = true;
   mysystem.niri = true;
-  mysystem.sway = true;
+  mysystem.sway = false;
   mysystem.amd = true;
   mysystem.user = "a";
   mysystem.userdescription = "astaugaard";
   mysystem.wpasupplicant.enable = true;
   mysystem.virt = true;
-  mysystem.ssh.enable = true;
+  # mysystem.ssh.enable = true;
 }

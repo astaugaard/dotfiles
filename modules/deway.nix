@@ -45,13 +45,12 @@ in
     home.sessionVariables.WLR_RENDERER = "vulkan";
 
     myhome.waybar.enable = true;
+    myhome.swaync.enable = true;
 
     stylix.targets.swaylock.useImage = false;
 
     programs.swaylock.settings = {
       image = "${lockscreen}/lock.png";
     };
-    myhome.swaync.enable = true;
-
   };
 }

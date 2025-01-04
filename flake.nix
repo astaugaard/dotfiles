@@ -7,8 +7,9 @@
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     stylix = {
-      url = "github:danth/stylix";
+      url = "github:danth/stylix/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
     };
 
     niri = {
@@ -71,10 +72,14 @@
         modules = [
           ./home.nix
           niri.homeModules.niri
-          {
-            imports = [ stylix.homeManagerModules.stylix ];
-            disabledModules = [ "${stylix}/modules/kubecolor/hm.nix" ];
-          }
+          stylix.homeManagerModules.stylix
+          # {
+          #   imports = [ stylix.homeManagerModules.stylix ];
+          #   disabledModules = [
+          #     "${stylix}/modules/kubecolor/hm.nix"
+          #     "${stylix}/modules/ghostty/hm.nix"
+          #   ];
+          # }
         ];
 
         extraSpecialArgs = {

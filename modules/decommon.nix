@@ -26,7 +26,6 @@ with lib;
 
     myhome.kitty.enable = true;
     myhome.rofi.enable = true;
-    myhome.swaync.enable = true;
 
     gtk.enable = true;
     gtk.iconTheme = {

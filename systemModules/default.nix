@@ -150,6 +150,6 @@ with lib;
       extraConfig = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=wheel";
     };
 
-    system.stateVersion = "22.05"; # Did you read the comment?
+    system.stateVersion = "22.05";
   };
 }
