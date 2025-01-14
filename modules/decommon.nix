@@ -21,8 +21,12 @@ with lib;
       nautilus
       scrot
       beauty-line-icon-theme
-      librewolf
     ];
+
+    programs.librewolf.enable = true;
+    stylix.targets.librewolf.firefoxGnomeTheme.enable = true;
+    stylix.targets.librewolf.enable = true;
+    stylix.targets.librewolf.profileNames = [ "default" ];
 
     myhome.kitty.enable = true;
     myhome.rofi.enable = true;

@@ -18,10 +18,10 @@ with lib;
 
   config = mkIf config.myhome.desktop.enable {
     home.packages = with pkgs; [
-      galculator
-      xorg.xclock
+      xorg.xeyes
       bitwarden-desktop
       nix-index
+      ripgrep
       alsa-utils
       # virt-manager
       # qemu
@@ -31,6 +31,7 @@ with lib;
     xdg.mimeApps.defaultApplications = {
       "x-scheme-handler/http" = [ "librewolf.desktop" ];
       "x-scheme-handler/https" = [ "librewolf.desktop" ];
+      "application/pdf" = [ "org.gnome.Evince.desktop" ];
     };
   };
 }

@@ -43,6 +43,7 @@ in
     # myhome.desktop.enable = true;
     programs.swaylock.enable = true;
     home.sessionVariables.WLR_RENDERER = "vulkan";
+    myhome.decommon.enable = true;
 
     myhome.waybar.enable = true;
     myhome.swaync.enable = true;

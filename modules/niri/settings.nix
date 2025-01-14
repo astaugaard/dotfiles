@@ -25,16 +25,16 @@
     "Mod+Shift+F".action = fullscreen-window;
     "Mod+C".action = center-column;
 
-    "XF86AudioRaiseVolume".action = spawn "pactl" "set-volume" "@DEFAULT_AUDIO_SINK@" "+5%";
+    "XF86AudioRaiseVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+";
     "XF86AudioRaiseVolume".allow-when-locked = true;
 
-    "XF86AudioLowerVolume".action = spawn "pactl" "set-volume" "@DEFAULT_AUDIO_SINK@" "-5%";
+    "XF86AudioLowerVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-";
     "XF86AudioLowerVolume".allow-when-locked = true;
 
-    "XF86AudioMute".action = spawn "pactl" "set-sink-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
+    "XF86AudioMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
     "XF86AudioMute".allow-when-locked = true;
 
-    "XF86AudioMicMute".action = spawn "pactl" "set-source-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle";
+    "XF86AudioMicMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle";
     "XF86AudioMicMute".allow-when-locked = true;
 
     "Mod+Shift+W".action = close-window;
@@ -119,17 +119,14 @@
     "Mod+Shift+Q".action = quit;
 
     "Mod+Shift+P".action = power-off-monitors;
+
+    "Mod+Shift+V".action = switch-focus-between-floating-and-tiling;
+    "Mod+V".action = toggle-window-floating;
   };
 
   screenshot-path = "~/Dropbox/Screenshots/Screenshot %Y-%m-%d at %H:%M:%S.png";
   prefer-no-csd = true;
   spawn-at-startup = [
-    # {
-    #   command = [
-    #     "maestral"
-    #     "start"
-    #   ];
-    # }
     (
       let
         background_file = pkgs.substituteAll {
@@ -145,11 +142,20 @@
       }
     )
     { command = [ "swaync" ]; }
+    {
+      command = [
+        "systemctl"
+        "start"
+        "--user"
+        "swayidle.service"
+      ];
+    }
     { command = [ "${pkgs.xwayland-satellite-unstable}/bin/xwayland-satellite" ]; }
     {
       command = [
         "dbus-update-activation-environment"
         "DISPLAY"
+        "WAYLAND_DISPLAY"
       ];
     }
 
