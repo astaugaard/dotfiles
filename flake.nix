@@ -27,6 +27,8 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
   };
 
   outputs =
@@ -37,6 +39,7 @@
       nixpkgs-unstable,
       niri,
       nixos-generators,
+      nix-flatpak,
       ...
     }:
     let
@@ -73,13 +76,7 @@
           ./home.nix
           niri.homeModules.niri
           stylix.homeManagerModules.stylix
-          # {
-          #   imports = [ stylix.homeManagerModules.stylix ];
-          #   disabledModules = [
-          #     "${stylix}/modules/kubecolor/hm.nix"
-          #     "${stylix}/modules/ghostty/hm.nix"
-          #   ];
-          # }
+          nix-flatpak.homeManagerModules.nix-flatpak
         ];
 
         extraSpecialArgs = {
