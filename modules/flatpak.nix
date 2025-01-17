@@ -33,7 +33,6 @@ with lib;
 
     services.flatpak.packages = [
       "com.bitwarden.desktop"
-      "com.discordapp.Discord"
       "com.github.tchx84.Flatseal"
       "com.github.unrud.VideoDownloader"
       "com.obsproject.Studio"
