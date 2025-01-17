@@ -13,7 +13,7 @@
     "Mod+Shift+Slash".action = show-hotkey-overlay;
 
     "Mod+Shift+Return".action = spawn "kitty";
-    "Mod+P".action = spawn "rofi" "-modi" "drun" "-show" "drun" "-show-icons";
+    "Mod+P".action = spawn "rofi" "-show" "drun" "-terminal" "kitty";
     "Super+Shift+C".action = screenshot;
     "Super+Shift+O".action = spawn "swaync-client" "-t" "-sw";
     "Super+Shift+L".action = spawn "swaylock" "--image" "${config.programs.swaylock.settings.image}";
@@ -120,8 +120,8 @@
 
     "Mod+Shift+P".action = power-off-monitors;
 
-    "Mod+Shift+V".action = switch-focus-between-floating-and-tiling;
-    "Mod+V".action = toggle-window-floating;
+    "Mod+V".action = switch-focus-between-floating-and-tiling;
+    "Mod+Shift+V".action = toggle-window-floating;
   };
 
   screenshot-path = "~/Dropbox/Screenshots/Screenshot %Y-%m-%d at %H:%M:%S.png";
