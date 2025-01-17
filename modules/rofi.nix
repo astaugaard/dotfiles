@@ -23,10 +23,18 @@ with lib;
       enable = true;
       package = pkgs.rofi-wayland;
       terminal = "${pkgs.kitty}/bin/kitty";
-      # plugins = [
-      #   pkgs.rofi-calc
-      #   pkgs.rofi-emoji
-      # ];
+      plugins = [
+        (pkgs.rofi-calc.overrideAttrs (old: {
+          # makes calc work with rofi-wayland
+          buildInputs = [
+            pkgs.rofi-wayland
+            pkgs.libqalculate
+            pkgs.glib
+            pkgs.cairo
+          ];
+        }))
+        pkgs.rofi-emoji-wayland
+      ];
 
       # based on: https://github.com/adi1090x/rofi/blob/master/files/launchers/type-7/style-6.rasi
       theme =

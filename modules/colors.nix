@@ -52,6 +52,7 @@ in
       description = "base16 theme path";
       type = lib.types.path;
       default = "${pkgs.base16-schemes}/share/themes/catppuccin-macchiato.yaml";
+      # default = "${pkgs.base16-schemes}/share/themes/catppuccin-latte.yaml";
     };
   };
 

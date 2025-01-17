@@ -11,7 +11,6 @@
 
   binds = with config.lib.niri.actions; {
     "Mod+Shift+Slash".action = show-hotkey-overlay;
-
     "Mod+Shift+Return".action = spawn "kitty";
     "Mod+P".action = spawn "rofi" "-show" "drun" "-terminal" "kitty";
     "Super+Shift+C".action = screenshot;
@@ -23,7 +22,9 @@
     "Mod+Ctrl+R".action = reset-window-height;
     "Mod+F".action = maximize-column;
     "Mod+Shift+F".action = fullscreen-window;
-    "Mod+C".action = center-column;
+    "Mod+C".action =
+      spawn "rofi" "-show" "calc" "-modi" "calc" "-modi" "emoji" "-no-persist-history" "-calc-command"
+        "echo -n '{result}' | ${pkgs.wl-clipboard}/bin/wl-copy";
 
     "XF86AudioRaiseVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+";
     "XF86AudioRaiseVolume".allow-when-locked = true;

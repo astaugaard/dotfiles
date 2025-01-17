@@ -110,7 +110,7 @@ with lib;
         "custom/launcher" = {
           format = "";
           tooltip = false;
-          on-click = "rofi -modi drun -show drun -show-icons";
+          on-click = "rofi -show drun -terminal kitty";
         };
 
         "wlr/taskbar" = {
