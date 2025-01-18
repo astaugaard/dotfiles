@@ -19,13 +19,9 @@ with lib;
   config = mkIf config.myhome.desktop.enable {
     home.packages = with pkgs; [
       xorg.xeyes
-      bitwarden-desktop
       nix-index
       ripgrep
       alsa-utils
-      # virt-manager
-      # qemu
-      # libvirt
     ];
 
     xdg.mimeApps.defaultApplications = {
