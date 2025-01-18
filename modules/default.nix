@@ -69,16 +69,13 @@
               nix flake update
               home-manager switch --flake ".?submodules=1"
               sudo nixos-rebuild switch --flake ".?submodules=1"
-              ${if config.myhome.flatpak.enable then "flatpak update -y" else ""}
               popd ;;
             "collect-garbage")
               nix-collect-garbage --delete-older-than 5d
-              sudo nix-collect-garbage --delete-older-than 5d
-              ${if config.myhome.flatpak.enable then "flatpak uninstall - -unused " else ""};;
+              sudo nix-collect-garbage --delete-older-than 5d ;;
             "collect-garbage-all")
               nix-collect-garbage -d
-              sudo nix-collect-garbage -d 
-              ${if config.myhome.flatpak.enable then "flatpak uninstall - -unused " else ""};;
+              sudo nix-collect-garbage -d  ;;
             "update-button")
               kitty bash -c 'system update; fish' ;;
             "build-iso")

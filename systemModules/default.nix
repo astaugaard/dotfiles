@@ -73,8 +73,6 @@ with lib;
     };
     boot.loader.systemd-boot.enable = true;
 
-    security.rtkit.enable = true;
-
     environment.systemPackages = with pkgs; [
       kakoune
       wget
@@ -141,12 +139,22 @@ with lib;
 
     security.polkit.enable = true;
     services.ntp.enable = true;
-    programs.dconf.enable = true;
+
+    sops.defaultSopsFile = ../secrets/wifi.json;
+    sops.defaultSopsFormat = "json";
+    sops.age.keyFile = "/home/a/.config/sops/age/keys.txt";
+    sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    sops.age.generateKey = true;
+
+    sops.secrets.password = { };
+    sops.templates."wifi.env".content = ''
+      password=${config.sops.placeholder.password}
+    '';
 
     networking.wireless = {
-      secretsFile = config.mysystem.wpasupplicant.envfile;
+      secretsFile = config.sops.templates."wifi.env".path;
       enable = config.mysystem.wpasupplicant.enable;
-      networks."Whitemarsh".pskRaw = "ext:psk_home";
+      networks."Whitemarsh".pskRaw = "ext:password";
       extraConfig = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=wheel";
     };
 

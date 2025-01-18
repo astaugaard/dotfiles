@@ -29,6 +29,11 @@
     };
 
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -40,6 +45,7 @@
       niri,
       nixos-generators,
       nix-flatpak,
+      sops-nix,
       ...
     }:
     let
@@ -103,6 +109,7 @@
             ./configuration.nix
             ./systemModules
             niri.outputs.nixosModules.niri
+            sops-nix.nixosModules.sops
           ];
         };
 

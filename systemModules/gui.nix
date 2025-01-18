@@ -48,6 +48,9 @@ with lib;
       xterm
     ];
 
+    programs.dconf.enable = true;
+    security.rtkit.enable = true;
+
     programs.sway.enable = config.mysystem.sway;
     programs.sway.package = pkgs.sway;
 

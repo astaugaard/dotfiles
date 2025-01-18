@@ -16,7 +16,7 @@ with lib;
     };
   };
 
-  config = mkIf config.mysystem.tailscale.enable {
+  config = mkIf config.mysystem.ssh.enable {
     services.openssh.enable = true;
     services.openssh.settings.PermitRootLogin = "no";
     users.users.a.openssh.authorizedKeys.keys = [
