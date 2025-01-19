@@ -34,10 +34,26 @@
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # nixos-facter-modules = { not used because idk if I can make it follow stable
+    #   url = "github:numtide/nixos-facter-modules";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+
+    disko = {
+      url = "github:/nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     {
+      self,
       nixpkgs,
       home-manager,
       stylix,
@@ -46,6 +62,9 @@
       nixos-generators,
       nix-flatpak,
       sops-nix,
+      disko,
+      deploy-rs,
+      # nixos-facter-modules,
       ...
     }:
     let
@@ -113,6 +132,60 @@
           ];
         };
 
+        rpi-home = lib.nixosSystem {
+          system = "aarch64-linux";
+
+          specialArgs = {
+            inherit pkgs-unstable;
+          };
+
+          modules = [
+            (
+              { config, pkgs, ... }:
+              {
+
+                imports = [ ./rpi-disko-config.nix ];
+
+                nixpkgs.overlays = myOverlays;
+
+                i18n.defaultLocale = "en_US.utf8";
+                networking.hostName = "rpi-home";
+                time.timeZone = "America/New_York";
+                mysystem.user = "a";
+                mysystem.userdescription = "admin";
+
+                mysystem.enablegc = true;
+                mysystem.wpasupplicant.enable = true;
+                mysystem.tailscale.enable = true;
+                mysystem.tailscale.authkey = "tailscale-server-auth";
+                mysystem.ssh.enable = true;
+                mysystem.k3s.enable = true;
+
+                mysystem.flatpak.enable = false;
+                mysystem.niri = false;
+                mysystem.sway = false;
+                mysystem.xmonad = false;
+                mysystem.amd = false;
+                mysystem.virt = false;
+              }
+            )
+            ./systemModules
+            niri.outputs.nixosModules.niri # not used at all in config lol
+            ./rpi-home-hardware-configuration.nix
+            # nixos-facter-modules.nixosModules.facter
+            { config.facter.reportPath = ./facter.json; }
+            sops-nix.nixosModules.sops
+            disko.nixosModules.disko
+          ];
+        };
+      };
+
+      deploy.nodes.rpi-home = {
+        hostname = "rpi-home";
+        profile.system = {
+          user = "root";
+          path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.rpi-home;
+        };
       };
 
       homeModules.myhome =

@@ -12,6 +12,7 @@ with lib;
     ./amd.nix
     ./tailscale.nix
     ./ssh.nix
+    ./k3s.nix
   ];
 
   options.mysystem = {
@@ -23,7 +24,7 @@ with lib;
     firewall = mkOption {
       description = "enable firewall";
       type = lib.types.bool;
-      default = false;
+      default = true;
     };
     user = mkOption {
       description = "main user for the system";
@@ -115,27 +116,14 @@ with lib;
 
     networking.firewall.enable = config.mysystem.firewall;
 
-    networking.firewall = {
-      allowedTCPPorts = [
-        17500
-        17599
-        17600
-        17601
-        17602
-        17603
-        17604
-        17605
-        17606
-        17607
-        17608
-        17609
-        53317 # for localsend
-      ];
-      allowedUDPPorts = [
-        17500
-        53317
-      ];
-    };
+    # networking.firewall = {
+    #   allowedTCPPorts = [
+    #     17500
+    #   ];
+    #   allowedUDPPorts = [
+    #     17500
+    #   ];
+    # };
 
     security.polkit.enable = true;
     services.ntp.enable = true;
