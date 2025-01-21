@@ -83,6 +83,10 @@
               nix build .?submodules=1#nixosConfigurations.iso.config.system.build.isoImage
               popd
               ;;
+            "deploy")
+              git push rpi-home main
+              ssh nixos@rpi-home-1 bash 'cd ~/dotfiles; nixos-rebuild switch --flake ".?submodules=1#rpi-home"'
+            ;;
             *)
 
               echo "unknown command: $1"
