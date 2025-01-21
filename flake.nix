@@ -101,6 +101,13 @@
         };
       };
 
+      pkgs-unstable-arm = import nixpkgs-unstable {
+        system = "aarch64-linux";
+        config = {
+          allowUnfree = true;
+        };
+      };
+
       lib = nixpkgs.lib;
     in
     {
@@ -148,7 +155,7 @@
           system = "aarch64-linux";
 
           specialArgs = {
-            inherit pkgs-unstable;
+            inherit pkgs-unstable-arm;
           };
 
           modules = [
@@ -253,84 +260,6 @@
         #     # disko.nixosModules.disko
         #   ];
         # };
-      };
-
-      meta = {
-        nixpkgs = pkgs;
-
-        nodeNixpkgs = {
-          rpi-home = pkgs-arm;
-        };
-      };
-
-      colmena = {
-        rpi-home = {
-          nixpkgs = pkgs-arm;
-
-          deployment = {
-            targetHost = "rpi-home-1";
-            targetUser = "nixos";
-          };
-
-          system = "aarch64-linux";
-
-          specialArgs = {
-            inherit pkgs-unstable;
-          };
-
-          modules = [
-            (
-              { config, pkgs, ... }:
-              {
-                # imports = [ ./rpi-disko-config.nix ];
-
-                nixpkgs.overlays = myOverlays;
-                sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-
-                i18n.defaultLocale = "en_US.utf8";
-                networking.hostName = "rpi-home";
-                time.timeZone = "America/New_York";
-                mysystem.user = "nixos";
-                mysystem.userdescription = "admin";
-
-                boot.kernel.sysctl = {
-                  "vm.swappiness" = 60;
-                };
-
-                swapDevices = [
-                  {
-                    device = "/var/lib/swapfile";
-                    size = 16 * 1024;
-                  }
-                ];
-
-                mysystem.enablegc = true;
-                mysystem.wpasupplicant.enable = true;
-                mysystem.tailscale.enable = true;
-                mysystem.tailscale.authkey = "tailscale-server-auth";
-                mysystem.ssh.enable = true;
-                mysystem.k3s.enable = true;
-                mysystem.systemd-boot = false;
-                mysystem.grub = false;
-                mysystem.grub-device = "/dev/mmcblk0";
-
-                mysystem.flatpak.enable = false;
-                mysystem.niri = false;
-                mysystem.sway = false;
-                mysystem.xmonad = false;
-                mysystem.amd = false;
-                mysystem.virt = false;
-              }
-            )
-            ./systemModules
-            niri.outputs.nixosModules.niri # not used at all in config lol
-            ./rpi-home-hardware-configuration.nix
-            # nixos-facter-modules.nixosModules.facter
-            # { config.facter.reportPath = ./rpi-facter.json; }
-            sops-nix.nixosModules.sops
-            nixos-hardware.nixosModules.raspberry-pi-4
-          ];
-        };
       };
 
       deploy.nodes.rpi-home = {
