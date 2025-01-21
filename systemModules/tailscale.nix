@@ -29,10 +29,11 @@ with lib;
     mkIf config.mysystem.tailscale.enable {
       services.tailscale.enable = true;
 
-      services.tailscale.authKeyFile = mkIf (authkey != null) config.sops.secrets."${authkey}".path;
+      services.tailscale.authKeyFile =
+        if (authkey != null) then config.sops.secrets."${authkey}".path else null;
 
       services.tailscale.openFirewall = true;
 
-      sops.secrets."${authkey}" = mkIf (authkey != null) { };
+      sops.secrets."${if (authkey != null) then authkey else "password"}" = mkIf (authkey != null) { };
     };
 }

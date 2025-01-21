@@ -1,7 +1,15 @@
 keys:
   - &admin_a age1e3r7mu3wx74p02v9d7h7az2aacem2fkuqssruxtknv66zvyz6e2smpcxkz
+  # - &pihome_temp age1act2tagvc2ttd7sfj20xtwrefce0e4h9cp4dclusm92snhu8k3pqs7rge6
+  # - &nixos age1dmpc7hdgfa2aemn7g83kc6wh0gn3hq8u2j7qpace809n0nelce6qkytu4a
+  # - &another_temp age1ltr0nccwz49cu2flp0zrum4ma53qnpqm39umrzdwmm0zjv95w5wqg3ssqg
+  # - &yet_another age16zkq8wz97jk7d599kflcp0lqt09v0t9ztv47hvkjfrq4xq8ety9s4swq9e
 creation_rules:
   - path_regex: secrets/[^/]+\.(yaml|json|env|ini)$
     key_groups:
     - age:
       - *admin_a
+      # - *pihome_temp
+      # - *nixos
+      # - *another_temp
+      # - *yet_another

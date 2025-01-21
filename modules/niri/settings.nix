@@ -176,6 +176,23 @@
       };
       clip-to-geometry = true;
     }
+    {
+      matches = [
+        { app-id = "^Bitwarden$"; }
+        { app-id = "^vesktop$"; }
+      ];
+      block-out-from = "screen-capture";
+    }
+  ];
+
+  layer-rules = [
+    {
+      matches = [
+        { namespace = "swaync-notification-window"; }
+        { namespace = "swaync-control-center"; }
+      ];
+      block-out-from = "screen-capture";
+    }
   ];
 
   layout = {

@@ -24,7 +24,7 @@ with lib;
     firewall = mkOption {
       description = "enable firewall";
       type = lib.types.bool;
-      default = true;
+      default = false;
     };
     user = mkOption {
       description = "main user for the system";
@@ -53,8 +53,32 @@ with lib;
       default = "a";
     };
 
+    systemd-boot = mkOption {
+      description = "enable systemd boot";
+      type = lib.types.bool;
+      default = true;
+    };
+
+    grub = mkOption {
+      description = "enable grub";
+      type = lib.types.bool;
+      default = false;
+    };
+
+    grub-device = mkOption {
+      description = "device to install grub on";
+      type = lib.types.str;
+      default = "nodev";
+    };
+
     virt = mkOption {
       description = "virtualization support";
+      type = lib.types.bool;
+      default = false;
+    };
+
+    aarch-binfmt = mkOption {
+      description = "enable binfmt emulation of aarch64-linux";
       type = lib.types.bool;
       default = false;
     };
@@ -63,16 +87,18 @@ with lib;
   config = {
     virtualisation.libvirtd.enable = config.mysystem.virt;
 
+    boot.binfmt.emulatedSystems = if config.mysystem.aarch-binfmt then [ "aarch64-linux" ] else [ ];
+
     boot.loader.efi.canTouchEfiVariables = true;
     boot.loader.grub = {
-      enable = false;
+      enable = config.mysystem.grub;
       # 	version = 2;
-      device = "nodev";
+      device = config.mysystem.grub-device;
       useOSProber = true;
-      efiSupport = true;
+      efiSupport = if config.mysystem.grub-device == "nodev" then true else false;
       theme = "${pkgs.grub-pets-min-theme}/grub/theme";
     };
-    boot.loader.systemd-boot.enable = true;
+    boot.loader.systemd-boot.enable = config.mysystem.systemd-boot;
 
     environment.systemPackages = with pkgs; [
       kakoune
@@ -116,21 +142,23 @@ with lib;
 
     networking.firewall.enable = config.mysystem.firewall;
 
-    # networking.firewall = {
-    #   allowedTCPPorts = [
-    #     17500
-    #   ];
-    #   allowedUDPPorts = [
-    #     17500
-    #   ];
-    # };
+    networking.firewall = {
+      allowedTCPPorts = [
+        17500
+        22
+      ];
+      allowedUDPPorts = [
+        17500
+        22
+      ];
+    };
 
     security.polkit.enable = true;
     services.ntp.enable = true;
 
     sops.defaultSopsFile = ../secrets/wifi.json;
     sops.defaultSopsFormat = "json";
-    sops.age.keyFile = "/home/a/.config/sops/age/keys.txt";
+    sops.age.keyFile = "/home/${config.mysystem.user}/.config/sops/age/keys.txt";
     sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
     sops.age.generateKey = true;
 
