@@ -53,8 +53,8 @@ with lib;
       "org.inkscape.Inkscape"
       "org.libreoffice.LibreOffice"
       "org.mozilla.Thunderbird"
-      "org.polymc.PolyMC"
       "org.torproject.torbrowser-launcher"
+      "org.prismlauncher.PrismLauncher"
       {
         appId = "org.wpilib.Wpilib";
         origin = "wpilib-origin";

@@ -34,6 +34,13 @@ with lib;
       # "--debug" # Optionally add additional args to k3s
     ];
 
+    # for longhorn
+    environment.systemPackages = [ pkgs.nfs-utils ];
+    services.openiscsi = {
+      enable = true;
+      name = "${config.networking.hostName}-initiatorhost";
+    };
+
     services.k3s.images = [
       (pkgs.dockerTools.pullImage {
         imageName = "freshrss/freshrss";
@@ -55,13 +62,13 @@ with lib;
             finalizers = [ "wrangler.cattle.io/on-helm-chart-remove" ];
             generation = 1;
             name = "longhorn-install";
-            namespace = "default";
+            namespace = "kube-system"; # hack to see if this works
           };
 
           spec = {
             version = "v1.8.0";
             chart = "longhorn";
-            repo = "https://charts.longhorn.io";
+            repo = "http://charts.longhorn.io";
             failurePolicy = "abort";
             targetNamespace = "longhorn-system";
             createNamespace = true;

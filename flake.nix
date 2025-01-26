@@ -40,11 +40,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-facter-modules = {
-      # not used because idk if I can make it follow stable
-      url = "github:numtide/nixos-facter-modules";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # nixos-facter-modules = {
+    #   # not used because idk if I can make it follow stable
+    #   url = "github:numtide/nixos-facter-modules";
+    # };
 
     disko = {
       url = "github:/nix-community/disko";
@@ -67,7 +66,7 @@
       sops-nix,
       disko,
       deploy-rs,
-      nixos-facter-modules,
+      # nixos-facter-modules,
       nixos-hardware,
       ...
     }:
