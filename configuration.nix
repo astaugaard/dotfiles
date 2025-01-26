@@ -46,7 +46,7 @@
 
   mysystem.enablegc = true;
   mysystem.flatpak.enable = true;
-  mysystem.tailscale.enable = true;
+  # mysystem.tailscale.enable = true;
   mysystem.niri = true;
   mysystem.sway = false;
   mysystem.amd = true;
@@ -55,5 +55,5 @@
   mysystem.wpasupplicant.enable = true;
   mysystem.virt = true;
   mysystem.ssh.enable = true;
-  mysystem.aarch-binfmt = false;
+  mysystem.aarch-binfmt = true;
 }

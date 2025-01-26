@@ -138,6 +138,8 @@ with lib;
         dates = "weekly";
         options = "--delete-older-than 5d";
       };
+
+      settings.trusted-users = [ "${config.mysystem.user}" ];
     };
 
     networking.firewall.enable = config.mysystem.firewall;

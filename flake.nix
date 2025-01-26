@@ -177,6 +177,22 @@
                   "vm.swappiness" = 60;
                 };
 
+                boot.kernelParams = [
+                  "cgroup_memory=1"
+                  "cgroup_enable=memory"
+                ];
+
+                # networking = {
+                #   interfaces.end0 = {
+                #     addresses = [
+                #       {
+                #         address = "169.254.90.188";
+                #         prefixLength = 24;
+                #       }
+                #     ];
+                #   };
+                # };
+
                 swapDevices = [
                   {
                     device = "/var/lib/swapfile";
@@ -186,7 +202,6 @@
 
                 mysystem.enablegc = true;
                 mysystem.wpasupplicant.enable = true;
-                mysystem.tailscale.enable = true;
                 mysystem.tailscale.authkey = "tailscale-server-auth";
                 mysystem.ssh.enable = true;
                 mysystem.k3s.enable = true;

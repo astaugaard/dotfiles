@@ -84,8 +84,14 @@
               popd
               ;;
             "deploy")
-              git push rpi-home main
-              ssh nixos@rpi-home-1 bash 'cd ~/dotfiles; nixos-rebuild switch --flake ".?submodules=1#rpi-home"'
+              pushd ~/dotfiles
+              rsync -r --exclude=.git . nixos@rpi-home-1:~/dotfiles
+              ssh nixos@rpi-home-1 'nixos-rebuild switch --flake "./dotfiles?submodules=1#rpi-home"'
+
+              # git push rpi-home main
+              # ssh nixos@rpi-home-1 'git -C ./dotfiles submodule update --recursive'
+              # ssh nixos@rpi-home-1 'nixos-rebuild switch --flake "./dotfiles?submodules=1#rpi-home"'
+              popd
             ;;
             *)
 

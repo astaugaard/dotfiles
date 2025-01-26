@@ -7,6 +7,22 @@
 }:
 with builtins;
 with lib;
+let
+  myhelm = (
+    with pkgs;
+    wrapHelm kubernetes-helm {
+      plugins = with pkgs.kubernetes-helmPlugins; [
+        helm-secrets
+        helm-diff
+        helm-s3
+        helm-git
+      ];
+    }
+  );
+  myhelmfile = pkgs.helmfile-wrapped.override {
+    inherit (myhelm) pluginsDir;
+  };
+in
 {
   options.myhome.devtools = {
     enable = mkOption {
@@ -18,6 +34,12 @@ with lib;
 
   config = mkIf config.myhome.devtools.enable {
     home.packages = with pkgs; [
+      kubectl
+      myhelm
+      myhelmfile
+      # kubernetes-helmPlugins.helm-diff
+      # kubernetes-helmPlugins.helm-secrets
+      # kubernetes-helmPlugins.helm-s3
       # general c stuff (so most languages)
       pkg-config
       glib
