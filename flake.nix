@@ -203,7 +203,10 @@
                 mysystem.wpasupplicant.enable = true;
                 mysystem.tailscale.authkey = "tailscale-server-auth";
                 mysystem.ssh.enable = true;
-                mysystem.k3s.enable = true;
+                mysystem.k3s.enable = false;
+
+                mysystem.freshrss.enable = true;
+
                 mysystem.systemd-boot = false;
                 mysystem.grub = false;
                 mysystem.grub-device = "/dev/mmcblk0";

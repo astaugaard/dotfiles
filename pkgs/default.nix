@@ -11,6 +11,8 @@ self: super: {
 
   nixos-plymouth-vortex = self.callPackage ./plymouth-vortex.nix.nix { };
 
+  battlesnake = self.callPackage ./battlesnake.nix { };
+
   haskellPackages = super.haskellPackages.override {
     overrides = self: super: { dynamicDashboard = self.callPackage ./dash { }; };
   };

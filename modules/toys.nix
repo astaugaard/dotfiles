@@ -26,6 +26,7 @@ with lib;
       lolcat
       prideful
       sl
+      battlesnake
     ];
 
     programs.fastfetch.enable = true;

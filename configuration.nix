@@ -56,4 +56,7 @@
   mysystem.virt = true;
   mysystem.ssh.enable = true;
   mysystem.aarch-binfmt = true;
+
+  mysystem.grub = true;
+  mysystem.systemd-boot = false;
 }

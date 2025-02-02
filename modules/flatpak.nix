@@ -55,6 +55,7 @@ with lib;
       "org.mozilla.Thunderbird"
       "org.torproject.torbrowser-launcher"
       "org.prismlauncher.PrismLauncher"
+      "in.cinny.Cinny"
       {
         appId = "org.wpilib.Wpilib";
         origin = "wpilib-origin";

@@ -13,6 +13,7 @@ with lib;
     ./tailscale.nix
     ./ssh.nix
     ./k3s.nix
+    ./freshrss.nix
   ];
 
   options.mysystem = {
@@ -94,7 +95,7 @@ with lib;
       enable = config.mysystem.grub;
       # 	version = 2;
       device = config.mysystem.grub-device;
-      useOSProber = true;
+      # useOSProber = true;
       efiSupport = if config.mysystem.grub-device == "nodev" then true else false;
       theme = "${pkgs.grub-pets-min-theme}/grub/theme";
     };
