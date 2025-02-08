@@ -71,11 +71,27 @@ with lib;
           ];
         };
 
-        "custom/update" = {
-          format = "󰚰";
-          tooltip = false;
-          on-click = "system update-button";
-        };
+        "custom/update" =
+          let
+            update_script = pkgs.writeShellScriptBin "since_last_update" ''
+              #!/bin/bash
+
+              MOD_TIME=`stat -c %Y /home/${config.myhome.username}/dotfiles/flake.lock`
+              RIGHTNOW=`date +%s`
+              HOW_LONG=`expr $RIGHTNOW - $MOD_TIME`
+              NUM_DAYS=`expr $HOW_LONG / 86400`
+              NUM_HOURS=`expr \( $HOW_LONG % 86400 \) / 3600`
+
+              echo "$NUM_DAYS d + $NUM_HOURS h"
+            '';
+          in
+          {
+            format = "󰚰  {}";
+            tooltip = false;
+            on-click = "system update-button";
+            exec = "${update_script}/bin/since_last_update";
+            interval = 3600;
+          };
 
         "custom/power" = {
           format = "⏻";

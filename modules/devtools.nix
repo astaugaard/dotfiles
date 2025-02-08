@@ -68,6 +68,7 @@ in
       pkgs-unstable.cargo
       pkgs-unstable.cargo-tarpaulin
       pkgs-unstable.rust-analyzer
+      pkgs-unstable.clippy
       pkgs-unstable.cabal-install
       pkgs-unstable.rustfmt
       # cargo-disasm # removed for now bc test not passing
