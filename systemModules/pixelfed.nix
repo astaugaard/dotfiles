@@ -20,9 +20,7 @@ in
   };
 
   config = mkIf config.mysystem.pixelfed.enable {
-    sops.secrets.pixelfed = {
-      # owner = freshrss-user;
-    };
+    sops.secrets.pixelfed = { };
 
     sops.templates."pixelfed-secrets.env" = {
       content = ''
@@ -32,16 +30,16 @@ in
       owner = pixelfed-user;
     };
 
-    users.users."${freshrss-user}" = {
+    users.users."${pixelfed-user}" = {
       isSystemUser = true;
-      group = freshrss-user;
+      group = pixelfed-user;
     };
 
-    users.groups."${freshrss-user}" = { };
+    users.groups."${pixelfed-user}" = { };
 
-    containers.freshrss =
+    containers.pixelfed =
       let
-        secrets_env = config.sops.templates."pixelfed-secret.env".path;
+        secrets_env = config.sops.templates."pixelfed-secrets.env".path;
       in
       {
         autoStart = true;
@@ -58,19 +56,29 @@ in
             ...
           }:
           {
+
             services.pixelfed = {
               enable = true;
-              domain = "pixefed.staugaard.xyz";
+              package = pkgs-unstable.pixelfed;
+              phpPackage = pkgs.php84;
+
+              domain = "169.254.90.188:5000";
               user = pixelfed-user;
-              secretsFile = secrets_env;
-              settings."FORCE_HTTPS_URLS" = false;
+
+              secretFile = secrets_env;
               settings."APP_NAME" = "Pixelfed";
+              settings."FORCE_HTTPS_URLS" = false;
 
               redis.createLocally = true;
               nginx = {
                 listen = [
                   {
-                    addr = "127.0.0.1";
+                    addr = "169.254.90.188";
+                    port = 5000;
+                    # ssl = true;
+                  }
+                  {
+                    addr = "100.64.0.2";
                     port = 5000;
                     # ssl = true; // hopefully covered by caddy
                   }

@@ -36,6 +36,7 @@ in
         passwordFile = config.sops.secrets.freshrss-password.path;
       in
       {
+
         autoStart = true;
         bindMounts."/run/secrets/freshrss-password" = {
           mountPoint = "/run/secrets/freshrss-password";
@@ -50,6 +51,14 @@ in
             ...
           }:
           {
+            services.cron = {
+              enable = true;
+
+              systemCronJobs = [
+                "10 * * * * www-data ${pkgs.php}/bin/php -f ${pkgs.freshrss}/app/actualize_script.php > /tmp/FreshRSS.log 2>&1"
+              ];
+            };
+
             services.freshrss = {
               enable = true;
               passwordFile = passwordFile;

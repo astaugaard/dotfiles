@@ -154,7 +154,7 @@
           system = "aarch64-linux";
 
           specialArgs = {
-            inherit pkgs-unstable-arm;
+            pkgs-unstable = pkgs-unstable-arm;
           };
 
           modules = [
@@ -206,6 +206,7 @@
                 mysystem.k3s.enable = false;
                 mysystem.wireguard-host.enable = true;
                 mysystem.invidious.enable = true;
+                mysystem.pixelfed.enable = true;
 
                 mysystem.freshrss.enable = true;
 
