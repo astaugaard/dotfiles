@@ -204,6 +204,8 @@
                 mysystem.tailscale.authkey = "tailscale-server-auth";
                 mysystem.ssh.enable = true;
                 mysystem.k3s.enable = false;
+                mysystem.wireguard-host.enable = true;
+                mysystem.invidious.enable = true;
 
                 mysystem.freshrss.enable = true;
 

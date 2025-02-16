@@ -56,6 +56,8 @@ with lib;
       "org.torproject.torbrowser-launcher"
       "org.prismlauncher.PrismLauncher"
       "in.cinny.Cinny"
+      "org.freedesktop.Sdk.Extension.texlive//24.08"
+      "org.texstudio.TeXstudio"
       {
         appId = "org.wpilib.Wpilib";
         origin = "wpilib-origin";

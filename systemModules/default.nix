@@ -14,6 +14,9 @@ with lib;
     ./ssh.nix
     ./k3s.nix
     ./freshrss.nix
+    ./wireguard_host.nix
+    ./invidious.nix
+    ./pixelfed.nix
   ];
 
   options.mysystem = {

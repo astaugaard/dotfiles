@@ -34,12 +34,12 @@ in
 
   config = mkIf config.myhome.devtools.enable {
     home.packages = with pkgs; [
-      kubectl
-      myhelm
-      myhelmfile
-      # kubernetes-helmPlugins.helm-diff
-      # kubernetes-helmPlugins.helm-secrets
-      # kubernetes-helmPlugins.helm-s3
+      # kubectl
+      # myhelm
+      # myhelmfile
+
+      docker
+
       # general c stuff (so most languages)
       pkg-config
       glib
