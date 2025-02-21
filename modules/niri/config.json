@@ -64,6 +64,80 @@
                 "command": "flatpak run org.prismlauncher.PrismLauncher",
                 "icon": "org.prismlauncher.PrismLauncher"
             }
+        },
+
+        "s": {
+            "Application": {
+                "name": "spotify ",
+                "command": "flatpak run com.spotify.Client",
+                "icon": "com.spotify.Client"
+            }
+        },
+
+        "d": {
+            "Folder": {
+                "name": "editors",
+                "applications": {
+                    "b": {
+                        "Application": {
+                            "name": "Blender",
+                            "command": "flatpak run --branch=stable --arch=x86_64 --command=blender --file-forwarding org.blender.Blender @@ %f @@",
+                            "icon": "org.blender.Blender"
+                        }
+
+                    },
+                    "i": {
+                        "Application": {
+                            "name": "Inkscape",
+                            "command": "flatpak run --branch=stable --arch=x86_64 --command=inkscape org.inkscape.Inkscape",
+                            "icon": "org.inkscape.Inkscape"
+                        }
+                    },
+
+                    "t": {
+                        "Application": {
+                            "name": "TeXstudio",
+                            "command": "flatpak run org.texstudio.TeXstudio",
+                            "icon": "org.texstudio.TeXstudio"
+                        }
+                    },
+                    "c": {
+                        "Application": {
+                            "name": "Calc",
+                            "command": "flatpak run --branch=stable --arch=x86_64 --command=libreoffice org.libreoffice.LibreOffice --calc",
+                            "icon": "org.libreoffice.LibreOffice.calc"
+                        }
+                    },
+                    "d": {
+                        "Application": {
+                            "name": "Draw",
+                            "command": "flatpak run --branch=stable --arch=x86_64 --command=libreoffice org.libreoffice.LibreOffice --draw",
+                            "icon": "org.libreoffice.LibreOffice.draw"
+                        }
+                    },
+                    "s": {
+                        "Application": {
+                            "name": "Slides",
+                            "command": "flatpak run --branch=stable --arch=x86_64 --command=libreoffice org.libreoffice.LibreOffice --impress",
+                            "icon": "org.libreoffice.LibreOffice.impress"
+                        }
+                    },
+                    "m": {
+                        "Application": {
+                            "name": "Math",
+                            "command": "flatpak run --branch=stable --arch=x86_64 --command=libreoffice org.libreoffice.LibreOffice --math",
+                            "icon": "org.libreoffice.LibreOffice.math"
+                        }
+                    },
+                    "w": {
+                        "Application": {
+                            "name": "Writer",
+                            "command": "flatpak run --branch=stable --arch=x86_64 --command=libreoffice org.libreoffice.LibreOffice --writer",
+                            "icon": "org.libreoffice.LibreOffice.writer"
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -5,13 +5,13 @@
 }:
 rustPlatform.buildRustPackage rec {
   version = "1.0";
-  pname = "gtk-confirmation-dialog";
+  pname = "gtk-quick-launch";
 
   src = pkgs.fetchFromGitHub {
     owner = "astaugaard";
     repo = "quick-launch";
-    rev = "b080d75024f260146b5ad036d9e72105f3062986";
-    hash = "sha256-w66icsZroAM+f/qdZnEtby822/8Tr9//uhakNB9Z/0I=";
+    rev = "72d9a9f3ed81c63054b7990e0e310f147abca23b";
+    hash = "sha256-Ek3fAeq2bG1I/n7dHQXxaB+a8eWEM/Fsyc8WAXQkf9I=";
   };
 
   buildInputs = with pkgs; [
@@ -30,5 +30,5 @@ rustPlatform.buildRustPackage rec {
     pkg-config
   ];
 
-  cargoHash = "sha256-WpllHeB0zhkCqfYgnR4YMP8DfG91OFluMbSGBScTpPA=";
+  cargoHash = "sha256-Pk8wIxPiyUS7Bb7JcV2VB0h+TJKlUQJp7e5hBnjc8sE=";
 }
