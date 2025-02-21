@@ -13,6 +13,10 @@ self: super: {
 
   battlesnake = self.callPackage ./battlesnake.nix { };
 
+  gtk-quick-launch = self.callPackage ./gtk-quick-launch.nix { };
+
+  gtk-confirmation-dialog = self.callPackage ./gtk-confirmation-dialog.nix { };
+
   haskellPackages = super.haskellPackages.override {
     overrides = self: super: { dynamicDashboard = self.callPackage ./dash { }; };
   };

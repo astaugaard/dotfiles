@@ -1,0 +1,69 @@
+{
+    "width": 4,
+    "height": 7,
+    "applications": {
+        "l": {
+            "Application": {
+                "name": "librewolf",
+                "command": "librewolf",
+                "icon": "librewolf"
+            }
+        },
+
+        "f": {
+            "Application": {
+                "name": "files",
+                "command": "nautilus",
+                "icon": "org.gnome.Nautilus"
+            }
+        },
+
+        "v": {
+            "Application": {
+                "name": "vesktop",
+                "command": "flatpak run dev.vencord.Vesktop",
+                "icon": "dev.vencord.Vesktop"
+            }
+        },
+
+        "g": {
+            "Application": {
+                "name": "lutris",
+                "command": "flatpak run net.lutris.Lutris",
+                "icon": "net.lutris.Lutris"
+            }
+        },
+
+        "b": {
+            "Application": {
+                "name": "bitwarden",
+                "command": "flatpak run com.bitwarden.desktop",
+                "icon": "com.bitwarden.desktop"
+            }
+        },
+
+        "t": {
+            "Application": {
+                "name": "thunderbird",
+                "command": "flatpak run org.mozilla.Thunderbird",
+                "icon": "org.mozilla.Thunderbird"
+            }
+        },
+
+        "o": {
+            "Application": {
+                "name": "obs",
+                "command": "flatpak run com.obsproject.Studio",
+                "icon": "com.obsproject.Studio"
+            }
+        },
+
+        "p": {
+            "Application": {
+                "name": "prism launcher",
+                "command": "flatpak run org.prismlauncher.PrismLauncher",
+                "icon": "org.prismlauncher.PrismLauncher"
+            }
+        }
+    }
+}

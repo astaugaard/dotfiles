@@ -4,6 +4,28 @@
   lib,
   ...
 }:
+let
+  quick-launch-style = pkgs.writeText "style.css" ''
+    window {
+        background-color: #00000000;
+
+    }
+
+    stack {
+        background-color: #${config.lib.stylix.colors.base01};
+        border-radius: 20px;
+        padding: 20px;
+        border: 2px solid #${config.lib.stylix.colors.base0E};
+    }
+
+    button {
+        background-color: #${config.lib.stylix.colors.base02};
+        color: #${config.lib.stylix.colors.base05};
+        border-radius: 20px;
+        padding: 20px;
+    }
+  '';
+in
 {
   input.keyboard.xkb = {
     layout = "us";
@@ -15,6 +37,9 @@
     "Mod+P".action = spawn "rofi" "-show" "drun" "-terminal" "kitty";
     "Super+Shift+C".action = screenshot;
     "Super+Shift+O".action = spawn "swaync-client" "-t" "-sw";
+    "Super+O".action =
+      spawn "${pkgs.gtk-quick-launch}/bin/quick-launch" "--config" "${./config.json}" "--css"
+        "${quick-launch-style}";
     "Super+Shift+L".action = spawn "swaylock" "--image" "${config.programs.swaylock.settings.image}";
 
     "Mod+R".action = switch-preset-column-width;
@@ -117,7 +142,27 @@
     "Ctrl+Print".action = screenshot-screen;
     "Alt+Print".action = screenshot-window;
 
-    "Mod+Shift+Q".action = quit;
+    "Mod+Shift+Q".action =
+      let
+        css = pkgs.writeText "style.css" ''
+          label {
+                color: #${config.lib.stylix.colors.base05};
+                background-color: #${config.lib.stylix.colors.base01};
+                padding: 20px;
+
+                border: 2px solid #${config.lib.stylix.colors.base0E};
+                border-radius: 20px;
+          }
+
+          window {
+              background-color: #00000000;
+
+          }
+        '';
+      in
+      spawn "${pkgs.gtk-confirmation-dialog}/bin/confirmation" "-s" "${
+        css
+      }" "--message" "Are you sure you want to quit niri?" "-c" "niri msg action quit -s";
 
     "Mod+Shift+P".action = power-off-monitors;
 

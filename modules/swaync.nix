@@ -25,11 +25,11 @@ with lib;
         control-center-layer = "top";
         layer-shell = true;
         cssPriority = "application";
-        control-center-margin-top = 0;
-        control-center-margin-bottom = 0;
-        control-center-margin-right = 0;
-        control-center-margin-left = 0;
-        control-center-height = 600;
+        control-center-margin-top = 20;
+        # control-center-margin-bottom = 0;
+        control-center-margin-right = 20;
+        # control-center-margin-left = 0;
+        control-center-height = 500;
         notification-2fa-action = true;
         notification-inline-replies = false;
         notification-icon-size = 64;
@@ -43,10 +43,13 @@ with lib;
           "notifications"
         ];
       };
+
       # style = pkgs.fetchurl {
       #   url = "https://github.com/catppuccin/swaync/releases/download/v0.2.3/macchiato.css";
       #   hash = "sha256-LMm6nWn1JPPgj5YpppwFG3lXTtXem5atlIvqrDxd0bM=";
       # };
     };
+
+    stylix.targets.swaync.enable = true;
   };
 }

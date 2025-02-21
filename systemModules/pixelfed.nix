@@ -37,56 +37,85 @@ in
 
     users.groups."${pixelfed-user}" = { };
 
-    containers.pixelfed =
-      let
-        secrets_env = config.sops.templates."pixelfed-secrets.env".path;
-      in
-      {
-        autoStart = true;
-        bindMounts."${secrets_env}" = {
-          mountPoint = secrets_env;
-          isReadOnly = true;
-          hostPath = secrets_env;
-        };
-        config =
+    services.pixelfed = {
+      enable = true;
+      package = pkgs-unstable.pixelfed;
+      phpPackage = pkgs.php84;
+
+      domain = "169.254.90.188:5000";
+      user = pixelfed-user;
+
+      secretFile = config.sops.templates."pixelfed-secrets.env".path;
+      settings."APP_NAME" = "Pixelfed";
+      settings."FORCE_HTTPS_URLS" = false;
+
+      redis.createLocally = true;
+      nginx = {
+        listen = [
           {
-            config,
-            pkgs,
-            lib,
-            ...
-          }:
+            addr = "169.254.90.188";
+            port = 5000;
+            # ssl = true;
+          }
           {
-
-            services.pixelfed = {
-              enable = true;
-              package = pkgs-unstable.pixelfed;
-              phpPackage = pkgs.php84;
-
-              domain = "169.254.90.188:5000";
-              user = pixelfed-user;
-
-              secretFile = secrets_env;
-              settings."APP_NAME" = "Pixelfed";
-              settings."FORCE_HTTPS_URLS" = false;
-
-              redis.createLocally = true;
-              nginx = {
-                listen = [
-                  {
-                    addr = "169.254.90.188";
-                    port = 5000;
-                    # ssl = true;
-                  }
-                  {
-                    addr = "100.64.0.2";
-                    port = 5000;
-                    # ssl = true; // hopefully covered by caddy
-                  }
-                ];
-              };
-            };
-            system.stateVersion = "24.11";
-          };
+            addr = "100.64.0.2";
+            port = 5000;
+            # ssl = true; // hopefully covered by caddy
+          }
+        ];
       };
+    };
   };
+
+  # containers.pixelfed =
+  #   let
+  #     secrets_env = config.sops.templates."pixelfed-secrets.env".path;
+  #   in
+  #   {
+  #     autoStart = true;
+  #     bindMounts."${secrets_env}" = {
+  #       mountPoint = secrets_env;
+  #       isReadOnly = true;
+  #       hostPath = secrets_env;
+  #     };
+  #     config =
+  #       {
+  #         config,
+  #         pkgs,
+  #         lib,
+  #         ...
+  #       }:
+  #       {
+
+  #   services.pixelfed = {
+  #     enable = true;
+  #     package = pkgs-unstable.pixelfed;
+  #     phpPackage = pkgs.php84;
+
+  #     domain = "169.254.90.188:5000";
+  #     user = pixelfed-user;
+
+  #     secretFile = secrets_env;
+  #     settings."APP_NAME" = "Pixelfed";
+  #     settings."FORCE_HTTPS_URLS" = false;
+
+  #     redis.createLocally = true;
+  #     nginx = {
+  #       listen = [
+  #         {
+  #           addr = "169.254.90.188";
+  #           port = 5000;
+  #           # ssl = true;
+  #         }
+  #         {
+  #           addr = "100.64.0.2";
+  #           port = 5000;
+  #           # ssl = true; // hopefully covered by caddy
+  #         }
+  #       ];
+  #     };
+  #   };
+  #   system.stateVersion = "24.11";
+  # };
+  # };
 }
