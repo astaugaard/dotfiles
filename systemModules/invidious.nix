@@ -22,6 +22,10 @@ in
   config = mkIf config.mysystem.invidious.enable {
     containers.invidious = {
       autoStart = true;
+      bindMounts."/etc/resolv.conf" = {
+        hostPath = "/etc/resolv.conf";
+        isReadOnly = true;
+      };
       config =
         {
           config,

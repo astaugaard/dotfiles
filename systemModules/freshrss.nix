@@ -43,6 +43,12 @@ in
           isReadOnly = true;
           hostPath = "/run/secrets/freshrss-password";
         };
+
+        bindMounts."/etc/resolv.conf" = {
+          hostPath = "/etc/resolv.conf";
+          isReadOnly = true;
+        };
+
         config =
           {
             config,
