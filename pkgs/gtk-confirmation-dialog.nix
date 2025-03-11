@@ -10,7 +10,7 @@ rustPlatform.buildRustPackage rec {
   src = pkgs.fetchFromGitHub {
     owner = "astaugaard";
     repo = "gtk-confirmation-dialog";
-    rev = "10dc2e4d75cdd77848027b77407b1f5556cab570";
+    rev = "938d877f50ed5640698682cc6f130185f34bce81";
     hash = "sha256-q63ULK/0IgiwcOwubsVbCPJKWi4RADuo9sBeSPFNQxo=";
   };
 

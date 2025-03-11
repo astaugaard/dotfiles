@@ -7,6 +7,10 @@
 with builtins;
 with lib;
 let
+  # lockscreen = pkgs.substituteAll {
+  #   foreground = "#${config.lib.stylix.colors.base09}";
+  #   src = ./lock.svg;
+  # };
   lockscreen = pkgs.stdenv.mkDerivation rec {
     name = "lockscreen";
     src = lib.fileset.toSource {
@@ -25,7 +29,11 @@ let
       ${pkgs.inkscape}/bin/inkscape --export-type "png" --export-filename "$out/lock.png" lock.svg
     '';
   };
+
 in
+#     # ${pkgs.inkscape}/bin/inkscape --export-type "png" --export-filename "$out/lock.png" lock.svg
+#   '';
+# };
 {
   options.myhome.deway = {
     enable = mkOption {
@@ -41,7 +49,7 @@ in
       wl-clipboard
     ];
     # myhome.desktop.enable = true;
-    programs.swaylock.enable = true;
+
     home.sessionVariables.WLR_RENDERER = "vulkan";
     myhome.decommon.enable = true;
 
@@ -50,8 +58,13 @@ in
 
     stylix.targets.swaylock.useImage = false;
 
+    programs.swaylock.enable = true;
+    programs.swaylock.package = pkgs.swaylock-effects;
+
     programs.swaylock.settings = {
-      image = "${lockscreen}/lock.png";
+      effect-pixelate = 20;
+      screenshots = true;
+      # effect-compose = "${lockscreen}/lock.png";
     };
   };
 }

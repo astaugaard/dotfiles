@@ -1,7 +1,7 @@
 { pkgs }:
 pkgs.stdenv.mkDerivation rec {
   pname = "Loenn";
-  version = "0.7.8";
+  version = "0.9.0";
 
   buildInputs = [
     pkgs.unzip
@@ -10,8 +10,8 @@ pkgs.stdenv.mkDerivation rec {
 
   src = (
     pkgs.fetchzip {
-      url = "https://github.com/CelestialCartographers/Loenn/releases/download/v0.7.8/Loenn-v0.7.8-linux.zip";
-      sha256 = "sha256-7tW9HNbQ0F15+7YblSL62tXSZFgLTMXVcDew81E/cs8=";
+      url = "https://github.com/CelestialCartographers/Loenn/releases/download/v0.9.0/Loenn-v0.9.0-linux.zip";
+      sha256 = "sha256-FhPmm73QrNbqQiBmL7gzFY7DqtHzXJC0A1sKzUBiuYI=";
       stripRoot = false;
     }
   );

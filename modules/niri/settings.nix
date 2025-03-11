@@ -5,26 +5,11 @@
   ...
 }:
 let
-  quick-launch-style = pkgs.writeText "style.css" ''
-    window {
-        background-color: #00000000;
-
-    }
-
-    stack {
-        background-color: #${config.lib.stylix.colors.base01};
-        border-radius: 20px;
-        padding: 20px;
-        border: 2px solid #${config.lib.stylix.colors.base0E};
-    }
-
-    button {
-        background-color: #${config.lib.stylix.colors.base02};
-        color: #${config.lib.stylix.colors.base05};
-        border-radius: 20px;
-        padding: 20px;
-    }
-  '';
+  quick-launch-command = import ../quick-launch.nix {
+    inherit config;
+    inherit pkgs;
+    inherit lib;
+  };
 in
 {
   input.keyboard.xkb = {
@@ -37,10 +22,10 @@ in
     "Mod+P".action = spawn "rofi" "-show" "drun" "-terminal" "kitty";
     "Super+Shift+C".action = screenshot;
     "Super+Shift+O".action = spawn "swaync-client" "-t" "-sw";
-    "Super+O".action =
-      spawn "${pkgs.gtk-quick-launch}/bin/quick-launch" "--config" "${./config.json}" "--css"
-        "${quick-launch-style}";
-    "Super+Shift+L".action = spawn "swaylock" "--image" "${config.programs.swaylock.settings.image}";
+    "Super+O".action = spawn "${quick-launch-command}/bin/launcher";
+    # spawn "${pkgs.gtk-quick-launch}/bin/quick-launch" "--config" "${./config.json}" "--css"
+    #   "${quick-launch-style}";
+    "Super+Shift+L".action = spawn "swaylock"; # "--image" "${config.programs.swaylock.settings.image}";
 
     "Mod+R".action = switch-preset-column-width;
     "Mod+Shift+R".action = switch-preset-window-height;

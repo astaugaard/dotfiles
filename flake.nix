@@ -206,7 +206,7 @@
                 mysystem.k3s.enable = false;
                 mysystem.wireguard-host.enable = true;
                 mysystem.invidious.enable = true;
-                mysystem.pixelfed.enable = true;
+                mysystem.pixelfed.enable = false;
 
                 mysystem.freshrss.enable = true;
 
@@ -231,56 +231,9 @@
             nixos-hardware.nixosModules.raspberry-pi-4
           ];
         };
-
-        # installer-sd = lib.nixosSystem {
-        #   system = "aarch64-linux";
-
-        #   specialArgs = {
-        #     inherit pkgs-unstable;
-        #   };
-
-        #   modules = [
-        #     (
-        #       { config, pkgs, ... }:
-        #       {
-
-        #         # imports = [ ./rpi-disko-config.nix ];
-
-        #         nixpkgs.overlays = myOverlays;
-
-        #         i18n.defaultLocale = "en_US.utf8";
-        #         networking.hostName = "installer-sd";
-        #         time.timeZone = "America/New_York";
-        #         mysystem.user = "a";
-        #         mysystem.userdescription = "admin";
-
-        #         mysystem.enablegc = true;
-        #         mysystem.wpasupplicant.enable = true;
-        #         mysystem.tailscale.enable = true;
-        #         mysystem.tailscale.authkey = "tailscale-temp-auth";
-        #         mysystem.ssh.enable = true;
-        #         mysystem.ssh.root-login = true;
-
-        #         mysystem.flatpak.enable = false;
-        #         mysystem.niri = false;
-        #         mysystem.sway = false;
-        #         mysystem.xmonad = false;
-        #         mysystem.amd = false;
-        #         mysystem.virt = false;
-        #         mysystem.k3s.enable = false;
-        #         mysystem.systemd-boot = false;
-        #       }
-        #     )
-        #     ./systemModules
-        #     niri.outputs.nixosModules.niri # not used at all in config lol
-        #     # ./rpi-home-hardware-configuration.nix
-        #     # nixos-facter-modules.nixosModules.facter
-        #     # { config.facter.reportPath = ./facter.json; }
-        #     sops-nix.nixosModules.sops
-        #     # disko.nixosModules.disko
-        #   ];
-        # };
       };
+
+      overlays.astaugaard = import ./pkgs;
 
       deploy.nodes.rpi-home = {
         hostname = "rpi-home";
@@ -291,7 +244,7 @@
         };
       };
 
-      homeModules.myhome =
+      homeModules.astaugaard-home =
         { config }:
         {
           imports = [
@@ -303,7 +256,7 @@
           config = { };
         };
 
-      nixosModules.mysystem =
+      nixosModules.astaugaard-system =
         { config }:
         {
           imports = [

@@ -69,6 +69,8 @@
               nix flake update
               home-manager switch --flake ".?submodules=1"
               sudo nixos-rebuild switch --flake ".?submodules=1"
+              nixos-rebuild switch --target-host "nixos@169.254.90.188" --use-remote-sudo --flake ".#rpi-home"
+              ssh root@69.48.200.159 "apt-get update; apt-get upgrade"
               popd ;;
             "collect-garbage")
               nix-collect-garbage --delete-older-than 5d

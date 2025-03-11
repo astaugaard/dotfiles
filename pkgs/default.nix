@@ -3,6 +3,8 @@ self: super: {
   # greatVibes = self.callPackage ./googleFonts.nix {};
   reasymotion = self.callPackage ./reasymotion.nix { };
 
+  # loenn = self.callPackage ./lonn.nix { };
+
   prideful = self.callPackage ./prideful.nix { };
 
   cargo-disasm = self.callPackage ./cargo-disasm.nix { };

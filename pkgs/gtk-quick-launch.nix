@@ -10,8 +10,8 @@ rustPlatform.buildRustPackage rec {
   src = pkgs.fetchFromGitHub {
     owner = "astaugaard";
     repo = "quick-launch";
-    rev = "72d9a9f3ed81c63054b7990e0e310f147abca23b";
-    hash = "sha256-Ek3fAeq2bG1I/n7dHQXxaB+a8eWEM/Fsyc8WAXQkf9I=";
+    rev = "c3b7d123c83efe88b08da9355e23a69fc639787e";
+    hash = "sha256-57wXrW2UbWc+717XcRxw54ISOKdAOL5WotwMdztaNBo=";
   };
 
   buildInputs = with pkgs; [
@@ -30,5 +30,5 @@ rustPlatform.buildRustPackage rec {
     pkg-config
   ];
 
-  cargoHash = "sha256-Pk8wIxPiyUS7Bb7JcV2VB0h+TJKlUQJp7e5hBnjc8sE=";
+  cargoHash = "sha256-GPLLkRQ0jL6sb0NeOJTF3uriL8ZgXDN9Fj/qFecDpII=";
 }
