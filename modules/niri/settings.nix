@@ -124,7 +124,7 @@ in
     "Mod+Shift+Equal".action = set-window-height "+10%";
 
     "Print".action = screenshot;
-    "Ctrl+Print".action = screenshot-screen;
+    # "Ctrl+Print".action = screenshot-screen;
     "Alt+Print".action = screenshot-window;
 
     "Mod+Shift+Q".action =
