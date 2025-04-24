@@ -9,6 +9,8 @@ self: super: {
 
   cargo-disasm = self.callPackage ./cargo-disasm.nix { };
 
+  creusot = self.callPackage ./creusot.nix { };
+
   grub-pets-min-theme = self.callPackage ./pets-min-theme.nix { };
 
   nixos-plymouth-vortex = self.callPackage ./plymouth-vortex.nix.nix { };

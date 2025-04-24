@@ -17,9 +17,17 @@ in
       type = lib.types.bool;
       default = false;
     };
+
+    port = mkOption {
+      description = "port for invidious to listen on";
+      type = lib.types.int;
+      default = 3000;
+    };
   };
 
   config = mkIf config.mysystem.invidious.enable {
+    networking.firewall.allowedTCPPorts = [ config.mysystem.invidious.port ];
+
     containers.invidious = {
       autoStart = true;
       bindMounts."/etc/resolv.conf" = {
@@ -28,7 +36,7 @@ in
       };
       config =
         {
-          config,
+          # config,
           pkgs,
           lib,
           ...
@@ -38,6 +46,7 @@ in
             enable = true;
             sig-helper.enable = true;
             http3-ytproxy.enable = true;
+            port = config.mysystem.invidious.port;
             settings = {
               popular_enabled = false;
             };

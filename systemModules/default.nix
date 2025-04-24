@@ -110,6 +110,7 @@ with lib;
       wget
       fish
       libsecret
+      sops
     ];
 
     users.users."${(config.mysystem.user)}" = {
@@ -152,6 +153,7 @@ with lib;
     networking.firewall = {
       allowedTCPPorts = [
         17500
+        8888
         22
       ];
       allowedUDPPorts = [
@@ -177,7 +179,12 @@ with lib;
     networking.wireless = {
       secretsFile = config.sops.templates."wifi.env".path;
       enable = config.mysystem.wpasupplicant.enable;
-      networks."Whitemarsh".pskRaw = "ext:password";
+      networks."Whitemarsh" = {
+        pskRaw = "ext:password";
+        # extraConfig = ''
+        #   bssid=70:3a:cb:08:07:8d
+        # '';
+      };
       extraConfig = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=wheel";
     };
 

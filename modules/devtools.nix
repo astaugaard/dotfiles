@@ -71,6 +71,13 @@ in
       pkgs-unstable.clippy
       pkgs-unstable.cabal-install
       pkgs-unstable.rustfmt
+
+      # why3
+      # creusot
+
+      # coq
+      # coqPackages.coqide
+
       # cargo-disasm # removed for now bc test not passing
     ];
   };

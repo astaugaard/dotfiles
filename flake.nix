@@ -47,6 +47,11 @@
 
     disko = {
       url = "github:/nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -68,6 +73,7 @@
       deploy-rs,
       # nixos-facter-modules,
       nixos-hardware,
+      rust-overlay,
       ...
     }:
     let
@@ -75,8 +81,10 @@
       # pkgs = nixpkgs.legacyPackages.${system};
       myOverlays = [
         niri.overlays.niri
+        rust-overlay.overlays.default
         (import ./pkgs)
       ];
+
       pkgs = import nixpkgs {
         inherit system;
         config = {

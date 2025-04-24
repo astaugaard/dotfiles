@@ -58,6 +58,7 @@ with lib;
       "in.cinny.Cinny"
       "org.freedesktop.Sdk.Extension.texlive//24.08"
       "org.texstudio.TeXstudio"
+      "com.github.johnfactotum.Foliate"
       {
         appId = "org.wpilib.Wpilib";
         origin = "wpilib-origin";

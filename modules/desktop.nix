@@ -22,6 +22,7 @@ with lib;
       nix-index
       ripgrep
       alsa-utils
+      qrcp
     ];
 
     xdg.mimeApps.defaultApplications = {
