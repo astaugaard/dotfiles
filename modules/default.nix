@@ -79,7 +79,9 @@
               nix-collect-garbage -d
               sudo nix-collect-garbage -d  ;;
             "update-button")
-              kitty bash -c 'system update; fish' ;;
+              kitty bash -c 'system update; fish' &
+              disown -a
+              ;;
             "build-iso")
               pushd ~/dotfiles
               nix build .?submodules=1#nixosConfigurations.iso.config.system.build.isoImage

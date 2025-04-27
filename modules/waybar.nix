@@ -21,7 +21,7 @@ with lib;
         position = "top";
         margin-left = 5;
         margin-right = 5;
-        margin-top = 5;
+        margin-top = 0;
         height = 20;
         spacing = 10;
         mode = "dock";
@@ -176,30 +176,72 @@ with lib;
           background: rgba(0,0,0,0);
         }
 
+        #custom-launcher {
+            color: #${config.lib.stylix.colors.base08}
+        }
+
+        #idle_inhibitor {
+            color: #${config.lib.stylix.colors.base09}
+        }
+
+        #pulseaudio {
+            color: #${config.lib.stylix.colors.base0A}
+        }
+
+        #custom-update {
+            color: #${config.lib.stylix.colors.base0B}
+        }
+
+        #clock {
+            color: #${config.lib.stylix.colors.base0C}
+        }
+
+        #custom-power {
+            color: #${config.lib.stylix.colors.base0D}
+        }
+
+        #custom-quit {
+            color: #${config.lib.stylix.colors.base0E}
+        }
+
+        #custom-lock {
+            color: #${config.lib.stylix.colors.base0F}
+        }
+
+        #custom-sleep {
+            color: #${config.lib.stylix.colors.base05}
+        }
+
+        #custom-reboot {
+            color: #${config.lib.stylix.colors.base08}
+        }
+
         .module {
           padding-left: 10px;
           padding-right: 10px;
           font-size: 25px;
-          color: #${config.lib.stylix.colors.base01};
+          color: #${config.lib.stylix.colors.base05};
         }
 
         .modules-left {
           padding-left:25px;
           padding-right:25px;
-          border-radius: 25px;
-          background-image: linear-gradient(0deg, #${config.lib.stylix.colors.base08}, #${config.lib.stylix.colors.base09} );
+          border-bottom-left-radius: 25px;
+          border-bottom-right-radius: 25px;
+          background-color: #${config.lib.stylix.colors.base00};
         }
 
         #bottom1 {
           padding-left:25px;
           padding-right:25px;
           background-color: blue;
-          border-radius: 25px;
-          background-image: linear-gradient(0deg, #${config.lib.stylix.colors.base0A}, #${config.lib.stylix.colors.base0B} );
+          border-bottom-left-radius: 25px;
+          border-bottom-right-radius: 25px;
+          background-color: #${config.lib.stylix.colors.base00};
         }
 
         #privacy-item {
-            color: #${config.lib.stylix.colors.base01};
+            color: #${config.lib.stylix.colors.base05};
         }
 
         .popup {
@@ -210,8 +252,9 @@ with lib;
           padding-left:25px;
           padding-right:25px;
           background-color: blue;
-          border-radius: 25px;
-          background-image: linear-gradient(0deg, #${config.lib.stylix.colors.base0C}, #${config.lib.stylix.colors.base0D} );
+          border-bottom-left-radius: 25px;
+          border-bottom-right-radius: 25px;
+          background-color: #${config.lib.stylix.colors.base00};
         }
       '';
 
