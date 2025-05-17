@@ -61,6 +61,26 @@ in
     programs.swaylock.enable = true;
     programs.swaylock.package = pkgs.swaylock-effects;
 
+    services.swayidle = {
+      enable = true;
+      events = [
+        {
+          event = "before-sleep";
+          command = "${pkgs.swaylock}/bin/swaylock -fF";
+        }
+      ];
+      timeouts = [
+        {
+          timeout = 120;
+          command = "${pkgs.niri-stable}/bin/niri msg action power-off-monitors";
+        }
+        {
+          timeout = 180;
+          command = "${pkgs.swaylock}/bin/systemctl hybrid-sleep";
+        }
+      ];
+    };
+
     programs.swaylock.settings = {
       effect-pixelate = 20;
       screenshots = true;

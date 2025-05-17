@@ -32,25 +32,6 @@ if standalone then
         myhome.decommon.enable = true;
         myhome.deway.enable = true;
 
-        services.swayidle = {
-          enable = true;
-          events = [
-            {
-              event = "before-sleep";
-              command = "${pkgs.swaylock}/bin/swaylock -fF";
-            }
-          ];
-          timeouts = [
-            {
-              timeout = 120;
-              command = "${pkgs.niri-stable}/bin/niri msg action power-off-monitors";
-            }
-            {
-              timeout = 180;
-              command = "${pkgs.swaylock}/bin/systemctl hybrid-sleep";
-            }
-          ];
-        };
       };
     }
   )

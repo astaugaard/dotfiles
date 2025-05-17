@@ -162,6 +162,8 @@ with lib;
       ];
     };
 
+    networking.dhcpcd.wait = "background";
+
     security.polkit.enable = true;
     services.ntp.enable = true;
 

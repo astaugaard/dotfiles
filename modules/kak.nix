@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgs-unstable,
   config,
   lib,
   ...
@@ -18,8 +19,8 @@ with lib;
   config = mkIf config.myhome.kak.enable {
     home.packages = with pkgs; [
       reasymotion
-      kakoune
-      kak-lsp
+      pkgs-unstable.kakoune
+      pkgs-unstable.kak-lsp
       lua
       fd
     ];

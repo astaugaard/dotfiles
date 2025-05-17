@@ -72,6 +72,10 @@ in
       pkgs-unstable.cabal-install
       pkgs-unstable.rustfmt
 
+      pkgs-unstable.typst
+      pkgs-unstable.typst-live
+      pkgs-unstable.tinymist
+
       # why3
       # creusot
 
