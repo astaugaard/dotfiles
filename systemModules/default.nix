@@ -11,9 +11,7 @@ with lib;
     ./flatpak.nix
     ./gui.nix
     ./amd.nix
-    ./tailscale.nix
     ./ssh.nix
-    ./k3s.nix
     ./freshrss.nix
     ./wireguard_host.nix
     ./invidious.nix

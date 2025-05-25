@@ -59,7 +59,7 @@ in
     stylix.targets.swaylock.useImage = false;
 
     programs.swaylock.enable = true;
-    programs.swaylock.package = pkgs.swaylock-effects;
+    programs.swaylock.package = pkgs.swaylock;
 
     services.swayidle = {
       enable = true;
@@ -82,9 +82,7 @@ in
     };
 
     programs.swaylock.settings = {
-      effect-pixelate = 20;
-      screenshots = true;
-      # effect-compose = "${lockscreen}/lock.png";
+      image = "${lockscreen}/lock.png";
     };
   };
 }

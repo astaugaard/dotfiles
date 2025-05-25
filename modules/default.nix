@@ -9,17 +9,12 @@
   imports = [
     ./decommon.nix
     ./devtools.nix
-    ./dex11.nix
-    ./picom
     ./toys.nix
     ./rofi.nix
     ./kak.nix
     ./fish.nix
-    ./dunst.nix
-    ./sway
     ./kitty.nix
     (import ./niri { inherit standalone; })
-    # ./niri
     ./deway.nix
     ./swaync.nix
     ./desktop.nix
@@ -27,7 +22,6 @@
     ./colors.nix
     ./dropbox.nix
     ./waybar.nix
-    # ./oomox-gtk-theme.nix
   ];
 
   options.myhome.username = lib.mkOption {

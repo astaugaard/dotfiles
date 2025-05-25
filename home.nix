@@ -8,7 +8,6 @@
 {
   imports = [ (import ./modules { standalone = true; }) ];
 
-  myhome.sway.enable = false;
   myhome.niri.enable = true;
   myhome.toys.enable = true;
   myhome.devtools.enable = true;

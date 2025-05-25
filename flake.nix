@@ -23,35 +23,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-generators = {
-      url = "github:nix-community/nixos-generators";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 
     sops-nix = {
       url = "github:Mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    deploy-rs = {
-      url = "github:serokell/deploy-rs";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # nixos-facter-modules = {
-    #   # not used because idk if I can make it follow stable
-    #   url = "github:numtide/nixos-facter-modules";
-    # };
-
-    disko = {
-      url = "github:/nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
-
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -66,14 +41,10 @@
       stylix,
       nixpkgs-unstable,
       niri,
-      nixos-generators,
       nix-flatpak,
       sops-nix,
-      disko,
-      deploy-rs,
       # nixos-facter-modules,
       nixos-hardware,
-      rust-overlay,
       ...
     }:
     let
@@ -81,7 +52,6 @@
       # pkgs = nixpkgs.legacyPackages.${system};
       myOverlays = [
         niri.overlays.niri
-        rust-overlay.overlays.default
         (import ./pkgs)
       ];
 
@@ -209,9 +179,7 @@
 
                 mysystem.enablegc = true;
                 mysystem.wpasupplicant.enable = true;
-                mysystem.tailscale.authkey = "tailscale-server-auth";
                 mysystem.ssh.enable = true;
-                mysystem.k3s.enable = false;
                 mysystem.wireguard-host.enable = true;
                 mysystem.invidious.enable = true;
                 mysystem.pixelfed.enable = false;
@@ -238,15 +206,6 @@
             sops-nix.nixosModules.sops
             nixos-hardware.nixosModules.raspberry-pi-4
           ];
-        };
-      };
-
-      deploy.nodes.rpi-home = {
-        hostname = "rpi-home";
-        profiles.system = {
-          user = "root";
-          sshUser = "nixos";
-          path = deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.rpi-home;
         };
       };
 
