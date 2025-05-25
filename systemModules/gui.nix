@@ -60,7 +60,7 @@ with lib;
     programs.xwayland.enable = true;
 
     fonts = {
-      packages = with pkgs; [ (nerdfonts.override { fonts = [ "FiraCode" ]; }) ];
+      packages = with pkgs; [ nerd-fonts.fira-code ];
       fontconfig = {
         defaultFonts = {
           monospace = [ "FiraCode" ];
@@ -121,6 +121,6 @@ with lib;
 
     hardware.graphics.enable32Bit = true;
     hardware.graphics.enable = true;
-    hardware.graphics.package = pkgs.mesa.drivers;
+    hardware.graphics.package = pkgs.mesa;
   };
 }

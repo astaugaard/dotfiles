@@ -141,8 +141,7 @@ in
   spawn-at-startup = [
     (
       let
-        background_file = pkgs.substituteAll {
-          src = ./set_bg.fish;
+        background_file = pkgs.replaceVars ./set_bg.fish {
           background_image = config.stylix.image;
         };
       in
@@ -153,14 +152,14 @@ in
         ];
       }
     )
-    { command = [ "${pkgs.xwayland-satellite-unstable}/bin/xwayland-satellite" ]; }
-    # {
-    #   command = [
-    #     "dbus-update-activation-environment"
-    #     "DISPLAY"
-    #     "WAYLAND_DISPLAY"
-    #   ];
-    # }
+    { command = [ "${pkgs.xwayland-satellite}/bin/xwayland-satellite" ]; }
+    {
+      command = [
+        "dbus-update-activation-environment"
+        "DISPLAY"
+        "WAYLAND_DISPLAY"
+      ];
+    }
   ];
 
   input.focus-follows-mouse.enable = true;
@@ -219,7 +218,7 @@ in
     ];
   };
 
-  cursor.size = 12;
+  cursor.size = 24;
 
   environment = {
     SDL_VIDEODRIVER = "wayland";

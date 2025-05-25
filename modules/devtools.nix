@@ -76,6 +76,8 @@ in
       pkgs-unstable.typst-live
       pkgs-unstable.tinymist
 
+      presenterm
+
       # why3
       # creusot
 

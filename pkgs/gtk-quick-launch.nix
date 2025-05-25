@@ -30,5 +30,5 @@ rustPlatform.buildRustPackage rec {
     pkg-config
   ];
 
-  cargoHash = "sha256-GPLLkRQ0jL6sb0NeOJTF3uriL8ZgXDN9Fj/qFecDpII=";
+  cargoHash = "sha256-jHd0xzc/9eCklPxeb4croGn84wGLCJaziKJDMQDq/LA=";
 }

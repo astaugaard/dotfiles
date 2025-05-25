@@ -14,7 +14,6 @@
     ./toys.nix
     ./rofi.nix
     ./kak.nix
-    ./xmonad
     ./fish.nix
     ./dunst.nix
     ./sway

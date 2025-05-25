@@ -8,7 +8,6 @@
 {
   imports = [ (import ./modules { standalone = true; }) ];
 
-  myhome.xmonad.enable = false;
   myhome.sway.enable = false;
   myhome.niri.enable = true;
   myhome.toys.enable = true;
