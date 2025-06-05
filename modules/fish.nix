@@ -20,6 +20,9 @@ with lib;
 
     stylix.targets.fish.enable = false;
 
+    programs.zoxide.enable = true;
+    programs.zoxide.enableFishIntegration = true;
+
     programs.fish = {
       enable = true;
       functions = {

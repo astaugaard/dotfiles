@@ -15,4 +15,6 @@
   myhome.flatpak.enable = true;
   myhome.dropbox.enable = true;
   myhome.desktop.enable = true;
+
+  # myhome.colors.colorscheme = "nord";
 }

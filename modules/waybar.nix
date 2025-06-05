@@ -18,6 +18,7 @@ with lib;
   config = mkIf config.myhome.waybar.enable {
     programs.waybar = {
       settings.mainbar = {
+        output = "HDMI-A-1";
         position = "top";
         margin-left = 5;
         margin-right = 5;

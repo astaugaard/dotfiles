@@ -87,15 +87,6 @@ let
               application = "org.inkscape.Inkscape";
             };
 
-            "t" = {
-              application = "org.texstudio.TeXstudio";
-              image = pkgs.fetchurl {
-                url = "https://img.icons8.com/color/96/latex.png";
-                hash = "sha256-MDFVR/gGLwUgNSauxZz/NHp7scP9Gs6ICg7kFQTfK+A=";
-                name = "latex-logo";
-              };
-            };
-
             "c" = {
               name = "Calc";
               application = "org.libreoffice.LibreOffice.calc";

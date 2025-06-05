@@ -42,12 +42,10 @@ with lib;
       "io.bassi.Amberol"
       "io.github.celluloid_player.Celluloid"
       "io.github.flattool.Warehouse"
-      "io.github.seadve.Kooha"
       "io.github.wxmaxima_developers.wxMaxima"
       "net.lutris.Lutris"
       "org.blender.Blender"
       "org.gimp.GIMP"
-      "org.gnome.Boxes"
       "org.gnome.Evince"
       "org.gnome.eog"
       "org.inkscape.Inkscape"
@@ -56,13 +54,7 @@ with lib;
       "org.torproject.torbrowser-launcher"
       "org.prismlauncher.PrismLauncher"
       "in.cinny.Cinny"
-      "org.freedesktop.Sdk.Extension.texlive//24.08"
-      "org.texstudio.TeXstudio"
       "com.github.johnfactotum.Foliate"
-      # {
-      #   appId = "org.wpilib.Wpilib";
-      #   origin = "wpilib-origin";
-      # }
     ];
 
     services.flatpak.uninstallUnmanaged = true;

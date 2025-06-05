@@ -44,7 +44,6 @@
         bc
         unzip
         git
-        zoxide
 
         # system management script
         (pkgs.writeShellScriptBin "system" ''

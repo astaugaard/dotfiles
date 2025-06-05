@@ -16,6 +16,21 @@ in
     layout = "us";
   };
 
+  outputs = {
+    "HDMI-A-1" = {
+      position = {
+        y = 0;
+        x = 0;
+      };
+    };
+    "HDMI-A-2" = {
+      position = {
+        y = 1440;
+        x = 0;
+      };
+    };
+  };
+
   binds = with config.lib.niri.actions; {
     "Mod+Shift+Slash".action = show-hotkey-overlay;
     "Mod+Shift+Return".action = spawn "kitty";
@@ -59,6 +74,12 @@ in
     "Mod+Shift+T".action = move-window-down;
     "Mod+Shift+N".action = move-window-up;
     "Mod+Shift+S".action = move-column-right;
+
+    "Mod+1".action = focus-monitor-up;
+    "Mod+2".action = focus-monitor-down;
+
+    "Mod+Shift+1".action = move-column-to-monitor-up;
+    "Mod+Shift+2".action = move-column-to-monitor-down;
 
     "Mod+Home".action = focus-column-first;
     "Mod+End".action = focus-column-last;
