@@ -108,6 +108,13 @@
         };
       };
 
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
+
+      forAllSystems = nixpkgs.lib.genAttrs systems;
+
       lib = nixpkgs.lib;
     in
     {
@@ -231,6 +238,8 @@
           ];
         };
       };
+
+      formatter = forAllSystems (system: inputs.nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
 
       homeModules.astaugaard-home =
         { config }:
