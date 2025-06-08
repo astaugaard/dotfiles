@@ -200,6 +200,23 @@
         "type": "github"
       }
     },
+    "gtk-confirmation-dialog": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1739845053,
+        "narHash": "sha256-q63ULK/0IgiwcOwubsVbCPJKWi4RADuo9sBeSPFNQxo=",
+        "owner": "astaugaard",
+        "repo": "gtk-confirmation-dialog",
+        "rev": "938d877f50ed5640698682cc6f130185f34bce81",
+        "type": "github"
+      },
+      "original": {
+        "owner": "astaugaard",
+        "ref": "main",
+        "repo": "gtk-confirmation-dialog",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -369,14 +386,69 @@
         "type": "github"
       }
     },
+    "prideful": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1645018010,
+        "narHash": "sha256-3X0hhsGtRtULQYget3Lq9MBuLGgUaUcieKiyqOAJr54=",
+        "owner": "angelofallars",
+        "repo": "prideful",
+        "rev": "e60506c63218e9377a4286774c46fe0e33aefc56",
+        "type": "github"
+      },
+      "original": {
+        "owner": "angelofallars",
+        "ref": "main",
+        "repo": "prideful",
+        "type": "github"
+      }
+    },
+    "quick-launch": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1740933245,
+        "narHash": "sha256-57wXrW2UbWc+717XcRxw54ISOKdAOL5WotwMdztaNBo=",
+        "owner": "astaugaard",
+        "repo": "quick-launch",
+        "rev": "c3b7d123c83efe88b08da9355e23a69fc639787e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "astaugaard",
+        "ref": "main",
+        "repo": "quick-launch",
+        "type": "github"
+      }
+    },
+    "reasymotion": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1740874696,
+        "narHash": "sha256-3KJ5dmpmRvJax1MOM4B82wApwcuB8OZY4RaHnkf6Bdk=",
+        "owner": "astaugaard",
+        "repo": "reasymotion",
+        "rev": "aaffa008d0a82717deb133a8fdd1b16167bed75b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "astaugaard",
+        "ref": "main",
+        "repo": "reasymotion",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
+        "gtk-confirmation-dialog": "gtk-confirmation-dialog",
         "home-manager": "home-manager",
         "niri": "niri",
         "nix-flatpak": "nix-flatpak",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "prideful": "prideful",
+        "quick-launch": "quick-launch",
+        "reasymotion": "reasymotion",
         "sops-nix": "sops-nix",
         "stylix": "stylix"
       }

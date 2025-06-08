@@ -19,7 +19,6 @@ with lib;
   config = mkIf config.myhome.toys.enable {
     home.packages = with pkgs; [
       hyfetch
-      catsay
       fortune
       cbonsai
       cmatrix

@@ -2,17 +2,13 @@
   pkgs,
   rustPlatform,
   fetchgit,
+  inputs,
 }:
 rustPlatform.buildRustPackage rec {
   version = "1.0";
   pname = "gtk-quick-launch";
 
-  src = pkgs.fetchFromGitHub {
-    owner = "astaugaard";
-    repo = "quick-launch";
-    rev = "c3b7d123c83efe88b08da9355e23a69fc639787e";
-    hash = "sha256-57wXrW2UbWc+717XcRxw54ISOKdAOL5WotwMdztaNBo=";
-  };
+  src = "${inputs.quick-launch}";
 
   buildInputs = with pkgs; [
     cairo
@@ -30,5 +26,7 @@ rustPlatform.buildRustPackage rec {
     pkg-config
   ];
 
-  cargoHash = "sha256-jHd0xzc/9eCklPxeb4croGn84wGLCJaziKJDMQDq/LA=";
+  cargoLock = {
+    lockFile = "${inputs.quick-launch}/Cargo.lock";
+  };
 }

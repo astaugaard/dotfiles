@@ -30,11 +30,34 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+      flake = false;
+    };
+
+    quick-launch = {
+      url = "github:astaugaard/quick-launch/main";
+      flake = false;
+    };
+
+    gtk-confirmation-dialog = {
+      url = "github:astaugaard/gtk-confirmation-dialog/main";
+      flake = false;
+    };
+
+    prideful = {
+      url = "github:angelofallars/prideful/main";
+      flake = false;
+    };
+
+    reasymotion = {
+      url = "github:astaugaard/reasymotion/main";
+      flake = false;
+    };
   };
 
   outputs =
-    {
+    inputs@{
       self,
       nixpkgs,
       home-manager,
@@ -52,7 +75,7 @@
       # pkgs = nixpkgs.legacyPackages.${system};
       myOverlays = [
         niri.overlays.niri
-        (import ./pkgs)
+        (import ./pkgs inputs)
       ];
 
       pkgs = import nixpkgs {
