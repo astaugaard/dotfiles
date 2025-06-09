@@ -315,7 +315,6 @@
       }
     },
     "nixos-hardware": {
-      "flake": false,
       "locked": {
         "lastModified": 1749195551,
         "narHash": "sha256-W5GKQHgunda/OP9sbKENBZhMBDNu2QahoIPwnsF6CeM=",

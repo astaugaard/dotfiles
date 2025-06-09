@@ -30,10 +30,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixos-hardware = {
-      url = "github:NixOS/nixos-hardware/master";
-      flake = false;
-    };
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     quick-launch = {
       url = "github:astaugaard/quick-launch/main";
@@ -242,7 +239,7 @@
       formatter = forAllSystems (system: inputs.nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
 
       homeModules.astaugaard-home =
-        { config }:
+        { config, ... }:
         {
           imports = [
             (import ./modules { standalone = true; })
@@ -254,7 +251,7 @@
         };
 
       nixosModules.astaugaard-system =
-        { config }:
+        { config, ... }:
         {
           imports = [
             ./systemModules
