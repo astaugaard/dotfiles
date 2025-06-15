@@ -58,7 +58,7 @@
               popd ;;
             "update")
               pushd ~/dotfiles
-              nix flake update
+              git pull origin main
               home-manager switch --flake ".?submodules=1"
               sudo nixos-rebuild switch --flake ".?submodules=1"
               nixos-rebuild switch --target-host "nixos@169.254.90.188" --use-remote-sudo --flake ".#rpi-home"
