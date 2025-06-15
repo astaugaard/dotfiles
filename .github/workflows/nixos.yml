@@ -1,13 +1,10 @@
-
+# based on https://github.com/gvolpe/nix-config/blob/master/.github/workflows/nixos.yml
 name: NixOS
 
 on:
-  pull_request:
-    paths-ignore:
-      - 'home/**'
   push:
     branches:
-      - master
+      - main
     paths-ignore:
       - '.gitignore'
       - 'modules/**'
