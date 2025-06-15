@@ -115,17 +115,6 @@
       lib = nixpkgs.lib;
     in
     {
-      nixConfig = {
-        substituters = [
-          "https://cache.nixos.org"
-          "estaugaard.cachix.org"
-        ];
-
-        trusted-public-keys = [
-          "estaugaard.cachix.org-1:eV+qfYWJP3YKSDXRrjkZS7NBl5ZymDkKZ2HjtF6Jdxc="
-        ];
-      };
-
       homeConfigurations."a" = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 
