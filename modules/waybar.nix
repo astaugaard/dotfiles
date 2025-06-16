@@ -163,7 +163,7 @@ with lib;
         };
 
         clock = {
-          format = "{:%H:%M}";
+          format = "{:%a %b %d %R}";
         };
 
         tray = {
