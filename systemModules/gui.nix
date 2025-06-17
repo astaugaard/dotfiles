@@ -86,10 +86,19 @@ with lib;
       settings = {
         default_session = {
           # command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
-          command = "${pkgs.cage}/bin/cage -s -- ${pkgs.greetd.regreet}/bin/regreet";
+          command = "${pkgs.cage}/bin/cage -s -- ${pkgs.egui-greeter}/bin/egui-greeter";
           user = "greeter";
         };
       };
+    };
+
+    mysystem.egui-greeter = {
+      enable = true;
+      default_session_name = "Niri";
+
+      default_session_command = "niri-session";
+
+      user = config.mysystem.user;
     };
 
     programs.regreet.enable = config.mysystem.loginManager;

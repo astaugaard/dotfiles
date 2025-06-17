@@ -94,6 +94,8 @@ in
     "Mod+WheelScrollDown".action = focus-workspace-down;
     "Mod+WheelScrollDown".cooldown-ms = 150;
 
+    "Mod+A".action = toggle-overview;
+
     "Mod+WheelScrollUp".action = focus-workspace-up;
     "Mod+WheelScrollUp".cooldown-ms = 150;
 
@@ -185,7 +187,7 @@ in
 
   input.focus-follows-mouse.enable = true;
   input.focus-follows-mouse.max-scroll-amount = "25%";
-  input.warp-mouse-to-focus = true;
+  input.warp-mouse-to-focus.enable = true;
 
   window-rules = [
     {
@@ -205,6 +207,8 @@ in
       block-out-from = "screen-capture";
     }
   ];
+
+  overview.backdrop-color = "#${config.lib.stylix.colors.base01}";
 
   layer-rules = [
     {

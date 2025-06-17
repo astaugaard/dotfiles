@@ -16,6 +16,7 @@ with lib;
     ./wireguard_host.nix
     ./invidious.nix
     ./pixelfed.nix
+    ./egui-greeter.nix
   ];
 
   options.mysystem = {

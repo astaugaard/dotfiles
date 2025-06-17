@@ -78,6 +78,8 @@ in
 
       presenterm
 
+      egui-greeter
+
       # why3
       # creusot
 

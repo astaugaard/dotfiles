@@ -37,6 +37,11 @@
       flake = false;
     };
 
+    egui-greeter = {
+      url = "github:astaugaard/egui-greeter/main";
+      flake = false;
+    };
+
     gtk-confirmation-dialog = {
       url = "github:astaugaard/gtk-confirmation-dialog/main";
       flake = false;
