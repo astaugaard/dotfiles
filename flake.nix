@@ -235,7 +235,7 @@
             ./systemModules
             niri.outputs.nixosModules.niri # not used at all in config lol
             ./rpi-home-hardware-configuration.nix
-            egui-greeter.nixosModules.egui-greeter
+            egui-greeter.nixosModules."aarch64-linux".egui-greeter
             # nixos-facter-modules.nixosModules.facter
             # { config.facter.reportPath = ./rpi-facter.json; }
             sops-nix.nixosModules.sops
@@ -301,6 +301,7 @@
 
             })
             ./systemModules
+            egui-greeter.nixosModules."aarch64-linux".egui-greeter
             niri.outputs.nixosModules.niri
             sops-nix.nixosModules.sops
           ];
