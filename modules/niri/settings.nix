@@ -159,6 +159,8 @@ in
     "Mod+Shift+V".action = toggle-window-floating;
   };
 
+  gestures.hot-corners.enable = false;
+
   screenshot-path = "~/Dropbox/Screenshots/Screenshot %Y-%m-%d at %H:%M:%S.png";
   prefer-no-csd = true;
   spawn-at-startup = [
