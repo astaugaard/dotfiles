@@ -18,7 +18,7 @@
     ./deway.nix
     ./swaync.nix
     ./desktop.nix
-    ./flatpak.nix
+    (import ./flatpak.nix { inherit standalone; })
     ./colors.nix
     ./dropbox.nix
     ./waybar.nix
@@ -35,8 +35,6 @@
       username = config.myhome.username;
       homeDirectory = "/home/${config.myhome.username}";
     };
-
-    nixpkgs.config.allowUnfree = true;
 
     home = {
       packages = with pkgs; [

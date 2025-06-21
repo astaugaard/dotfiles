@@ -8,6 +8,4 @@ inputs: self: super: {
   gtk-quick-launch = self.callPackage ./gtk-quick-launch.nix { inherit inputs; };
 
   gtk-confirmation-dialog = self.callPackage ./gtk-confirmation-dialog.nix { inherit inputs; };
-
-  egui-greeter = self.callPackage ./egui-greeter.nix { inherit inputs; };
 }

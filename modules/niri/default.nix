@@ -36,4 +36,27 @@ if standalone then
     }
   )
 else
-  { }
+  {
+    pkgs,
+    config,
+    lib,
+    pkgs-unstable,
+    ...
+  }:
+  with builtins;
+  with lib;
+  {
+    config = {
+      programs.niri.package = pkgs.niri-stable;
+
+      programs.niri.settings = import ./settings.nix {
+        inherit pkgs;
+        inherit config;
+        inherit lib;
+      };
+
+      myhome.decommon.enable = true;
+      myhome.deway.enable = true;
+
+    };
+  }

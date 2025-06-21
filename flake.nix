@@ -39,7 +39,7 @@
 
     egui-greeter = {
       url = "github:astaugaard/egui-greeter/main";
-      flake = false;
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     gtk-confirmation-dialog = {
@@ -70,6 +70,7 @@
       sops-nix,
       # nixos-facter-modules,
       nixos-hardware,
+      egui-greeter,
       ...
     }:
     let
@@ -156,6 +157,7 @@
             ./configuration.nix
             ./systemModules
             niri.outputs.nixosModules.niri
+            egui-greeter.nixosModules."${system}".egui-greeter
             sops-nix.nixosModules.sops
           ];
         };
@@ -233,11 +235,76 @@
             ./systemModules
             niri.outputs.nixosModules.niri # not used at all in config lol
             ./rpi-home-hardware-configuration.nix
+            egui-greeter.nixosModules.egui-greeter
             # nixos-facter-modules.nixosModules.facter
             # { config.facter.reportPath = ./rpi-facter.json; }
             sops-nix.nixosModules.sops
             nixos-hardware.nixosModules.raspberry-pi-4
           ];
+        };
+
+        test-vm = lib.nixosSystem {
+          inherit system;
+          inherit pkgs;
+
+          specialArgs = {
+            inherit pkgs-unstable;
+          };
+
+          modules = [
+            ({
+              imports = [
+                # Include the results of the hardware scan.
+                home-manager.nixosModules.home-manager
+                ./hardware-configuration.nix
+              ];
+
+              home-manager.users.a = {
+                imports = [
+                  (import ./modules { standalone = false; })
+                  stylix.homeModules.stylix
+                ];
+
+                myhome.toys.enable = true;
+                myhome.devtools.enable = false;
+                myhome.kak.enable = true;
+                myhome.flatpak.enable = false;
+                myhome.dropbox.enable = false;
+                myhome.desktop.enable = true;
+
+                home.sessionVariables = {
+                  WLR_ALLOW_SOFTWARE = 1;
+                };
+              };
+
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+
+              i18n.defaultLocale = "en_US.UTF-8";
+              networking.hostName = "nixos";
+              time.timeZone = "America/New_York";
+
+              mysystem.enablegc = true;
+              mysystem.flatpak.enable = false;
+              mysystem.niri = true;
+              mysystem.sway = false;
+              mysystem.amd = true;
+              mysystem.user = "a";
+              mysystem.userdescription = "estaugaard";
+              mysystem.wpasupplicant.enable = true;
+              mysystem.virt = true;
+              mysystem.ssh.enable = true;
+              mysystem.aarch-binfmt = true;
+
+              mysystem.grub = true;
+              mysystem.systemd-boot = false;
+
+            })
+            ./systemModules
+            niri.outputs.nixosModules.niri
+            sops-nix.nixosModules.sops
+          ];
+
         };
       };
 

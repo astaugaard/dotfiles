@@ -16,7 +16,6 @@ with lib;
     ./wireguard_host.nix
     ./invidious.nix
     ./pixelfed.nix
-    ./egui-greeter.nix
   ];
 
   options.mysystem = {
@@ -132,7 +131,6 @@ with lib;
     users.defaultUserShell = pkgs.fish;
     programs.fish.enable = true;
 
-    nixpkgs.config.allowUnfree = true;
     nix = {
       # package = pkgs.lix;
       extraOptions = ''

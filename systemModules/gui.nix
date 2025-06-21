@@ -79,43 +79,13 @@ with lib;
       };
     };
 
-    services.seatd.enable = config.mysystem.loginManager;
-
-    services.greetd = {
-      enable = config.mysystem.loginManager;
-      settings = {
-        default_session = {
-          # command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd sway";
-          command = "${pkgs.cage}/bin/cage -s -- ${pkgs.egui-greeter}/bin/egui-greeter";
-          user = "greeter";
-        };
-      };
-    };
-
-    mysystem.egui-greeter = {
+    programs.egui-greeter = {
       enable = true;
       default_session_name = "Niri";
 
       default_session_command = "niri-session";
 
       user = config.mysystem.user;
-    };
-
-    programs.regreet.enable = config.mysystem.loginManager;
-    programs.regreet.settings = {
-      background.fit = "Fill";
-      background.path = ./wallhaven-6dq1w6.jpg;
-      GTK.application_prefer_dark_theme = true;
-      commands = {
-        reboot = [
-          "systemctl"
-          "reboot"
-        ];
-        poweroff = [
-          "systemctl"
-          "poweroff"
-        ];
-      };
     };
 
     services.pipewire = {
