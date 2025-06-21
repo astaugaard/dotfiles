@@ -2,8 +2,6 @@
   description = "Home Manager configuration of a";
 
   inputs = {
-    self.submodules = true;
-
     # Specify the source of Home Manager and Nixpkgs.
     nixpkgs.url = "nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
