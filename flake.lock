@@ -76,11 +76,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1750520574,
-        "narHash": "sha256-YEebOnCayxNn+BJhEM4VGMfu4hMf/zxmEX4J9BRFRKs=",
+        "lastModified": 1750520657,
+        "narHash": "sha256-erqiDoteXn2nrHJ5Wr2O7Xz5HGOlL/NIH7T8OBt1oMw=",
         "owner": "astaugaard",
         "repo": "egui-greeter",
-        "rev": "88efa524bb40c06d78e0c1867d3b73c68dcacb89",
+        "rev": "274d73c8965f031c683cfdb317b2968e57499e47",
         "type": "github"
       },
       "original": {
