@@ -142,18 +142,13 @@
       nixosConfigurations = {
         nixos = lib.nixosSystem {
           inherit system;
+          inherit pkgs;
 
           specialArgs = {
             inherit pkgs-unstable;
           };
 
           modules = [
-            (
-              { config, pkgs, ... }:
-              {
-                nixpkgs.overlays = myOverlays;
-              }
-            ) # name a more hack way of doing this
             ./configuration.nix
             ./systemModules
             niri.outputs.nixosModules.niri
@@ -175,7 +170,6 @@
               {
                 # imports = [ ./rpi-disko-config.nix ];
 
-                nixpkgs.overlays = myOverlays;
                 sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
 
                 i18n.defaultLocale = "en_US.UTF-8";
