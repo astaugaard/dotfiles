@@ -51,9 +51,13 @@ with lib;
         '';
       };
 
+      interactiveShellInit = ''
+        fish_vi_key_bindings --no-erase
+        bind -M insert \cf accept-autosuggestion
+      '';
+
       shellInit = ''
         fish_add_path ~/.bin/ ~/.local/bin/ ~/.pack/bin/
-        zoxide init fish | source
       '';
 
       shellAliases = {

@@ -42,6 +42,7 @@
         bc
         unzip
         git
+        qrcp
 
         # system management script
         (pkgs.writeShellScriptBin "system" ''
@@ -79,12 +80,7 @@
               ;;
             "deploy")
               pushd ~/dotfiles
-              rsync -r --exclude=.git . nixos@rpi-home-1:~/dotfiles
-              ssh nixos@rpi-home-1 'nixos-rebuild switch --flake "./dotfiles?submodules=1#rpi-home"'
-
-              # git push rpi-home main
-              # ssh nixos@rpi-home-1 'git -C ./dotfiles submodule update --recursive'
-              # ssh nixos@rpi-home-1 'nixos-rebuild switch --flake "./dotfiles?submodules=1#rpi-home"'
+              nixos-rebuild switch --target-host "nixos@169.254.90.188" --use-remote-sudo --flake ".#rpi-home"
               popd
             ;;
             *)
@@ -96,6 +92,7 @@
               echo "  update"
               echo "  collect-garbage"
               echo "  collect-garbage-all"
+              echo "  deploy"
               echo "  build-iso";;
           esac
         '')
