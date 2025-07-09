@@ -57,6 +57,7 @@ if standalone then
         "org.prismlauncher.PrismLauncher"
         "in.cinny.Cinny"
         "com.github.johnfactotum.Foliate"
+        "io.github.everestapi.Olympus"
       ];
 
       services.flatpak.uninstallUnmanaged = true;

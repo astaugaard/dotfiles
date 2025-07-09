@@ -75,12 +75,6 @@ in
     "Mod+Shift+N".action = move-window-up;
     "Mod+Shift+S".action = move-column-right;
 
-    "Mod+1".action = focus-monitor-up;
-    "Mod+2".action = focus-monitor-down;
-
-    "Mod+Shift+1".action = move-column-to-monitor-up;
-    "Mod+Shift+2".action = move-column-to-monitor-down;
-
     "Mod+Home".action = focus-column-first;
     "Mod+End".action = focus-column-last;
     "Mod+Ctrl+Home".action = move-column-to-first;
@@ -153,7 +147,24 @@ in
         css
       }" "--message" "Are you sure you want to quit niri?" "-c" "niri msg action quit -s";
 
-    "Mod+Shift+P".action = power-off-monitors;
+    "Mod+Q".action =
+
+      let
+        css = pkgs.writeText "style.css" ''
+          window {
+              background-color: #00000000;
+          }
+
+          box {
+              background-color: #${config.lib.stylix.colors.base01};
+              border-radius: 20px;
+              padding: 20px;
+              border: 2px solid #${config.lib.stylix.colors.base0E};
+          }
+        '';
+      in
+      spawn "bash" "-c"
+        "${pkgs.wl-clipboard}/bin/wl-paste | ${pkgs.qrencode}/bin/qrencode -o - | ${pkgs.display-image}/bin/display-image --image - --css ${css} --size 800";
 
     "Mod+V".action = switch-focus-between-floating-and-tiling;
     "Mod+Shift+V".action = toggle-window-floating;

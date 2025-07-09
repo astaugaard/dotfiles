@@ -47,6 +47,11 @@
       flake = false;
     };
 
+    display-image = {
+      url = "github:astaugaard/display-image/main";
+      flake = false;
+    };
+
     prideful = {
       url = "github:angelofallars/prideful/main";
       flake = false;
