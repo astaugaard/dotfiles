@@ -48,6 +48,23 @@ with lib;
       xterm
     ];
 
+    boot = {
+      plymouth = {
+        enable = true;
+        theme = "rings_2";
+        themePackages = with pkgs; [
+          (adi1090x-plymouth-themes.override {
+            selected_themes = [ "rings_2" ];
+          })
+        ];
+      };
+
+      kernelParams = [
+        "splash"
+        "boot.shell_on_fail"
+      ];
+    };
+
     programs.dconf.enable = true;
     security.rtkit.enable = true;
 
