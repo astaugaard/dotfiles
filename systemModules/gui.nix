@@ -49,6 +49,8 @@ with lib;
     ];
 
     # boot = {
+    #   initrd.systemd.enable = true;
+
     #   plymouth = {
     #     enable = true;
     #     theme = "rings_2";
@@ -61,6 +63,7 @@ with lib;
 
     #   kernelParams = [
     #     "boot.shell_on_fail"
+    #     "plymouth.use-simpledrm"
     #   ];
     # };
 
