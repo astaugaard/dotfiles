@@ -59,4 +59,5 @@
 
   mysystem.grub = true;
   mysystem.systemd-boot = false;
+  mysystem.steam = true;
 }

@@ -39,6 +39,11 @@ with lib;
       type = lib.types.bool;
       default = config.mysystem.gui;
     };
+    steam = mkOption {
+      description = "enable steam";
+      type = lib.types.bool;
+      default = false;
+    };
   };
 
   config = mkIf config.mysystem.gui {
@@ -48,7 +53,25 @@ with lib;
       xterm
     ];
 
+    programs.gamescope = {
+      enable = config.mysystem.steam;
+      capSysNice = true;
+    };
+
+    programs.steam = {
+      enable = config.mysystem.steam;
+      remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+      dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+      localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+
+      gamescopeSession = {
+        enable = true;
+      };
+    };
+
     # boot = {
+    #   initrd.systemd.enable = true;
+
     #   plymouth = {
     #     enable = true;
     #     theme = "rings_2";
@@ -61,6 +84,7 @@ with lib;
 
     #   kernelParams = [
     #     "boot.shell_on_fail"
+    #     "plymouth.use-simpledrm"
     #   ];
     # };
 

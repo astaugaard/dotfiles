@@ -39,7 +39,6 @@ if standalone then
         "com.github.unrud.VideoDownloader"
         "com.obsproject.Studio"
         "com.spotify.Client"
-        "com.valvesoftware.Steam"
         "dev.vencord.Vesktop"
         "io.bassi.Amberol"
         "io.github.celluloid_player.Celluloid"
@@ -58,6 +57,7 @@ if standalone then
         "in.cinny.Cinny"
         "com.github.johnfactotum.Foliate"
         "io.github.everestapi.Olympus"
+        "io.github.giantpinkrobots.varia"
       ];
 
       services.flatpak.uninstallUnmanaged = true;
