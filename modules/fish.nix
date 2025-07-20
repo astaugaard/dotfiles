@@ -23,6 +23,9 @@ with lib;
     programs.zoxide.enable = true;
     programs.zoxide.enableFishIntegration = true;
 
+    programs.nix-index.enable = true;
+    programs.nix-index.enableFishIntegration = true;
+
     programs.fish = {
       enable = true;
       functions = {
