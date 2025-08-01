@@ -22,6 +22,7 @@ with lib;
     systemd.user.services.dropbox = {
       Unit = {
         Description = "Dropbox service";
+        Wants = [ "waybar" ];
       };
       Install = {
         WantedBy = [ "default.target" ];

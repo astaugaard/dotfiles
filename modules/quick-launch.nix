@@ -62,6 +62,15 @@ let
           };
         };
 
+        "S" = {
+          application = "org.signal.Signal";
+          image = pkgs.fetchurl {
+            url = "https://flathub.org/_next/image?url=https%3A%2F%2Fdl.flathub.org%2Fmedia%2Forg%2Fsignal%2FSignal%2Fd90a41a8de5cbde68ad9591d25b70ae8%2Ficons%2F128x128%2Forg.signal.Signal.png&w=256&q=100";
+            hash = "sha256-AJXypMkwUmedrUXl77K1AZeoucNrKQWFwaKXfINyg2A=";
+            name = "signal-icon";
+          };
+        };
+
         "d" = {
           name = "Editors";
           image = pkgs.fetchurl {

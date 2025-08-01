@@ -31,7 +31,30 @@ in
     };
   };
 
+  workspaces = {
+    browser = { };
+    main = { };
+    chat = { };
+    recording = { };
+    music = { };
+  };
+
   binds = with config.lib.niri.actions; {
+    "Mod+Ctrl+M".action = focus-workspace "main";
+    "Mod+Ctrl+Shift+M".action.move-column-to-workspace = "main";
+
+    "Mod+Ctrl+B".action = focus-workspace "browser";
+    "Mod+Ctrl+Shift+B".action.move-column-to-workspace = "browser";
+
+    "Mod+Ctrl+C".action = focus-workspace "chat";
+    "Mod+Ctrl+Shift+C".action.move-column-to-workspace = "chat";
+
+    "Mod+Ctrl+R".action = focus-workspace "recording";
+    "Mod+Ctrl+Shift+R".action.move-column-to-workspace = "recording";
+
+    "Mod+Ctrl+A".action = focus-workspace "music";
+    "Mod+Ctrl+Shift+A".action.move-column-to-workspace = "music";
+
     "Mod+Shift+Slash".action = show-hotkey-overlay;
     "Mod+Shift+Return".action = spawn "kitty";
     "Mod+P".action = spawn "rofi" "-show" "drun" "-terminal" "kitty";
@@ -44,7 +67,6 @@ in
 
     "Mod+R".action = switch-preset-column-width;
     "Mod+Shift+R".action = switch-preset-window-height;
-    "Mod+Ctrl+R".action = reset-window-height;
     "Mod+F".action = maximize-column;
     "Mod+Shift+F".action = fullscreen-window;
     "Mod+C".action =
@@ -211,13 +233,60 @@ in
         top-right = 20.0;
       };
       clip-to-geometry = true;
+      open-on-workspace = "main";
     }
+
     {
       matches = [
         { app-id = "^Bitwarden$"; }
         { app-id = "^vesktop$"; }
       ];
       block-out-from = "screen-capture";
+    }
+
+    {
+      matches = [
+        {
+          app-id = "^librewolf$";
+        }
+        {
+          app-id = "^io.github.celluloid_player.Celluloid$";
+        }
+      ];
+      open-on-workspace = "browser";
+    }
+
+    {
+      matches = [
+        {
+          app-id = "^Spotify$";
+        }
+      ];
+      open-on-workspace = "music";
+    }
+
+    {
+      matches = [
+        {
+          app-id = "^vesktop$";
+        }
+        {
+          app-id = "^Signal$";
+        }
+        {
+          app-id = "^org.mozilla.Thunderbird$";
+        }
+      ];
+      open-on-workspace = "chat";
+    }
+
+    {
+      matches = [
+        {
+          app-id = "^com.obsproject.Studio$";
+        }
+      ];
+      open-on-workspace = "recording";
     }
   ];
 

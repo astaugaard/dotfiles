@@ -57,6 +57,7 @@ if standalone then
         "in.cinny.Cinny"
         "com.github.johnfactotum.Foliate"
         "io.github.everestapi.Olympus"
+        "org.signal.Signal"
       ];
 
       services.flatpak.uninstallUnmanaged = true;
