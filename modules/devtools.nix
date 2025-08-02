@@ -3,6 +3,7 @@
   config,
   lib,
   pkgs-unstable,
+  tools,
   ...
 }:
 with builtins;
@@ -38,14 +39,13 @@ in
       # myhelm
       # myhelmfile
 
-      docker
-
       # general c stuff (so most languages)
       pkg-config
       glib
       # valgrind
       gcc
       lld
+
       # qmk maybe in future
       # librsvg
       # libglvnd
@@ -63,6 +63,80 @@ in
 
       nixfmt-rfc-style
 
+      (
+        let
+          rust-script = pkgs.writeShellScriptBin "start-rust" ''
+            kitty --detach bash -c "niri msg action focus-column-left; bacon"
+            kak
+          '';
+          typst-script = pkgs.writeShellScriptBin "start-typst" ''
+            kitty --detach bash -c "niri msg action focus-column-left; typst-live $1"
+            kak $1
+          '';
+        in
+
+        tools.make_commands_script {
+          inherit pkgs;
+          options = {
+            rust = ''
+              if ! nix develop --command ${rust-script}/bin/start-rust; then
+                ${rust-script}/bin/start-rust
+              fi
+            '';
+            typst = ''
+              if ! nix develop --command ${typst-script}/bin/start-typst $1; then
+                ${typst-script}/bin/start-typst $1
+              fi
+            '';
+            config = ''
+              cd ~/dotfiles
+              kitty --detach
+              kak
+            '';
+          };
+          name = "start";
+        }
+      )
+
+      # (
+      #   let
+      #     rust-script = pkgs.writeShellScriptBin "start-rust" ''
+      #       kitty --detach bash -c "niri msg action focus-column-left; bacon"
+      #       kak
+      #     '';
+      #     typst-script = pkgs.writeShellScriptBin "start-typst" ''
+      #       kitty --detach bash -c "niri msg action focus-column-left; typst-live $1"
+      #       kak $1
+      #     '';
+      #   in
+      #   pkgs.writeShellScriptBin "start" ''
+      #     case $1 in
+      #       "rust")
+      #         if ! nix develop --command ${rust-script}/bin/start-rust; then
+      #           ${rust-script}/bin/start-rust
+      #         fi
+      #         ;;
+      #       "typst")
+      #         shift
+      #         if ! nix develop --command ${typst-script}/bin/start-typst $1; then
+      #           ${typst-script}/bin/start-typst $1
+      #         fi
+      #         ;;
+      #       "config")
+      #         cd ~/dotfiles
+      #         kitty --detach
+      #         kak
+      #         ;;
+      #       *)
+      #         echo "unknown command: $1"
+      #         echo "valid commands: "
+      #         echo "  rust"
+      #         echo "  typst"
+      #         echo "  config"
+      #     esac
+      #   ''
+      # )
+
       # rust
       trunk
       pkgs-unstable.cargo
@@ -71,7 +145,9 @@ in
       pkgs-unstable.clippy
       pkgs-unstable.cabal-install
       pkgs-unstable.rustfmt
+      pkgs-unstable.bacon
 
+      # typst
       pkgs-unstable.typst
       pkgs-unstable.typst-live
       pkgs-unstable.tinymist

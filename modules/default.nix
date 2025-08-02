@@ -22,6 +22,7 @@
     ./colors.nix
     ./dropbox.nix
     ./waybar.nix
+    ./makima.nix
   ];
 
   options.myhome.username = lib.mkOption {

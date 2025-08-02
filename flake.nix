@@ -123,6 +123,8 @@
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
       lib = nixpkgs.lib;
+
+      tools = import ./tools;
     in
     {
       homeConfigurations."a" = home-manager.lib.homeManagerConfiguration {
@@ -139,6 +141,7 @@
 
         extraSpecialArgs = {
           inherit pkgs-unstable;
+          inherit tools;
           # inherit nix-colors;
         };
       };
@@ -150,6 +153,7 @@
 
           specialArgs = {
             inherit pkgs-unstable;
+            inherit tools;
           };
 
           modules = [
@@ -166,6 +170,7 @@
 
           specialArgs = {
             pkgs-unstable = pkgs-unstable-arm;
+            inherit tools;
           };
 
           modules = [
@@ -247,6 +252,7 @@
 
           specialArgs = {
             inherit pkgs-unstable;
+            inherit tools;
           };
 
           modules = [

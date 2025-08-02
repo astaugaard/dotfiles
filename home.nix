@@ -15,6 +15,7 @@
   myhome.flatpak.enable = true;
   myhome.dropbox.enable = true;
   myhome.desktop.enable = true;
+  myhome.makima.enable = true;
 
   # myhome.colors.colorscheme = "nord";
 }
