@@ -3,6 +3,7 @@
   pkgs,
   config,
   lib,
+  tools,
   ...
 }:
 {
@@ -45,59 +46,49 @@
         git
         qrcp
 
-        # system management script
-        (pkgs.writeShellScriptBin "system" ''
-          case $1 in
-            "home") 
+        (tools.make_commands_script {
+          inherit pkgs;
+          options = {
+            home = ''
               pushd ~/dotfiles
               home-manager switch --flake ".?submodules=1"
-              popd ;;
-            "system")
+              popd
+            '';
+            system = ''
               pushd ~/dotfiles
               sudo nixos-rebuild switch --flake ".?submodules=1"
-              popd ;;
-            "update")
+              popd
+            '';
+            update = ''
               pushd ~/dotfiles
               git pull origin main
               home-manager switch --flake ".?submodules=1"
               sudo nixos-rebuild switch --flake ".?submodules=1"
               nixos-rebuild switch --target-host "nixos@169.254.90.188" --use-remote-sudo --flake ".#rpi-home"
               ssh root@69.48.200.159 "apt-get update; apt-get upgrade"
-              popd ;;
-            "collect-garbage")
+              popd
+            '';
+            collect-garbage = ''
               nix-collect-garbage --delete-older-than 5d
-              sudo nix-collect-garbage --delete-older-than 5d ;;
-            "collect-garbage-all")
-              nix-collect-garbage -d
-              sudo nix-collect-garbage -d  ;;
-            "update-button")
+              sudo nix-collect-garbage --delete-older-than 5d
+            '';
+            update-button = ''
               kitty bash -c 'system update; fish' &
               disown -a
-              ;;
-            "build-iso")
+            '';
+            build-iso = ''
               pushd ~/dotfiles
               nix build .?submodules=1#nixosConfigurations.iso.config.system.build.isoImage
               popd
-              ;;
-            "deploy")
+            '';
+            deploy = ''
               pushd ~/dotfiles
               nixos-rebuild switch --target-host "nixos@169.254.90.188" --use-remote-sudo --flake ".#rpi-home"
               popd
-            ;;
-            *)
-
-              echo "unknown command: $1"
-              echo "valid commands: "
-              echo "  home"
-              echo "  system"
-              echo "  update"
-              echo "  collect-garbage"
-              echo "  collect-garbage-all"
-              echo "  deploy"
-              echo "  build-iso";;
-          esac
-        '')
-
+            '';
+          };
+          name = "system";
+        })
       ];
 
       sessionVariables.LS_COLORS = "di=36;40:ln=0";

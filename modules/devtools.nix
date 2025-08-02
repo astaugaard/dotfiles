@@ -67,7 +67,7 @@ in
         let
           rust-script = pkgs.writeShellScriptBin "start-rust" ''
             kitty --detach bash -c "niri msg action focus-column-left; bacon"
-            kak
+            kak -e peneira-files
           '';
           typst-script = pkgs.writeShellScriptBin "start-typst" ''
             kitty --detach bash -c "niri msg action focus-column-left; typst-live $1"
@@ -97,45 +97,6 @@ in
           name = "start";
         }
       )
-
-      # (
-      #   let
-      #     rust-script = pkgs.writeShellScriptBin "start-rust" ''
-      #       kitty --detach bash -c "niri msg action focus-column-left; bacon"
-      #       kak
-      #     '';
-      #     typst-script = pkgs.writeShellScriptBin "start-typst" ''
-      #       kitty --detach bash -c "niri msg action focus-column-left; typst-live $1"
-      #       kak $1
-      #     '';
-      #   in
-      #   pkgs.writeShellScriptBin "start" ''
-      #     case $1 in
-      #       "rust")
-      #         if ! nix develop --command ${rust-script}/bin/start-rust; then
-      #           ${rust-script}/bin/start-rust
-      #         fi
-      #         ;;
-      #       "typst")
-      #         shift
-      #         if ! nix develop --command ${typst-script}/bin/start-typst $1; then
-      #           ${typst-script}/bin/start-typst $1
-      #         fi
-      #         ;;
-      #       "config")
-      #         cd ~/dotfiles
-      #         kitty --detach
-      #         kak
-      #         ;;
-      #       *)
-      #         echo "unknown command: $1"
-      #         echo "valid commands: "
-      #         echo "  rust"
-      #         echo "  typst"
-      #         echo "  config"
-      #     esac
-      #   ''
-      # )
 
       # rust
       trunk
