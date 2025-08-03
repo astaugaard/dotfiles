@@ -69,8 +69,23 @@ in
             kitty --detach bash -c "niri msg action focus-column-left; bacon"
             kak -e peneira-files
           '';
+
+          typst-arrange = pkgs.writeShellScriptBin "typst-arrange" ''
+            xdg-open $1 &
+            sleep 1.0
+            niri msg action focus-column-left
+            niri msg action consume-window-into-column
+            niri msg action set-window-height 33%
+            niri msg action move-window-down
+            niri msg action focus-column-left
+          '';
+
+          typst-make-live = pkgs.writeShellScriptBin "typst-make-live" ''
+            typst watch $1 --open ${typst-arrange}/bin/typst-arrange
+          '';
+
           typst-script = pkgs.writeShellScriptBin "start-typst" ''
-            kitty --detach bash -c "niri msg action focus-column-left; typst-live $1"
+            kitty --detach ${typst-make-live}/bin/typst-make-live $1
             kak $1
           '';
         in
