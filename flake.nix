@@ -263,6 +263,10 @@
                 ./hardware-configuration.nix
               ];
 
+              home-manager.extraSpecialArgs = { 
+                inherit tools 
+              };
+
               home-manager.users.a = {
                 imports = [
                   (import ./modules { standalone = false; })
