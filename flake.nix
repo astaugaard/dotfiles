@@ -264,7 +264,7 @@
               ];
 
               home-manager.extraSpecialArgs = { 
-                inherit tools 
+                inherit tools;
               };
 
               home-manager.users.a = {
