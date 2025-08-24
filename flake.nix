@@ -282,6 +282,7 @@
               };
 
               home-manager.useGlobalPkgs = true;
+              home-manager.extraSpecialArgs.tools = tools;
               home-manager.useUserPackages = true;
 
               i18n.defaultLocale = "en_US.UTF-8";
