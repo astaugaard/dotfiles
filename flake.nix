@@ -157,7 +157,7 @@
           };
 
           modules = [
-            ./configuration.nix
+            ./hosts/nixos/configuration.nix
             ./systemModules
             niri.outputs.nixosModules.niri
             egui-greeter.nixosModules."${system}".egui-greeter
@@ -174,70 +174,9 @@
           };
 
           modules = [
-            (
-              { config, pkgs, ... }:
-              {
-                # imports = [ ./rpi-disko-config.nix ];
-
-                sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-
-                i18n.defaultLocale = "en_US.UTF-8";
-                networking.hostName = "rpi-home";
-                time.timeZone = "America/New_York";
-                mysystem.user = "nixos";
-                mysystem.userdescription = "admin";
-
-                boot.kernel.sysctl = {
-                  "vm.swappiness" = 60;
-                };
-
-                boot.kernelParams = [
-                  "cgroup_memory=1"
-                  "cgroup_enable=memory"
-                ];
-
-                # networking = {
-                #   interfaces.end0 = {
-                #     addresses = [
-                #       {
-                #         address = "169.254.90.188";
-                #         prefixLength = 24;
-                #       }
-                #     ];
-                #   };
-                # };
-
-                swapDevices = [
-                  {
-                    device = "/var/lib/swapfile";
-                    size = 16 * 1024;
-                  }
-                ];
-
-                mysystem.enablegc = true;
-                mysystem.wpasupplicant.enable = true;
-                mysystem.ssh.enable = true;
-                mysystem.wireguard-host.enable = true;
-                mysystem.invidious.enable = true;
-                mysystem.pixelfed.enable = false;
-
-                mysystem.freshrss.enable = true;
-
-                mysystem.systemd-boot = false;
-                mysystem.grub = false;
-                mysystem.grub-device = "/dev/mmcblk0";
-
-                mysystem.flatpak.enable = false;
-                mysystem.niri = false;
-                mysystem.sway = false;
-                mysystem.xmonad = false;
-                mysystem.amd = false;
-                mysystem.virt = false;
-              }
-            )
+            ./hosts/rpi-home/configuration.nix
             ./systemModules
             niri.outputs.nixosModules.niri # not used at all in config lol
-            ./rpi-home-hardware-configuration.nix
             egui-greeter.nixosModules."aarch64-linux".egui-greeter
             # nixos-facter-modules.nixosModules.facter
             # { config.facter.reportPath = ./rpi-facter.json; }
