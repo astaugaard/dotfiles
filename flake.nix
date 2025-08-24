@@ -60,6 +60,11 @@
       url = "github:astaugaard/reasymotion/main";
       flake = false;
     };
+
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -75,6 +80,7 @@
       # nixos-facter-modules,
       nixos-hardware,
       egui-greeter,
+      disko,
       ...
     }:
     let
@@ -162,6 +168,26 @@
             niri.outputs.nixosModules.niri
             egui-greeter.nixosModules."${system}".egui-greeter
             sops-nix.nixosModules.sops
+          ];
+        };
+
+        lemur-pro-nixos = lib.nixosSystem {
+          inherit system;
+          inherit pkgs;
+
+          specialArgs = {
+            inherit pkgs-unstable;
+            inherit tools;
+            inherit disko;
+          };
+
+          modules = [
+            ./hosts/lemur-pro-nixos/configuration.nix
+            ./systemModules
+            niri.outputs.nixosModules.niri
+            egui-greeter.nixosModules."${system}".egui-greeter
+            sops-nix.nixosModules.sops
+            disko.nixosModules.disko
           ];
         };
 
