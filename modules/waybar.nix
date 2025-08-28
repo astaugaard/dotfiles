@@ -60,6 +60,7 @@ with lib;
             "idle_inhibitor"
             "pulseaudio"
             "custom/update"
+            "bluetooth"
           ];
         };
 
@@ -162,6 +163,17 @@ with lib;
           scroll-step = 1.0;
         };
 
+        bluetooth = {
+          controller = "controller1";
+          format = " {status}";
+          format-disabled = "";
+          format-no-controller = "";
+          format-connected = " {num_connections} connected";
+          tooltip-format = "{controller_alias}\t{controller_address}";
+          tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
+          tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
+        };
+
         clock = {
           format = "{:%a %b %d %R}";
         };
@@ -202,6 +214,10 @@ with lib;
         }
 
         #custom-quit {
+            color: #${config.lib.stylix.colors.base0E}
+        }
+
+        #bluetooth {
             color: #${config.lib.stylix.colors.base0E}
         }
 

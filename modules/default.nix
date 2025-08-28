@@ -45,6 +45,7 @@
         unzip
         git
         qrcp
+        caligula
 
         (tools.make_commands_script {
           inherit pkgs;

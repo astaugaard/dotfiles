@@ -211,6 +211,35 @@
           ];
         };
 
+        my_installer = lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            (
+              { pkgs, modulesPath, ... }:
+              {
+                imports = [ (modulesPath + "/installer/cd-dvd/installation-cd-minimal.nix") ];
+
+                environment.etc = {
+                  my_ssh = {
+                    text = ../.ssh;
+                    mode = "0440";
+                  };
+
+                  my_age = {
+                    text = ../.config/sops;
+                    mode = "0440";
+                  };
+
+                  my_dotfiles = {
+                    text = ./.;
+                    mode = "0440";
+                  };
+                };
+              }
+            )
+          ];
+        };
+
         test-vm = lib.nixosSystem {
           inherit system;
           inherit pkgs;
