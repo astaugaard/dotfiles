@@ -18,10 +18,13 @@
     ./disko.nix
   ];
 
-  disko.devices.disk.main.device = "/dev/nvme0";
+  services.xserver.xkb.layout = "us";
+  services.xserver.xkb.variant = "dvorak";
+  console.useXkbConfig = true;
+
 
   i18n.defaultLocale = "en_US.UTF-8";
-  networking.hostName = "nixos";
+  networking.hostName = "lemur-pro-nixos";
   time.timeZone = "America/New_York";
 
   mysystem.enablegc = true;
@@ -30,7 +33,7 @@
   mysystem.niri = true;
   mysystem.sway = false;
   mysystem.user = "a";
-  mysystem.userdescription = "astaugaard";
+  mysystem.userdescription = "estaugaard";
   mysystem.wpasupplicant.enable = true;
   mysystem.virt = true;
   mysystem.ssh.enable = true;

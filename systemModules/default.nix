@@ -104,6 +104,7 @@ with lib;
     boot.loader.systemd-boot.enable = config.mysystem.systemd-boot;
 
     environment.systemPackages = with pkgs; [
+      git
       kakoune
       wget
       fish
@@ -171,8 +172,10 @@ with lib;
     sops.age.generateKey = true;
 
     sops.secrets.password = { };
+    sops.secrets.eduroam-password = { };
     sops.templates."wifi.env".content = ''
       password=${config.sops.placeholder.password}
+      eduroam_password=${config.sops.placeholder.eduroam-password}
     '';
 
     networking.wireless = {
@@ -183,6 +186,16 @@ with lib;
         # extraConfig = ''
         #   bssid=70:3a:cb:08:07:8d
         # '';
+      };
+      networks."eduroam" = {
+	auth = ''
+          key_mgmt=WPA-EAP
+	  eap=PEAP
+	  phase2="auth=MSCHAPV2"
+ 	  identity="estaugaard@haverford.edu"
+	  password=ext:eduroam_password
+	'';
+
       };
       extraConfig = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=wheel";
     };

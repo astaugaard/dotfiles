@@ -109,7 +109,6 @@ with lib;
     };
 
     services.xserver = {
-      xkb.layout = "us";
       # xkb.variant= "dvorak";
       enable = config.mysystem.xserver;
       windowManager = {

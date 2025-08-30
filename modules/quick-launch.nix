@@ -75,7 +75,7 @@ let
           name = "Editors";
           image = pkgs.fetchurl {
             url = "https://www.iconfinder.com/icons/3069189/download/png/128";
-            hash = "sha256-lxRrVqpw/cwyFHP3SLRm25ULuJA6nUcBxwm/IVEIEms=";
+            hash = "sha256-IDi1zKx9SyCbiJMzlPEblWhWsUDfatIupc6bnQ4QcDc=";
             name = "editors-icon";
           };
           applications = {

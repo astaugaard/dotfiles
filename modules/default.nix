@@ -26,10 +26,12 @@
     ./makima.nix
   ];
 
-  options.myhome.username = lib.mkOption {
-    description = "username to use in home-manager";
-    type = lib.types.str;
-    default = "a";
+  options = {
+     myhome.username = lib.mkOption {
+    	description = "username to use in home-manager";
+    	type = lib.types.str;
+    	default = "a";
+     };
   };
 
   config = {

@@ -18,7 +18,6 @@ with lib;
   config = mkIf config.myhome.waybar.enable {
     programs.waybar = {
       settings.mainbar = {
-        output = "HDMI-A-1";
         position = "top";
         margin-left = 5;
         margin-right = 5;
@@ -69,9 +68,20 @@ with lib;
           modules = [
             "clock"
             "tray"
+            "battery"
             "group/power"
           ];
         };
+
+	battery = {
+	    interval = 60;
+	    states = {
+	        warning = 30;
+	        critical = 15;
+	    };
+	    format = "{capacity}%";
+	    format-icons = ["" "" "" "" ""];
+	};
 
         "custom/update" =
           let
@@ -187,6 +197,10 @@ with lib;
       style = ''
         .background {
           background: rgba(0,0,0,0);
+        }
+
+        #battery {
+            color: #${config.lib.stylix.colors.base0F}
         }
 
         #custom-launcher {

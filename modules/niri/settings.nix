@@ -14,6 +14,7 @@ in
 {
   input.keyboard.xkb = {
     layout = "us";
+    variant = "dvorak";
   };
 
   outputs = {

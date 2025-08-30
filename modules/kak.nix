@@ -24,7 +24,7 @@ with lib;
       lua
       fd
     ];
-    xdg.configFile."kak".source = ./kak;
+    # xdg.configFile."kak".source = ./kak;
     home.sessionVariables.EDITOR = "kak";
   };
 }
