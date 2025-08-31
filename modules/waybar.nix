@@ -73,15 +73,21 @@ with lib;
           ];
         };
 
-	battery = {
-	    interval = 60;
-	    states = {
-	        warning = 30;
-	        critical = 15;
-	    };
-	    format = "{capacity}%";
-	    format-icons = ["" "" "" "" ""];
-	};
+        battery = {
+          interval = 60;
+          states = {
+            warning = 30;
+            critical = 15;
+          };
+          format = "{capacity}%";
+          format-icons = [
+            ""
+            ""
+            ""
+            ""
+            ""
+          ];
+        };
 
         "custom/update" =
           let

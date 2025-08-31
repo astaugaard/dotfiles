@@ -27,11 +27,11 @@
   ];
 
   options = {
-     myhome.username = lib.mkOption {
-    	description = "username to use in home-manager";
-    	type = lib.types.str;
-    	default = "a";
-     };
+    myhome.username = lib.mkOption {
+      description = "username to use in home-manager";
+      type = lib.types.str;
+      default = "a";
+    };
   };
 
   config = {

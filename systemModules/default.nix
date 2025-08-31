@@ -188,13 +188,13 @@ with lib;
         # '';
       };
       networks."eduroam" = {
-	auth = ''
-          key_mgmt=WPA-EAP
-	  eap=PEAP
-	  phase2="auth=MSCHAPV2"
- 	  identity="estaugaard@haverford.edu"
-	  password=ext:eduroam_password
-	'';
+        auth = ''
+                    key_mgmt=WPA-EAP
+          	  eap=PEAP
+          	  phase2="auth=MSCHAPV2"
+           	  identity="estaugaard@haverford.edu"
+          	  password=ext:eduroam_password
+          	'';
 
       };
       extraConfig = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=wheel";

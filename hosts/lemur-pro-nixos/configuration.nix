@@ -22,7 +22,6 @@
   services.xserver.xkb.variant = "dvorak";
   console.useXkbConfig = true;
 
-
   i18n.defaultLocale = "en_US.UTF-8";
   networking.hostName = "lemur-pro-nixos";
   time.timeZone = "America/New_York";
