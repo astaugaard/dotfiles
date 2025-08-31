@@ -11,6 +11,7 @@ let
     inherit lib;
   };
 in
+with pkgs;
 {
   input.keyboard.xkb = {
     layout = "us";
@@ -79,6 +80,16 @@ in
 
     "XF86AudioLowerVolume".action = spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-";
     "XF86AudioLowerVolume".allow-when-locked = true;
+
+    "XF86MonBrightnessDown".action =
+      spawn "bash" "-c"
+        "${brightnessctl}/bin/brightnessctl -c backlight set 1- && ${libnotify}/bin/notify-send -c \"system\" \" Brightness: $(${brightnessctl}/bin/brightnessctl -m | cut -d',' -f4)\"";
+    "XF86MonBrightnessDown".allow-when-locked = true;
+
+    "XF86MonBrightnessUp".action =
+      spawn "bash" "-c"
+        "${brightnessctl}/bin/brightnessctl -c backlight set +1 && ${libnotify}/bin/notify-send -c \"system\" \" Brightness: $(${brightnessctl}/bin/brightnessctl -m | cut -d',' -f4)\"";
+    "XF86MonBrightnessUp".allow-when-locked = true;
 
     "XF86AudioMute".action = spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle";
     "XF86AudioMute".allow-when-locked = true;
