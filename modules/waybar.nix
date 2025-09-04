@@ -179,16 +179,30 @@ with lib;
           scroll-step = 1.0;
         };
 
-        bluetooth = {
-          controller = "controller1";
-          format = " {status}";
-          format-disabled = "";
-          format-no-controller = "";
-          format-connected = " {num_connections} connected";
-          tooltip-format = "{controller_alias}\t{controller_address}";
-          tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
-          tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
-        };
+        bluetooth =
+          let
+            toggle_bluetooth = pkgs.writeShellScriptBin "toggle_bluetooth" ''
+              #!/bin/bash
+
+              if bluetoothctl show | grep "Powered: yes"; then
+                bluetoothctl power off
+              else
+                bluetoothctl power on
+              fi
+
+            '';
+          in
+          {
+            controller = "controller1";
+            format = " {status}";
+            format-disabled = "";
+            on-click = "${toggle_bluetooth}/bin/toggle_bluetooth";
+            format-no-controller = "";
+            format-connected = " {num_connections} connected";
+            tooltip-format = "{controller_alias}\t{controller_address}";
+            tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
+            tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
+          };
 
         clock = {
           format = "{:%a %b %d %R}";
