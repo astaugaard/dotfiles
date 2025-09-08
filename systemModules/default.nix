@@ -190,9 +190,9 @@ with lib;
       };
       networks."eduroam" = {
         auth = ''
-                    key_mgmt=WPA-EAP
-          	  eap=PEAP
-          	  phase2="auth=MSCHAPV2"
+              key_mgmt=WPA-EAP
+              eap=PEAP
+              phase2="auth=MSCHAPV2"
            	  identity="estaugaard@haverford.edu"
           	  password=ext:eduroam_password
           	'';
