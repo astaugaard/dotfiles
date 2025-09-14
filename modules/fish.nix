@@ -65,7 +65,6 @@ with lib;
               moose
               turtle
               cheese
-              head-in
               mutilated
               tux
               cower

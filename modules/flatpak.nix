@@ -58,6 +58,7 @@ if standalone then
         "com.github.johnfactotum.Foliate"
         "io.github.everestapi.Olympus"
         "org.signal.Signal"
+        "net.ankiweb.Anki"
       ];
 
       services.flatpak.uninstallUnmanaged = true;

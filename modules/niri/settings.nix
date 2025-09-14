@@ -14,8 +14,8 @@ in
 with pkgs;
 {
   input.keyboard.xkb = {
-    layout = "us";
-    variant = "dvorak";
+    layout = "us,us";
+    variant = "dvorak,dvorak-intl";
   };
 
   outputs = {
@@ -44,6 +44,7 @@ with pkgs;
   binds = with config.lib.niri.actions; {
     "Mod+Ctrl+M".action = focus-workspace "main";
     "Mod+Ctrl+Shift+M".action.move-column-to-workspace = "main";
+    "Mod+Ctrl+K".action = spawn "niri" "msg" "action" "switch-layout" "next";
 
     "Mod+Ctrl+B".action = focus-workspace "browser";
     "Mod+Ctrl+Shift+B".action.move-column-to-workspace = "browser";
