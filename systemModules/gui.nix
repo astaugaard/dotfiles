@@ -69,24 +69,24 @@ with lib;
       };
     };
 
-    # boot = {
-    #   initrd.systemd.enable = true;
+    boot = {
+      initrd.systemd.enable = true;
 
-    #   plymouth = {
-    #     enable = true;
-    #     theme = "rings_2";
-    #     themePackages = with pkgs; [
-    #       (adi1090x-plymouth-themes.override {
-    #         selected_themes = [ "rings_2" ];
-    #       })
-    #     ];
-    #   };
+      plymouth = {
+        enable = true;
+        theme = "rings_2";
+        themePackages = with pkgs; [
+          (adi1090x-plymouth-themes.override {
+            selected_themes = [ "rings_2" ];
+          })
+        ];
+      };
 
-    #   kernelParams = [
-    #     "boot.shell_on_fail"
-    #     "plymouth.use-simpledrm"
-    #   ];
-    # };
+      kernelParams = [
+        "boot.shell_on_fail"
+        "plymouth.use-simpledrm"
+      ];
+    };
 
     programs.dconf.enable = true;
     security.rtkit.enable = true;
