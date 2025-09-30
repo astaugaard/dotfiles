@@ -28,6 +28,10 @@ let
           application = "dev.vencord.Vesktop";
         };
 
+        "c" = {
+          application = "bluetui-desktop";
+        };
+
         "g" = {
           application = "net.lutris.Lutris";
         };
