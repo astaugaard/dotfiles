@@ -267,6 +267,9 @@ with pkgs;
         }
       ];
       open-on-workspace = "browser";
+      default-column-width = {
+        proportion = 1.0;
+      };
     }
 
     {
@@ -275,6 +278,9 @@ with pkgs;
           app-id = "^Spotify$";
         }
       ];
+      default-column-width = {
+        proportion = 1.0;
+      };
       open-on-workspace = "music";
     }
 
@@ -290,6 +296,9 @@ with pkgs;
           app-id = "^org.mozilla.Thunderbird$";
         }
       ];
+      default-column-width = {
+        proportion = 1.0;
+      };
       open-on-workspace = "chat";
     }
 
@@ -299,6 +308,9 @@ with pkgs;
           app-id = "^com.obsproject.Studio$";
         }
       ];
+      default-column-width = {
+        proportion = 1.0;
+      };
       open-on-workspace = "recording";
     }
   ];
