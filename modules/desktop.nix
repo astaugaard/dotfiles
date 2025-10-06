@@ -39,6 +39,17 @@ with lib;
           name = "pairdrop-icon";
         };
       })
+
+      (makeDesktopItem rec {
+        name = "Flathub";
+        desktopName = "flathub";
+        exec = "${pkgs.chromium}/bin/chromium --app=\"https://flathub.org\"";
+        icon = pkgs.fetchurl {
+          url = "https://raw.githubusercontent.com/flathub-infra/assets/d593e566db996ec738621f073a13c534f681f291/web/favicon-i.svg";
+          hash = "sha256-v2spj4xF5FXQcYonVIIMt3Di9Gu5OUX20KTxyPYPMoY=";
+          name = "flathub-icon";
+        };
+      })
     ];
 
     xdg.mimeApps.defaultApplications = {
