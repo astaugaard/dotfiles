@@ -44,6 +44,11 @@ with lib;
       type = lib.types.bool;
       default = false;
     };
+    printing = mkOption {
+      description = "enable printing support";
+      type = lib.typs.bool;
+      default = false;
+    };
   };
 
   config = mkIf config.mysystem.gui {
@@ -52,6 +57,8 @@ with lib;
       beauty-line-icon-theme
       xterm
     ];
+
+    services.printing.enable = true;
 
     programs.gamescope = {
       enable = config.mysystem.steam;
