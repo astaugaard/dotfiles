@@ -78,8 +78,8 @@ let
         "d" = {
           name = "Editors";
           image = pkgs.fetchurl {
-            url = "https://www.iconfinder.com/icons/3069189/download/png/128";
-            hash = "sha256-IDi1zKx9SyCbiJMzlPEblWhWsUDfatIupc6bnQ4QcDc=";
+            url = "https://cdn-icons-png.flaticon.com/512/4400/4400968.png";
+            hash = "sha256-FnhvV0gx0tooI9rQn7oHyq7QTnVVJGjZMoYDmJVyZYE=";
             name = "editors-icon";
           };
           applications = {
