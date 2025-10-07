@@ -50,6 +50,13 @@ with lib;
           name = "flathub-icon";
         };
       })
+
+      (makeDesktopItem rec {
+        name = "htop";
+        desktopName = "htop";
+        exec = "${pkgs.kitty}/bin/kitty ${pkgs.htop}/bin/htop";
+        icon = "htop";
+      })
     ];
 
     xdg.mimeApps.defaultApplications = {
