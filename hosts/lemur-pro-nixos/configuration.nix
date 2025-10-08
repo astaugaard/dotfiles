@@ -43,4 +43,6 @@
   mysystem.systemd-boot = false;
   mysystem.steam = true;
   mysystem.bluetooth = true;
+
+  hardware.system76.enableAll = true;
 }
