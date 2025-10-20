@@ -114,6 +114,7 @@ with lib;
         c = "clear";
         ll = "ls -FGghot";
         la = "ls -FGghotA";
+        t = "trash";
       };
     };
   };

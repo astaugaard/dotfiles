@@ -48,6 +48,7 @@
         git
         qrcp
         caligula
+        trash-cli
 
         (tools.make_commands_script {
           inherit pkgs;
