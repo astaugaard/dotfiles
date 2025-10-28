@@ -14,8 +14,8 @@ in
 with pkgs;
 {
   input.keyboard.xkb = {
-    layout = "us,us,us";
-    variant = "dvorak,dvorak-intl,qwerty";
+    layout = "us,us";
+    variant = "dvorak,dvorak-intl";
   };
 
   outputs = {
