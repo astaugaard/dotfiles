@@ -61,7 +61,9 @@ with pkgs;
     "Mod+Shift+Slash".action = show-hotkey-overlay;
     "Mod+Shift+Return".action = spawn "kitty";
     "Mod+P".action = spawn "rofi" "-show" "drun" "-terminal" "kitty";
-    "Super+Shift+C".action = screenshot;
+    "Super+Shift+C".action.screenshot = {
+      show-pointer = false;
+    };
     "Super+Shift+O".action = spawn "swaync-client" "-t" "-sw";
     "Super+O".action = spawn "${quick-launch-command}/bin/launcher";
     # spawn "${pkgs.gtk-quick-launch}/bin/quick-launch" "--config" "${./config.json}" "--css"
@@ -156,9 +158,9 @@ with pkgs;
     "Mod+Shift+Minus".action = set-window-height "-10%";
     "Mod+Shift+Equal".action = set-window-height "+10%";
 
-    "Print".action = screenshot;
-    # "Ctrl+Print".action = screenshot-screen;
-    "Alt+Print".action = screenshot-window;
+    "Print".action.screenshot = {
+      show-pointer = false;
+    };
 
     "Mod+Shift+Q".action =
       let
