@@ -13,8 +13,7 @@ jobs:
       fail-fast: true
       matrix:
         config_name:
-          - nixos
-          - lemur-pro-nixos
+          - a
 
     steps:
       - uses: actions/checkout@v2.3.2
