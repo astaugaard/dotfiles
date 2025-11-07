@@ -12,7 +12,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        hostname:
+        config_name:
           - nixos
           - lemur-pro-nixos
 
