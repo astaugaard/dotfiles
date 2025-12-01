@@ -20,7 +20,7 @@ with lib;
     home.packages = with pkgs; [
       reasymotion
       kakoune
-      kak-lsp
+      kakoune-lsp
       lua
       fd
     ];
