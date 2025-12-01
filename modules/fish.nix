@@ -18,11 +18,13 @@ with lib;
   config = mkIf config.myhome.fish.enable {
     stylix.targets.fish.enable = false;
 
+    home.shell.enableFishIntegration = true;
+
     programs.zoxide.enable = true;
-    programs.zoxide.enableFishIntegration = true;
+
+    programs.fzf.enable = true;
 
     programs.nix-index.enable = true;
-    programs.nix-index.enableFishIntegration = true;
 
     programs.fish = {
       enable = true;
