@@ -65,6 +65,9 @@
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -143,6 +146,7 @@
           niri.homeModules.niri
           stylix.homeModules.stylix
           nix-flatpak.homeManagerModules.nix-flatpak
+          nix-index-database.homeModules.default
         ];
 
         extraSpecialArgs = {
