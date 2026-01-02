@@ -56,6 +56,21 @@
       flake = false;
     };
 
+    luar = {
+      url = "github:gustavo-hms/luar/master";
+      flake = false;
+    };
+
+    peneira = {
+      url = "github:gustavo-hms/peneira/main";
+      flake = false;
+    };
+
+    clipb = {
+      url = "github:/NNBnh/clipb.kak/main";
+      flake = false;
+    };
+
     reasymotion = {
       url = "github:astaugaard/reasymotion/main";
       flake = false;
@@ -84,6 +99,7 @@
       nixos-hardware,
       egui-greeter,
       disko,
+      nix-index-database,
       ...
     }:
     let

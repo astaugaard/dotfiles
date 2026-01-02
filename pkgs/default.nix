@@ -3,6 +3,10 @@ inputs: self: super: {
 
   prideful = self.callPackage ./prideful.nix { inherit inputs; };
 
+  luar = self.callPackage ./luar.nix { inherit inputs; };
+  peneira = self.callPackage ./peneira.nix { inherit inputs; };
+  clipb = self.callPackage ./clipb.nix { inherit inputs; };
+
   grub-pets-min-theme = self.callPackage ./pets-min-theme.nix { };
 
   gtk-quick-launch = self.callPackage ./gtk-quick-launch.nix { inherit inputs; };
