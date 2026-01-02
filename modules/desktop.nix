@@ -19,7 +19,6 @@ with lib;
   config = mkIf config.myhome.desktop.enable {
     home.packages = with pkgs; [
       xorg.xeyes
-      nix-index
       ripgrep
       alsa-utils
       qrcp

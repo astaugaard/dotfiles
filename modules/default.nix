@@ -55,19 +55,19 @@
           options = {
             home = ''
               pushd ~/dotfiles
-              home-manager switch --flake ".?submodules=1"
+              home-manager switch --flake "."
               popd
             '';
             system = ''
               pushd ~/dotfiles
-              sudo nixos-rebuild switch --flake ".?submodules=1"
+              sudo nixos-rebuild switch --flake "."
               popd
             '';
             update = ''
               pushd ~/dotfiles
               git pull origin main
-              home-manager switch --flake ".?submodules=1"
-              sudo nixos-rebuild switch --flake ".?submodules=1"
+              home-manager switch --flake "."
+              sudo nixos-rebuild switch --flake "."
               nixos-rebuild switch --target-host "nixos@169.254.90.188" --use-remote-sudo --flake ".#rpi-home"
               ssh root@69.48.200.159 "apt-get update; apt-get upgrade"
               popd
@@ -82,7 +82,7 @@
             '';
             build-iso = ''
               pushd ~/dotfiles
-              nix build .?submodules=1#nixosConfigurations.iso.config.system.build.isoImage
+              nix build .#nixosConfigurations.iso.config.system.build.isoImage
               popd
             '';
             deploy = ''

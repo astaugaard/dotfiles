@@ -225,12 +225,11 @@ with pkgs;
         ];
       }
     )
-    { command = [ "${pkgs.xwayland-satellite}/bin/xwayland-satellite" ]; }
+    # { command = [ "${pkgs.xwayland-satellite}/bin/xwayland-satellite" ]; }
     {
       command = [
         "dbus-update-activation-environment"
         "DISPLAY"
-        "WAYLAND_DISPLAY"
       ];
     }
   ];
@@ -361,6 +360,5 @@ with pkgs;
     _JAVA_AWT_WM_NONREPARENTING = "1";
     GTK_USE_PORTAL = "0";
     WLR_RENDERER = "vulkan";
-    DISPLAY = ":0";
   };
 }

@@ -3,11 +3,11 @@
 
   inputs = {
     # Specify the source of Home Manager and Nixpkgs.
-    nixpkgs.url = "nixpkgs/nixos-25.05";
+    nixpkgs.url = "nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "nixpkgs/nixos-unstable";
 
     stylix = {
-      url = "github:danth/stylix/release-25.05";
+      url = "github:danth/stylix/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -18,7 +18,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -56,6 +56,21 @@
       flake = false;
     };
 
+    luar = {
+      url = "github:gustavo-hms/luar/master";
+      flake = false;
+    };
+
+    peneira = {
+      url = "github:gustavo-hms/peneira/main";
+      flake = false;
+    };
+
+    clipb = {
+      url = "github:/NNBnh/clipb.kak/main";
+      flake = false;
+    };
+
     reasymotion = {
       url = "github:astaugaard/reasymotion/main";
       flake = false;
@@ -65,6 +80,9 @@
       url = "github:nix-community/disko/latest";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -81,6 +99,7 @@
       nixos-hardware,
       egui-greeter,
       disko,
+      nix-index-database,
       ...
     }:
     let
@@ -143,6 +162,7 @@
           niri.homeModules.niri
           stylix.homeModules.stylix
           nix-flatpak.homeManagerModules.nix-flatpak
+          nix-index-database.homeModules.default
         ];
 
         extraSpecialArgs = {

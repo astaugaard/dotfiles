@@ -56,7 +56,7 @@ in
     myhome.waybar.enable = true;
     myhome.swaync.enable = true;
 
-    stylix.targets.swaylock.useImage = false;
+    stylix.targets.swaylock.useWallpaper = false;
 
     programs.swaylock.enable = true;
     programs.swaylock.package = pkgs.swaylock;
