@@ -23,6 +23,10 @@ if standalone then
         programs.niri.enable = true;
         programs.niri.package = pkgs.niri-stable;
 
+        home.packages = with pkgs; [
+          xwayland-satellite
+        ];
+
         programs.niri.settings = import ./settings.nix {
           inherit pkgs;
           inherit config;
@@ -48,6 +52,10 @@ else
   {
     config = {
       programs.niri.package = pkgs.niri-stable;
+
+      home.packages = with pkgs; [
+        xwayland-satellite
+      ];
 
       programs.niri.settings = import ./settings.nix {
         inherit pkgs;
