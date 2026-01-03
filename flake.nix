@@ -112,32 +112,20 @@
 
       pkgs = import nixpkgs {
         inherit system;
-        config = {
-          allowUnfree = true;
-        };
-        overlays = myOverlays;
       };
 
       pkgs-arm = import nixpkgs {
         system = "aarch64-linux";
-        config = {
-          allowUnfree = true;
-        };
-        overlays = myOverlays;
       };
 
       pkgs-unstable = import nixpkgs-unstable {
         inherit system;
-        config = {
-          allowUnfree = true;
-        };
+        config.allowUnfree = true;
       };
 
       pkgs-unstable-arm = import nixpkgs-unstable {
         system = "aarch64-linux";
-        config = {
-          allowUnfree = true;
-        };
+        config.allowUnfree = true;
       };
 
       systems = [
@@ -152,34 +140,38 @@
       tools = import ./tools;
     in
     {
-      homeConfigurations."a" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
+      # homeConfigurations."a" = home-manager.lib.homeManagerConfiguration {
+      #   inherit pkgs;
 
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-        modules = [
-          ./home.nix
-          niri.homeModules.niri
-          stylix.homeModules.stylix
-          nix-flatpak.homeManagerModules.nix-flatpak
-          nix-index-database.homeModules.default
-        ];
+      #   # Specify your home configuration modules here, for example,
+      #   # the path to your home.nix.
+      #   modules = [
+      #     ./home.nix
+      #     niri.homeModules.niri
+      #     stylix.homeModules.stylix
+      #     nix-flatpak.homeManagerModules.nix-flatpak
+      #     nix-index-database.homeModules.default
+      #   ];
 
-        extraSpecialArgs = {
-          inherit pkgs-unstable;
-          inherit tools;
-          # inherit nix-colors;
-        };
-      };
+      #   extraSpecialArgs = {
+      #     inherit pkgs-unstable;
+      #     inherit tools;
+      #     # inherit nix-colors;
+      #   };
+      # };
 
       nixosConfigurations = {
         nixos = lib.nixosSystem {
           inherit system;
-          inherit pkgs;
 
           specialArgs = {
             inherit pkgs-unstable;
             inherit tools;
+            inherit stylix;
+            inherit niri;
+            inherit nix-flatpak;
+            inherit nix-index-database;
+            inherit myOverlays;
           };
 
           modules = [
@@ -188,17 +180,22 @@
             niri.outputs.nixosModules.niri
             egui-greeter.nixosModules."${system}".egui-greeter
             sops-nix.nixosModules.sops
+            home-manager.nixosModules.home-manager
           ];
         };
 
         lemur-pro-nixos = lib.nixosSystem {
           inherit system;
-          inherit pkgs;
 
           specialArgs = {
+            inherit disko;
             inherit pkgs-unstable;
             inherit tools;
-            inherit disko;
+            inherit stylix;
+            inherit niri;
+            inherit nix-flatpak;
+            inherit nix-index-database;
+            inherit myOverlays;
           };
 
           modules = [
@@ -208,6 +205,7 @@
             egui-greeter.nixosModules."${system}".egui-greeter
             sops-nix.nixosModules.sops
             disko.nixosModules.disko
+            home-manager.nixosModules.home-manager
           ];
         };
 
@@ -217,6 +215,7 @@
           specialArgs = {
             pkgs-unstable = pkgs-unstable-arm;
             inherit tools;
+            inherit myOverlays;
           };
 
           modules = [
@@ -229,73 +228,6 @@
             sops-nix.nixosModules.sops
             nixos-hardware.nixosModules.raspberry-pi-4
           ];
-        };
-
-        test-vm = lib.nixosSystem {
-          inherit system;
-          inherit pkgs;
-
-          specialArgs = {
-            inherit pkgs-unstable;
-            inherit tools;
-          };
-
-          modules = [
-            ({
-              imports = [
-                # Include the results of the hardware scan.
-                home-manager.nixosModules.home-manager
-                ./hosts/nixos/hardware-configuration.nix
-              ];
-
-              home-manager.users.a = {
-                imports = [
-                  (import ./modules { standalone = false; })
-                  stylix.homeModules.stylix
-                ];
-
-                myhome.toys.enable = true;
-                myhome.devtools.enable = false;
-                myhome.kak.enable = true;
-                myhome.flatpak.enable = false;
-                myhome.dropbox.enable = false;
-                myhome.desktop.enable = true;
-
-                home.sessionVariables = {
-                  WLR_ALLOW_SOFTWARE = 1;
-                };
-              };
-
-              home-manager.useGlobalPkgs = true;
-              home-manager.extraSpecialArgs.tools = tools;
-              home-manager.useUserPackages = true;
-
-              i18n.defaultLocale = "en_US.UTF-8";
-              networking.hostName = "nixos";
-              time.timeZone = "America/New_York";
-
-              mysystem.enablegc = true;
-              mysystem.flatpak.enable = false;
-              mysystem.niri = true;
-              mysystem.sway = false;
-              mysystem.amd = true;
-              mysystem.user = "a";
-              mysystem.userdescription = "estaugaard";
-              mysystem.wpasupplicant.enable = true;
-              mysystem.virt = true;
-              mysystem.ssh.enable = true;
-              mysystem.aarch-binfmt = true;
-
-              mysystem.grub = true;
-              mysystem.systemd-boot = false;
-
-            })
-            ./systemModules
-            egui-greeter.nixosModules."aarch64-linux".egui-greeter
-            niri.outputs.nixosModules.niri
-            sops-nix.nixosModules.sops
-          ];
-
         };
       };
 

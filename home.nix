@@ -6,7 +6,7 @@
   ...
 }:
 {
-  imports = [ (import ./modules { standalone = true; }) ];
+  imports = [ ./modules ];
 
   myhome.niri.enable = true;
   myhome.toys.enable = true;

@@ -6,6 +6,11 @@
   config,
   pkgs,
   pkgs-unstable,
+  tools,
+  stylix,
+  niri,
+  nix-index-database,
+  nix-flatpak,
   ...
 }:
 
@@ -17,6 +22,20 @@
     ./hardware-configuration.nix
     ./disko.nix
   ];
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.extraSpecialArgs.tools = tools;
+  home-manager.extraSpecialArgs.pkgs-unstable = pkgs-unstable;
+  home-manager.useUserPackages = true;
+
+  home-manager.users.a = {
+    imports = [
+      ../../home.nix
+      stylix.homeModules.stylix
+      nix-flatpak.homeManagerModules.nix-flatpak
+      nix-index-database.homeModules.default
+    ];
+  };
 
   services.xserver.xkb.layout = "us";
   services.xserver.xkb.variant = "dvorak";

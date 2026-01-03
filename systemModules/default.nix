@@ -3,6 +3,7 @@
   config,
   lib,
   pkgs-unstable,
+  myOverlays,
   ...
 }:
 with lib;
@@ -89,6 +90,13 @@ with lib;
   };
 
   config = {
+    nixpkgs = {
+      overlays = myOverlays;
+      config = {
+        allowUnfree = true;
+      };
+    };
+
     virtualisation.libvirtd.enable = config.mysystem.virt;
 
     boot.binfmt.emulatedSystems = if config.mysystem.aarch-binfmt then [ "aarch64-linux" ] else [ ];

@@ -1,4 +1,3 @@
-{ standalone }:
 {
   pkgs,
   config,
@@ -15,11 +14,11 @@
     ./kak.nix
     ./fish.nix
     ./kitty.nix
-    (import ./niri { inherit standalone; })
+    ./niri
     ./deway.nix
     ./swaync.nix
     ./desktop.nix
-    (import ./flatpak.nix { inherit standalone; })
+    ./flatpak.nix
     ./colors.nix
     ./dropbox.nix
     ./waybar.nix

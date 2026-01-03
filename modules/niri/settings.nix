@@ -2,6 +2,8 @@
   config,
   pkgs,
   lib,
+  keyboard-layout,
+  keyboard-variant,
   ...
 }:
 let
@@ -14,8 +16,8 @@ in
 with pkgs;
 {
   input.keyboard.xkb = {
-    layout = "us,us";
-    variant = "dvorak,dvorak-intl";
+    layout = keyboard-layout;
+    variant = keyboard-variant;
   };
 
   outputs = {
