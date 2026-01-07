@@ -56,8 +56,6 @@ with lib;
       "io.github.everestapi.Olympus"
       "org.signal.Signal"
       "net.ankiweb.Anki"
-      "com.valvesoftware.Steam"
-
     ];
 
     services.flatpak.uninstallUnmanaged = true;
