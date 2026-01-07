@@ -39,6 +39,8 @@
       homeDirectory = "/home/${config.myhome.username}";
     };
 
+    stylix.overlays.enable = false;
+
     home = {
       packages = with pkgs; [
         # always
