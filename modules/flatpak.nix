@@ -56,6 +56,7 @@ with lib;
       "io.github.everestapi.Olympus"
       "org.signal.Signal"
       "net.ankiweb.Anki"
+      "org.texstudio.TeXstudio"
     ];
 
     services.flatpak.uninstallUnmanaged = true;

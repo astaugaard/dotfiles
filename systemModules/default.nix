@@ -18,6 +18,7 @@ with lib;
     ./invidious.nix
     ./pixelfed.nix
     ./bluetooth.nix
+    ./dev.nix
   ];
 
   options.mysystem = {

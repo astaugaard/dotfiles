@@ -63,5 +63,7 @@
   mysystem.steam = true;
   mysystem.bluetooth = true;
 
+  mysystem.dev.enable = true;
+
   hardware.system76.enableAll = true;
 }
