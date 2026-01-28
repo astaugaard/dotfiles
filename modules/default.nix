@@ -54,11 +54,6 @@
         (tools.make_commands_script {
           inherit pkgs;
           options = {
-            home = ''
-              pushd ~/dotfiles
-              home-manager switch --flake "."
-              popd
-            '';
             system = ''
               pushd ~/dotfiles
               sudo nixos-rebuild switch --flake "."
@@ -67,9 +62,7 @@
             update = ''
               pushd ~/dotfiles
               git pull origin main
-              home-manager switch --flake "."
               sudo nixos-rebuild switch --flake "."
-              nixos-rebuild switch --target-host "nixos@169.254.90.188" --use-remote-sudo --flake ".#rpi-home"
               ssh root@69.48.200.159 "apt-get update; apt-get upgrade"
               popd
             '';
