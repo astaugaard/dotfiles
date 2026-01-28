@@ -1,4 +1,3 @@
-{ standalone }:
 {
   pkgs,
   config,
@@ -15,11 +14,11 @@
     ./kak.nix
     ./fish.nix
     ./kitty.nix
-    (import ./niri { inherit standalone; })
+    ./niri
     ./deway.nix
     ./swaync.nix
     ./desktop.nix
-    (import ./flatpak.nix { inherit standalone; })
+    ./flatpak.nix
     ./colors.nix
     ./dropbox.nix
     ./waybar.nix
@@ -40,6 +39,8 @@
       homeDirectory = "/home/${config.myhome.username}";
     };
 
+    stylix.overlays.enable = false;
+
     home = {
       packages = with pkgs; [
         # always
@@ -53,11 +54,6 @@
         (tools.make_commands_script {
           inherit pkgs;
           options = {
-            home = ''
-              pushd ~/dotfiles
-              home-manager switch --flake "."
-              popd
-            '';
             system = ''
               pushd ~/dotfiles
               sudo nixos-rebuild switch --flake "."
@@ -66,9 +62,7 @@
             update = ''
               pushd ~/dotfiles
               git pull origin main
-              home-manager switch --flake "."
               sudo nixos-rebuild switch --flake "."
-              nixos-rebuild switch --target-host "nixos@169.254.90.188" --use-remote-sudo --flake ".#rpi-home"
               ssh root@69.48.200.159 "apt-get update; apt-get upgrade"
               popd
             '';

@@ -6,6 +6,11 @@
   config,
   pkgs,
   pkgs-unstable,
+  tools,
+  stylix,
+  niri,
+  nix-index-database,
+  nix-flatpak,
   ...
 }:
 
@@ -17,6 +22,33 @@
     ./hardware-configuration.nix
     ./disko.nix
   ];
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.extraSpecialArgs.tools = tools;
+  home-manager.extraSpecialArgs.pkgs-unstable = pkgs-unstable;
+  home-manager.useUserPackages = true;
+
+  home-manager.users.a = {
+    imports = [
+      ../../home.nix
+      stylix.homeModules.stylix
+      nix-flatpak.homeManagerModules.nix-flatpak
+      nix-index-database.homeModules.default
+    ];
+  };
+
+  # specialisation = {
+  #   light.configuration = {
+  #     home-manager.users.a.imports = [
+  #       {
+  #         myhome.colors = {
+  #           dark = false;
+  #           colorscheme = "catppuccin-latte";
+  #         };
+  #       }
+  #     ];
+  #   };
+  # };
 
   services.xserver.xkb.layout = "us";
   services.xserver.xkb.variant = "dvorak";
@@ -43,6 +75,8 @@
   mysystem.systemd-boot = false;
   mysystem.steam = true;
   mysystem.bluetooth = true;
+
+  mysystem.dev.enable = true;
 
   hardware.system76.enableAll = true;
 }

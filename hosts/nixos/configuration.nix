@@ -6,6 +6,11 @@
   config,
   pkgs,
   pkgs-unstable,
+  tools,
+  stylix,
+  niri,
+  nix-index-database,
+  nix-flatpak,
   ...
 }:
 
@@ -16,6 +21,24 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
+
+  home-manager.useGlobalPkgs = true;
+  home-manager.extraSpecialArgs.tools = tools;
+  home-manager.extraSpecialArgs.pkgs-unstable = pkgs-unstable;
+  home-manager.useUserPackages = true;
+
+  home-manager.users.a = {
+    imports = [
+      ../../home.nix
+      stylix.homeModules.stylix
+      nix-flatpak.homeManagerModules.nix-flatpak
+      nix-index-database.homeModules.default
+      {
+        myhome.niri.keyboard-layout = "us";
+        myhome.niri.keyboard-variant = "qwerty";
+      }
+    ];
+  };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";

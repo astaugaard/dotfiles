@@ -2,6 +2,8 @@
   config,
   pkgs,
   lib,
+  keyboard-layout,
+  keyboard-variant,
   ...
 }:
 let
@@ -14,8 +16,8 @@ in
 with pkgs;
 {
   input.keyboard.xkb = {
-    layout = "us,us";
-    variant = "dvorak,dvorak-intl";
+    layout = keyboard-layout;
+    variant = keyboard-variant;
   };
 
   outputs = {
@@ -201,7 +203,7 @@ with pkgs;
         '';
       in
       spawn "bash" "-c"
-        "${pkgs.wl-clipboard}/bin/wl-paste | ${pkgs.qrencode}/bin/qrencode -o - | ${pkgs.display-image}/bin/display-image --image - --css ${css} --size 800";
+        "${pkgs.wl-clipboard}/bin/wl-paste | ${pkgs.qrencode}/bin/qrencode -s 50 -o - | ${pkgs.display-image}/bin/display-image --image - --css ${css} --size 800";
 
     "Mod+V".action = switch-focus-between-floating-and-tiling;
     "Mod+Shift+V".action = toggle-window-floating;
