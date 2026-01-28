@@ -37,6 +37,19 @@
     ];
   };
 
+  # specialisation = {
+  #   light.configuration = {
+  #     home-manager.users.a.imports = [
+  #       {
+  #         myhome.colors = {
+  #           dark = false;
+  #           colorscheme = "catppuccin-latte";
+  #         };
+  #       }
+  #     ];
+  #   };
+  # };
+
   services.xserver.xkb.layout = "us";
   services.xserver.xkb.variant = "dvorak";
   console.useXkbConfig = true;
