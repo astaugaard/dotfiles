@@ -57,6 +57,8 @@ with lib;
       "org.signal.Signal"
       "net.ankiweb.Anki"
       "org.texstudio.TeXstudio"
+      "org.freedesktop.Sdk.Extension.texlive//25.08"
+      "us.zoom.Zoom"
     ];
 
     services.flatpak.uninstallUnmanaged = true;
