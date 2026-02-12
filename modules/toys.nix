@@ -25,6 +25,7 @@ with lib;
       lolcat
       prideful
       sl
+      (olympus.override { celesteWrapper = "steam-run"; })
     ];
 
     programs.fastfetch.enable = true;
