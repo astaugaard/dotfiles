@@ -144,7 +144,7 @@ with lib;
           {
             name = "WinCreate";
             option = ".*";
-            commands = ''add-highlighter window/number-lines number-lines'';
+            commands = "add-highlighter window/number-lines number-lines";
           }
         ];
 
