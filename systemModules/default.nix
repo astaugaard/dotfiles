@@ -184,10 +184,12 @@ with lib;
     sops.secrets.password = { };
     sops.secrets.nj-password = { };
     sops.secrets.eduroam-password = { };
+    sops.secrets.lunas-moms-password = { };
     sops.templates."wifi.env".content = ''
       password=${config.sops.placeholder.password}
       nj_password=${config.sops.placeholder.nj-password}
       eduroam_password=${config.sops.placeholder.eduroam-password}
+      lunas_moms_password=${config.sops.placeholder.lunas-moms-password}
     '';
 
     networking.wireless = {
@@ -201,6 +203,9 @@ with lib;
       };
       networks."NETGEAR42-5G" = {
         pskRaw = "ext:nj_password";
+      };
+      networks."Verizon_X3WXPM" = {
+        pskRaw = "ext:lunas_moms_password";
       };
       networks."eduroam" = {
         auth = ''
