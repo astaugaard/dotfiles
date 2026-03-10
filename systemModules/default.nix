@@ -134,6 +134,7 @@ with lib;
         "pipewire"
         "video"
         "libvirtd"
+        "docker"
       ];
       packages = with pkgs; [ libglvnd ];
       initialPassword = config.mysystem.initialPassword;
