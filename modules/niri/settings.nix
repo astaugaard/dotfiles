@@ -278,7 +278,7 @@ with pkgs;
     {
       matches = [
         {
-          app-id = "^Spotify$";
+          app-id = "^spotify$";
         }
       ];
       default-column-width = {
