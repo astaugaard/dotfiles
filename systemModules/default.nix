@@ -179,6 +179,12 @@ with lib;
     security.polkit.enable = true;
     services.ntp.enable = true;
 
+    sops.defaultSopsFile = ../secrets/wifi.json;
+    sops.defaultSopsFormat = "json";
+    sops.age.keyFile = "/home/${config.mysystem.user}/.config/sops/age/keys.txt";
+    sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
+    sops.age.generateKey = true;
+
     networking.wireless.iwd = {
       enable = true;
       settings = {
