@@ -120,6 +120,7 @@ with lib;
       fish
       libsecret
       sops
+      impala
     ];
 
     users.users."${(config.mysystem.user)}" = {
@@ -155,6 +156,8 @@ with lib;
       };
 
       settings.trusted-users = [ "${config.mysystem.user}" ];
+
+      package = pkgs.lixPackageSets.stable.lix;
     };
 
     networking.firewall.enable = config.mysystem.firewall;
@@ -176,49 +179,16 @@ with lib;
     security.polkit.enable = true;
     services.ntp.enable = true;
 
-    sops.defaultSopsFile = ../secrets/wifi.json;
-    sops.defaultSopsFormat = "json";
-    sops.age.keyFile = "/home/${config.mysystem.user}/.config/sops/age/keys.txt";
-    sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-    sops.age.generateKey = true;
-
-    sops.secrets.password = { };
-    sops.secrets.nj-password = { };
-    sops.secrets.eduroam-password = { };
-    sops.secrets.lunas-moms-password = { };
-    sops.templates."wifi.env".content = ''
-      password=${config.sops.placeholder.password}
-      nj_password=${config.sops.placeholder.nj-password}
-      eduroam_password=${config.sops.placeholder.eduroam-password}
-      lunas_moms_password=${config.sops.placeholder.lunas-moms-password}
-    '';
-
-    networking.wireless = {
-      secretsFile = config.sops.templates."wifi.env".path;
-      enable = config.mysystem.wpasupplicant.enable;
-      networks."Whitemarsh" = {
-        pskRaw = "ext:password";
+    networking.wireless.iwd = {
+      enable = true;
+      settings = {
+        IPv6 = {
+          Enabled = true;
+        };
+        Settings = {
+          AutoConnect = true;
+        };
       };
-      networks."NETGEAR42" = {
-        pskRaw = "ext:nj_password";
-      };
-      networks."NETGEAR42-5G" = {
-        pskRaw = "ext:nj_password";
-      };
-      networks."Verizon_X3WXPM" = {
-        pskRaw = "ext:lunas_moms_password";
-      };
-      networks."eduroam" = {
-        auth = ''
-              key_mgmt=WPA-EAP
-              eap=PEAP
-              phase2="auth=MSCHAPV2"
-           	  identity="estaugaard@haverford.edu"
-          	  password=ext:eduroam_password
-          	'';
-
-      };
-      extraConfig = "ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=wheel";
     };
 
     system.stateVersion = "22.05";

@@ -2,8 +2,6 @@
 {
   imports = [ ./hardware-configuration.nix ];
 
-  sops.age.sshKeyPaths = [ "/etc/ssh/ssh_host_ed25519_key" ];
-
   i18n.defaultLocale = "en_US.UTF-8";
   networking.hostName = "rpi-home";
   time.timeZone = "America/New_York";

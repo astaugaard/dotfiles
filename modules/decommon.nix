@@ -21,6 +21,7 @@ with lib;
       nautilus
       scrot
       beauty-line-icon-theme
+      gnome-calendar
     ];
 
     programs.librewolf.enable = true;
