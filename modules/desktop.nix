@@ -30,6 +30,13 @@ with lib;
       })
 
       (makeDesktopItem rec {
+        name = "impala-desktop";
+        desktopName = "Impala";
+        exec = "${pkgs.kitty}/bin/kitty ${pkgs.impala}/bin/impala";
+        icon = "wireless";
+      })
+
+      (makeDesktopItem rec {
         name = "pairdrop";
         desktopName = "Pairdrop";
         exec = "${pkgs.chromium}/bin/chromium --app=\"https://pairdrop.net\"";
