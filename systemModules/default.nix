@@ -98,6 +98,10 @@ with lib;
       };
     };
 
+    boot.kernelPackages = lib.mkIf (lib.versionOlder pkgs.linux.version "6.18.22") (
+      lib.mkDefault pkgs.linuxPackages_6_18
+    );
+
     virtualisation.libvirtd.enable = config.mysystem.virt;
 
     boot.binfmt.emulatedSystems = if config.mysystem.aarch-binfmt then [ "aarch64-linux" ] else [ ];
