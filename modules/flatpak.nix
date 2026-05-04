@@ -59,6 +59,7 @@ with lib;
       "org.texstudio.TeXstudio"
       "org.freedesktop.Sdk.Extension.texlive//25.08"
       "us.zoom.Zoom"
+      "net.trowell.typesetter"
     ];
 
     services.flatpak.uninstallUnmanaged = true;
