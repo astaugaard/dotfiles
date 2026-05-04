@@ -209,26 +209,26 @@
           ];
         };
 
-        rpi-home = lib.nixosSystem {
-          system = "aarch64-linux";
+        # rpi-home = lib.nixosSystem {
+        #   system = "aarch64-linux";
 
-          specialArgs = {
-            pkgs-unstable = pkgs-unstable-arm;
-            inherit tools;
-            inherit myOverlays;
-          };
+        #   specialArgs = {
+        #     pkgs-unstable = pkgs-unstable-arm;
+        #     inherit tools;
+        #     inherit myOverlays;
+        #   };
 
-          modules = [
-            ./hosts/rpi-home/configuration.nix
-            ./systemModules
-            niri.outputs.nixosModules.niri # not used at all in config lol
-            egui-greeter.nixosModules."aarch64-linux".egui-greeter
-            # nixos-facter-modules.nixosModules.facter
-            # { config.facter.reportPath = ./rpi-facter.json; }
-            sops-nix.nixosModules.sops
-            nixos-hardware.nixosModules.raspberry-pi-4
-          ];
-        };
+        #   modules = [
+        #     ./hosts/rpi-home/configuration.nix
+        #     ./systemModules
+        #     niri.outputs.nixosModules.niri # not used at all in config lol
+        #     egui-greeter.nixosModules."aarch64-linux".egui-greeter
+        #     # nixos-facter-modules.nixosModules.facter
+        #     # { config.facter.reportPath = ./rpi-facter.json; }
+        #     sops-nix.nixosModules.sops
+        #     nixos-hardware.nixosModules.raspberry-pi-4
+        #   ];
+        # };
       };
 
       formatter = forAllSystems (system: inputs.nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
