@@ -132,6 +132,8 @@ in
 
       comma
 
+      zotero
+
       # why3
       # creusot
 
