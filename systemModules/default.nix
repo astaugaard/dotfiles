@@ -98,6 +98,12 @@ with lib;
       };
     };
 
+    boot.extraModprobeConfig = ''
+      install rxrpc /bin/false
+      install esp4 /bin/false
+      install esp6 /bin/false
+    '';
+
     virtualisation.libvirtd.enable = config.mysystem.virt;
 
     boot.binfmt.emulatedSystems = if config.mysystem.aarch-binfmt then [ "aarch64-linux" ] else [ ];

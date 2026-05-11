@@ -108,25 +108,6 @@
       myOverlays = [
         niri.overlays.niri
         (import ./pkgs inputs)
-
-        (final: prev: {
-          linuxPackages =
-            if prev.linuxPackages.kernel.version == "6.12.85" then
-              final.linuxPackagesFor (
-                prev.linuxPackages.kernel.override {
-                  argsOverride = rec {
-                    version = "6.12.87";
-                    modDirVersion = version;
-                    src = final.fetchurl {
-                      url = "mirror://kernel/linux/kernel/v${final.lib.versions.major version}.x/linux-${version}.tar.xz";
-                      hash = "sha256:0pdvdpr3nnvh4479j4z5k6i1qkrlzbzigmzqvffg7jy74yrj5vzd";
-                    };
-                  };
-                }
-              )
-            else
-              prev.linuxPackages;
-        })
       ];
 
       pkgs = import nixpkgs {
