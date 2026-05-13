@@ -126,7 +126,7 @@ with lib;
     };
 
     programs.egui-greeter = {
-      enable = true;
+      enable = config.mysystem.loginManager;
       default_session_name = "Niri";
 
       default_session_command = "niri-session";
