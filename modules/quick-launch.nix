@@ -69,8 +69,8 @@ let
         "S" = {
           application = "org.signal.Signal";
           image = pkgs.fetchurl {
-            url = "https://flathub.org/_next/image?url=https%3A%2F%2Fdl.flathub.org%2Fmedia%2Forg%2Fsignal%2FSignal%2Fd90a41a8de5cbde68ad9591d25b70ae8%2Ficons%2F128x128%2Forg.signal.Signal.png&w=256&q=100";
-            hash = "sha256-AJXypMkwUmedrUXl77K1AZeoucNrKQWFwaKXfINyg2A=";
+            url = "https://imgproxy.flathub.org/insecure/dpr:2/f:avif/q:100/rs:fit:128:128/aHR0cHM6Ly9kbC5mbGF0aHViLm9yZy9tZWRpYS9vcmcvc2lnbmFsL1NpZ25hbC9lODUzNjZlOWEyNzI4Y2UyNDhlMzFjY2NhYTgwMWVhNS9pY29ucy8xMjh4MTI4L29yZy5zaWduYWwuU2lnbmFsLnBuZw";
+            hash = "sha256-/deCvkgJdiqQoYVIHIKgLvecDE1pT3tc9igYUXG6jaU=";
             name = "signal-icon";
           };
         };
