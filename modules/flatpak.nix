@@ -53,7 +53,6 @@ with lib;
       "org.prismlauncher.PrismLauncher"
       "in.cinny.Cinny"
       "com.github.johnfactotum.Foliate"
-      "io.github.everestapi.Olympus"
       "org.signal.Signal"
       "net.ankiweb.Anki"
       "org.texstudio.TeXstudio"
