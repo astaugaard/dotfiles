@@ -24,21 +24,21 @@
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" = {
-    device = "/dev/disk/by-uuid/5ce965f6-b8c0-470e-a92d-368f8160d6cf";
-    fsType = "ext4";
-  };
+  # fileSystems."/" = {
+  #   device = "/dev/disk/by-uuid/5ce965f6-b8c0-470e-a92d-368f8160d6cf";
+  #   fsType = "ext4";
+  # };
 
-  fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/3546-660F";
-    fsType = "vfat";
-    options = [
-      "fmask=0077"
-      "dmask=0077"
-    ];
-  };
+  # fileSystems."/boot" = {
+  #   device = "/dev/disk/by-uuid/3546-660F";
+  #   fsType = "vfat";
+  #   options = [
+  #     "fmask=0077"
+  #     "dmask=0077"
+  #   ];
+  # };
 
-  swapDevices = [ { device = "/dev/disk/by-uuid/479d672e-4361-4b86-b315-0e5ca10736d8"; } ];
+  # swapDevices = [ { device = "/dev/disk/by-uuid/479d672e-4361-4b86-b315-0e5ca10736d8"; } ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

@@ -20,6 +20,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./disko.nix
   ];
 
   home-manager.useGlobalPkgs = true;

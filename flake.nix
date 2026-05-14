@@ -181,6 +181,7 @@
             egui-greeter.nixosModules."${system}".egui-greeter
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
+            disko.nixosModules.disko
           ];
         };
 
