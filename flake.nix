@@ -230,30 +230,6 @@
             nixos-hardware.nixosModules.raspberry-pi-4
           ];
         };
-
-        installation_iso = lib.nixosSystem {
-          inherit system;
-
-          specialArgs = {
-            inherit disko;
-            inherit pkgs-unstable;
-            inherit tools;
-            inherit stylix;
-            inherit niri;
-            inherit nix-flatpak;
-            inherit nix-index-database;
-            inherit myOverlays;
-          };
-
-          modules = [
-            ./hosts/lemur-pro-nixos/configuration.nix
-            ./systemModules
-            niri.outputs.nixosModules.niri
-            egui-greeter.nixosModules."${system}".egui-greeter
-            home-manager.nixosModules.home-manager
-          ];
-
-        };
       };
 
       formatter = forAllSystems (system: inputs.nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
