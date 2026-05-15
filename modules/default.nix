@@ -92,6 +92,17 @@
       sessionVariables.LS_COLORS = "di=36;40:ln=0";
     };
 
+    programs.git = {
+      enable = true;
+
+      settings = {
+        user = {
+          email = "astaugaard@icloud.com";
+          name = "Erin Staugaard";
+        };
+      };
+    };
+
     xdg.enable = true;
 
     home.stateVersion = "23.11";
