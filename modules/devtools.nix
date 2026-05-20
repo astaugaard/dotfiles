@@ -134,6 +134,10 @@ in
 
       zotero
 
+      uv
+
+      gnumake
+
       # why3
       # creusot
 
