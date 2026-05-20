@@ -230,6 +230,20 @@
             nixos-hardware.nixosModules.raspberry-pi-4
           ];
         };
+
+        installation-iso = lib.nixosSystem {
+          inherit system;
+
+          specialArgs = {
+            inherit disko;
+            inherit tools;
+            inherit myOverlays;
+          };
+
+          modules = [
+            ./hosts/installation-iso/configuration.nix
+          ];
+        };
       };
 
       formatter = forAllSystems (system: inputs.nixpkgs.legacyPackages.${system}.nixfmt-rfc-style);
