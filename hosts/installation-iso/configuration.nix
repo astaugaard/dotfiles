@@ -15,8 +15,7 @@
     pkgs.kakoune
     pkgs.git
 
-    tools.make_commands_script
-    {
+    (tools.make_commands_script {
       inherit pkgs;
       options = {
         forward_ssh = ''
@@ -31,7 +30,7 @@
           sudo ${pkgs.nixos-install}/bin/nixos-install --no-channel-copy --no-root-password --flake .#$1
         '';
       };
-    }
+    })
   ];
 
   services.openssh.enable = true;
