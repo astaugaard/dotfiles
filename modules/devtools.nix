@@ -46,7 +46,6 @@ in
       gcc
       lld
 
-      # qmk maybe in future
       # librsvg
       # libglvnd
       # gmp.dev
@@ -133,11 +132,6 @@ in
       comma
 
       zotero
-
-      uv
-
-      gnumake
-
       # why3
       # creusot
 

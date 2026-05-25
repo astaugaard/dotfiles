@@ -81,6 +81,8 @@
   mysystem.ssh.enable = true;
   mysystem.aarch-binfmt = true;
 
+  mysystem.dev.enable = true;
+
   mysystem.grub = true;
   mysystem.systemd-boot = false;
   mysystem.steam = true;
