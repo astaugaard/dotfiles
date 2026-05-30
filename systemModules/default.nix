@@ -161,8 +161,6 @@ with lib;
         options = "--delete-older-than 5d";
       };
 
-      settings.trusted-users = [ "${config.mysystem.user}" ];
-
       package = pkgs.lixPackageSets.stable.lix;
     };
 
