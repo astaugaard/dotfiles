@@ -14,7 +14,7 @@ let
       root = ./.;
       fileset = ./butterfly.svg;
     };
-    background = "#${config.lib.stylix.colors.base01}";
+    background = "#1e2030";
     foreground = "#${config.lib.stylix.colors.base0E}";
 
     buildPhase = ''

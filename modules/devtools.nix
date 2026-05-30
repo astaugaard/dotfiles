@@ -60,7 +60,7 @@ in
       # chez
       # gnumake
 
-      nixfmt-rfc-style
+      nixfmt
 
       (
         let
