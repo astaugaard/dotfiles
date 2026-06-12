@@ -23,6 +23,7 @@
     ./dropbox.nix
     ./waybar.nix
     ./makima.nix
+    ./maestral.nix
   ];
 
   options = {
